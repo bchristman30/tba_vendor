@@ -1,0 +1,29 @@
+<div class="headerDesktop" *ngIf="!showDefaultLogo">
+  <div class="header-desktop-first" [routerLink]="['/home']" routerLinkActive="router-link-active" >
+    <div class="header-image">
+      <img [src]="headerImg">
+    </div>
+    <div>
+      <h1>{{locationName}}</h1>
+      <div class="open-time">Open today until 10 PM</div>
+    </div>
+  </div>
+
+  <div class="header-desktop-second">
+    <div>
+      <button mat-raised-button class="bttn bttn-primary">Redeem Stamp</button>
+    </div>
+    <div class="stamps-redeemed">Stamps Redeemed 2k</div>
+  </div>
+</div>
+
+<div class="headerDesktop" *ngIf="showDefaultLogo">
+  <div class="header-desktop-first" [routerLink]="['/home']" routerLinkActive="router-link-active" >
+    <div class="header-image">
+      <img [src]="headerImg">
+    </div>
+    <div>
+      <h1>That. Beer. App.</h1>
+    </div>
+  </div>
+</div>

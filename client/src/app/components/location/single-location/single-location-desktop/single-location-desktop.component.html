@@ -1,0 +1,90 @@
+<div id="singleLocationDesktopContainer">
+  <div>
+    <div class="margin-20-top-bottom">
+      <p><strong>Phone Number:</strong> {{location.phone}}</p>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="margin-20-top-bottom">
+        <p class="font-300">{{location.address}} {{location.city}}, {{location.state}} {{location.zipcode}}</p>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="margin-20-top-bottom">
+        <i class="material-icons wrap-icon" *ngFor="let icon of location.location_amenities" [matMenuTriggerFor]="menu">
+            {{icon.amenity.icon}}
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item routerLinkActive="router-link-active">
+                    <span>{{icon.amenity.help_text}}</span>
+                </button>
+            </mat-menu>
+        </i>
+    </div>
+    <mat-divider></mat-divider>
+    <div  class="margin-20-top-bottom">
+      <h2>Hours</h2>
+      <mat-accordion class="margin-bottom-20 margin-top-20" id="breweryHours">
+          <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                  <mat-panel-title>
+                      <b>Open Today</b>
+                  </mat-panel-title>
+                  <mat-panel-description>
+                      2 PM - 10 PM
+                  </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div>
+                  <p>Sunday ................. 2 PM - 10 PM</p>
+              </div>
+              <div>
+                  <p>Monday ................. 2 PM - 10 PM</p>
+              </div>
+              <div>
+                  <p>Tudesday ................. 2 PM - 10 PM</p>
+              </div>
+              <div class="active-date">
+                  <p>Wednesday ................. 2 PM - 10 PM</p>
+              </div>
+              <div>
+                  <p>Thursday ................. 2 PM - 10 PM</p>
+              </div>
+              <div>
+                  <p>Friday ................. 2 PM - 10 PM</p>
+              </div>
+              <div>
+                  <p>Saturday ................. 2 PM - 10 PM</p>
+              </div>
+              <div>
+                  <p>Sunday ................. 2 PM - 10 PM</p>
+              </div>
+          </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+
+    <div class="margin-20-top-bottom">
+        <h2>Beer on Tap</h2>
+        <div class="beer-on-tap-conainer">
+                <app-beer-card [beer]='beer' (click)="openBeer(beer.beer_id)" *ngFor="let beer of location.location_beers">
+                </app-beer-card>
+        </div> 
+    </div>
+
+    <div class="margin-20-top-bottom">
+      <h2>About Us</h2>
+      <p>{{ location.description }}</p>
+    </div>
+    </div>
+    
+    <app-desktop-sidebar [location]="location"></app-desktop-sidebar>
+
+    <div class="brewery-secondary-content">
+      <div class="margin-20-top-bottom">
+        <h2>Foodtrucks & Events</h2>
+        <app-location-events></app-location-events>
+      </div>
+
+      <div class="review-wrapper">
+        <h2>Reviews</h2>
+        <app-review-card [review]="review" *ngFor="let review of location.location_reviews"></app-review-card>
+      </div>
+  </div>
+  
+</div>

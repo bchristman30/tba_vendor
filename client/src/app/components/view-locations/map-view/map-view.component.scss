@@ -1,0 +1,48 @@
+agm-map{
+    height:100%;
+    width: 100%;
+}
+
+.content_map {
+    display: grid;
+    height: 100%;
+    -ms-grid-columns: 1fr 100px;
+    grid-template-columns: 1fr 100px;
+    -ms-grid-rows: 300px 100px 100px;
+    grid-template-rows: 1fr 100px 100px;
+    margin-bottom: 20px;
+
+    .mainchild{
+        grid-column: 1/4;
+        grid-row: 1/4;
+    }
+
+    #myLocationButton {
+        grid-column: 2/3;
+        grid-row: 3/4;
+        justify-content: center;
+        display: grid;
+    }
+
+    #locationRefreshButton {
+        grid-column: 2/3;
+        grid-row: 2/3;
+        display: grid;
+        justify-content: center;
+        align-self: center;
+    }
+}
+
+.trackclass{
+    background: #006f69;
+    color: #fff;
+}
+
+.refreshclass{
+    background: #006f69;
+    color: #fff;
+}
+
+div#sectionWithTabWrapper {
+    position: relative;
+ }

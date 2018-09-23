@@ -1,0 +1,10 @@
+#primarySidebar {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    
+    #vertSideBarAd {
+        display: grid;
+        text-align: center;
+        justify-content: center;
+    }
+}

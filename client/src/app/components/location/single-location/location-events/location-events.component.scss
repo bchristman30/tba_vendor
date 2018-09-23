@@ -1,0 +1,28 @@
+.top-buttons {
+    display: grid;
+    grid-gap: 10px;
+    text-align: center;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 30px;
+}
+
+.calendar-date-title {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.time-selector-buttons {
+    display: grid;
+    grid-gap: 10px;
+    text-align: center;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 30px;
+}
+
+.bttn {
+    border-radius: 10px;
+    height: 100%;
+    display: grid;
+    align-items: center;
+}
+

@@ -1,0 +1,45 @@
+#beerLogo {
+    text-align: center;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    max-height: 200px;
+    img {
+        max-height: 200px;
+    }
+}
+
+.beer-name {
+    display: grid;
+    text-align: center;
+}
+
+.beer-meta {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    margin: 20px 0px;
+    text-align: center;
+    align-items: center;
+    font-size: 18px;
+}
+
+.rating-container {
+    display: grid;
+    justify-content: center;
+    
+    .rating-card {
+        display: grid;
+        background: #FFCD83;
+        color: #fff;
+        border-radius: 50px;
+        width: 50px;
+        height: 50px;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+}
+
+.beer-categories {
+    margin: 20px 0px;
+}
+

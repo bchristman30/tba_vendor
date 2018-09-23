@@ -1,0 +1,18 @@
+<nav *ngIf="isMobile()" mat-tab-nav-bar mat-stretch-tabs>
+    <a mat-tab-link
+        *ngFor="let nav of tabs"
+        [routerLink]="nav.link"
+        [routerLinkActive]="" [ngClass]="rla.isActive?'active':''"  #rla="routerLinkActive"
+        [active]="rla.isActive">
+        <div>
+            {{nav.label}}
+        </div>
+    </a>
+</nav> 
+<div id="sectionWithTabWrapper" *ngIf="isMobile()">
+    <router-outlet></router-outlet>
+</div>
+
+<div *ngIf="!isMobile()">
+    <app-single-location-desktop></app-single-location-desktop>
+</div>

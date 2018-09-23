@@ -1,0 +1,18 @@
+<div class="flex-container">
+    <form #f="ngForm" (ngSubmit)="login(f)">
+    <mat-form-field>
+      <input type="text" matInput placeholder="Email Address" ngModel name="email" required #emailInput="ngModel">
+      <mat-error *ngIf="emailInput.hasError('required')">Field must not be empty.</mat-error>
+      <mat-error *ngIf="!emailInput.hasError('required')">E-Mail is invalid.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input  class="margin-bottom-10" type="password" matInput placeholder="Password" ngModel name="password" required #pwInput="ngModel">
+      <mat-error *ngIf="pwInput.hasError('required')">Password must not be empty.</mat-error>
+    </mat-form-field>
+  
+    <a routerLink="/resetpassword" class="margin-top-20 " class="forgot-pass"><span>Forget Password?</span></a>
+    <button *ngIf="!isloading" [disabled]="f.invalid" type="submit" mat-raised-button class="bttn-primary margin-top-20 ">Login</button>
+    <mat-spinner *ngIf="isloading"></mat-spinner>
+  </form>
+</div>

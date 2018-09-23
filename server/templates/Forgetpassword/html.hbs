@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>email template</title>
+</head>
+
+<body>
+	<table width="50%" style="margin: 0 auto;border: 1px solid #66bd68;text-align: center;" cellpadding="5">
+		<tr style="background-color: #66bc69;">
+			<td colspan="2" style="text-align: center;">
+				<img src="{{host}}/static/logo.png">
+			</td>
+		</tr>
+		<tr></tr>
+		<p></p>
+		<p></p>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<h2>Hi {{name}}</h2>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" style="font-size:16px;"></td>
+		</tr>
+		<tr>
+			<td>We got a request to reset your Brew pub App password.</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="{{host}}/recoverypassword?id={{id}}&token={{token}}" style="background-color: #043b40;
+border: none;
+color: #fff;
+padding: 15px 30px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;">Forget Password</a>
+			</td>
+		</tr>
+		<tr>
+			<p></p>
+			<p></p>
+		</tr>
+		<tr style=" margin-top: 30px; width: 100%;background: #e8e8e8;padding: 20px 0px;">
+			<td colspan="2" style="text-align: center;">
+				Contact Info
+				<br> Email:
+				<a href="#">info@brewpub.com</a>
+				<br> Website:Website:{{host}}
+			</td>
+		</tr>
+	</table>
+</body>
+
+</html>

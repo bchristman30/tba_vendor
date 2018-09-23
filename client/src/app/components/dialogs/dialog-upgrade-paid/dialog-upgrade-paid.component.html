@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Upgrade Membership</h1>
+<div mat-dialog-content>
+  <p>By Upgrading to pro membership you will get the following</p>
+
+  <ul>
+    <li>One free drink at all participating breweries</li>
+    <li>Ability to leave reviews and ratings</li>
+    <li>No more ads</li>
+  </ul>
+  
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Upgrade Now</button>
+</div>

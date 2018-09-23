@@ -1,0 +1,33 @@
+<mat-card class="padding-0 review-card-container">
+  <div class="review-card">
+    <div class="review-card-img">
+        <div class="grid">
+            <img src="/assets/imgs/user.png" >
+        </div>
+    </div>
+    
+    <div class="review-card-content">
+      <div class="review-card-content-header">
+        <div class="review-header-name">
+          {{review.username}}
+        </div>
+        <div class="review-header-time">
+          {{ review.created_at | date }}
+        </div>
+      </div>
+      <div class="review-card-content-rating">
+          <div class="review-card-rating-container rated-{{review.rating}}">
+              <div class="review-card-rating rating-1"></div>
+              <div class="review-card-rating rating-2"></div>
+              <div class="review-card-rating rating-3"></div>
+              <div class="review-card-rating rating-4"></div>
+              <div class="review-card-rating rating-5"></div>
+          </div>
+          <div>{{review.rating}} / 5</div>
+        </div>
+      <div class="review-card-content-message">
+        {{review.message}}
+      </div>
+    </div>
+  </div>
+</mat-card>

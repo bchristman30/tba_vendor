@@ -1,0 +1,12 @@
+<mat-card class="padding-0" (click)="openLocation()" routerLinkActive="router-link-active" >
+  <div id="eventCardSquare" >
+    <div class="eventLogo">
+        <img src="{{location.logo_string}}" src-fallback="{{ defaultLocationFallback }}">
+    </div>
+    <div class="eventCardOverlay">
+    </div>
+    <div class="eventCardOverlayContent">
+      <p>{{location.name}}</p>
+    </div>
+  </div>
+</mat-card>

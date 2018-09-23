@@ -1,0 +1,45 @@
+@import "../../../../shared/styles/base/variables.scss";
+
+#singleLocationLogo {
+    text-align: center;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    max-height: 200px;
+    margin-bottom: 20px;
+    img {
+        max-height: 200px;
+    }
+}
+
+.active-date {
+    background: #d4e6e4;
+}
+
+#addressSection {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    margin-top: 20px;
+    align-items: center;
+}
+
+#amenitiesWrap {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.stamp-redeem {
+    margin: 20px auto;
+    text-align: center;
+
+    button {
+        width: 100%;
+    }
+}
+.leave-review-wrapper {
+    textarea {
+        width: 100%;
+        border: 1px solid #c9c9c9;
+    }
+
+}

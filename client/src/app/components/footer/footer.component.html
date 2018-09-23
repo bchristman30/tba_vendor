@@ -1,0 +1,30 @@
+<nav mat-tab-nav-bar mat-stretch-tabs *ngIf="showDefaultNav()">
+    <a  mat-tab-link
+        *ngFor="let nav of bottomNav"
+        [routerLink]="nav.link"
+        [routerLinkActive]="" 
+        [ngClass]="rla.isActive?'active':''"  
+        #rla="routerLinkActive"
+        [active]="rla.isActive">
+        <div>
+        <div>
+            <mat-icon aria-label="Example icon-button with a heart icon">{{nav.icon}}</mat-icon>
+            </div>
+            <div>{{nav.label}}</div>
+        </div>
+    </a>
+</nav> 
+<nav mat-tab-nav-bar mat-stretch-tabs *ngIf="!showDefaultNav()">
+        <a  *ngIf="showNext"
+        mat-tab-link 
+        [routerLink]="['/upgrade/card-info']" 
+        class="next-action">
+        NEXT <i class="material-icons">navigate_next</i>
+    </a>
+    <a  *ngIf="showSubmit"
+        mat-tab-link 
+        (click)="submitPayment()" 
+        class="submit-payment next-action">
+        SUBMIT PAYMENT
+    </a>
+</nav>

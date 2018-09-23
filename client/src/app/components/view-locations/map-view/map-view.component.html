@@ -1,0 +1,45 @@
+<div class="content_map">
+    <div class="mainchild">
+        <agm-map 
+            [latitude]="currentLat"
+            [longitude]="currentLong"
+            [zoom]="zoom"
+            [disableDefaultUI]="false"
+            [zoomControl]="false"
+            (mapClick)="mapClicked($event)">
+        <agm-marker 
+            (markerClick)="clickedMarker(icon.url)"
+            [latitude]="currentLat"
+            [longitude]="currentLong"
+            [iconUrl]="icon"
+            [markerDraggable]="draggable">
+            <agm-info-window>
+            <strong>It's Me</strong>
+            </agm-info-window>
+        </agm-marker>
+
+        <agm-marker
+            *ngFor="let m of markers; let i = index"
+            (markerClick)="clickedMarkerloc(m.icon.url, m.id)"
+            [latitude]="m.lat"
+            [longitude]="m.lng"
+            [iconUrl]="m.icon"
+            [markerDraggable]="false"
+            (dragEnd)="markerDragEnd(m, $event)">
+        
+        </agm-marker>
+        </agm-map>
+    </div>
+    <div id="myLocationButton">
+        <button mat-icon-button  (click)="findMe('me')"class="trackclass" [disabled]="isPosition">
+            <mat-icon>my_location</mat-icon>
+        </button>
+    </div>
+    
+    <div id="locationRefreshButton">
+        <button mat-icon-button  class="refreshclass" (click)="refreshMap()" [disabled]="isRefreshed">
+            <mat-icon> place</mat-icon>
+        </button>
+    </div>    
+
+</div>

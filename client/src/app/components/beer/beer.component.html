@@ -1,0 +1,33 @@
+<div class="sectionNoTabWrapper">
+	<div id="beerLogo">
+		<img src="{{beer.beer_logo}}">
+	</div>
+	<div class="beer-name">
+		<h1>{{beer.name}}</h1>
+	</div>
+	<div class="beer-meta">
+		<div>
+			APV {{beer.Alchohol_content}}
+		</div>
+		<div class="border-right"></div>
+		<div  class="rating-container">
+			<div class="rating-card">
+				4/5
+			</div>
+			<div>
+				Rating
+			</div>
+		</div>
+	</div>
+	<div class="beer-categories">
+		<mat-chip-list>
+			<mat-chip color="primary" selected *ngFor="let style of beer.beer_categories| slice:0:2;">
+			{{style.beer_style.type}}
+			</mat-chip>
+		</mat-chip-list>
+	</div>
+
+	<div class="beer-description">
+		<p>{{beer.beer_description}}</p>
+	</div>
+</div>

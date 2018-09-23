@@ -1,0 +1,15 @@
+<div id="homeDesktopWrapper">
+  <div>
+    <h1 class="margin-bottom-20">Find Breweries Near You</h1>
+    <div class="home-map-wrapper">
+        <app-map-view></app-map-view>
+    </div>
+      
+    <div class="grid-2-by-1 margin-bottom-20">
+        <app-event-card-square class="wide-event" [location]="location" *ngFor="let location of locations"></app-event-card-square>
+    </div>
+  </div>
+  <app-desktop-sidebar></app-desktop-sidebar>
+  <div>
+  </div>
+</div>

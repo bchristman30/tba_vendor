@@ -1,0 +1,10 @@
+<div id="primarySidebar">
+    <div id="dynamicReviews" *ngIf="hasLocation()">
+      <p>{{location.location_reviews.length }} Review{{location.location_reviews.length !== 1 ? 's' : ''  }}</p>
+      <app-review-card [review]="location.location_reviews[0]"></app-review-card>
+    </div>
+    <div id="vertSideBarAd">
+        <h2 class="margin-bottom-20">Ad Space</h2>
+      <img src="/assets/imgs/test-ad.jpeg">
+    </div>
+</div>

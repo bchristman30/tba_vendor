@@ -1,0 +1,37 @@
+<div class="flex-container">
+  <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f)">
+   
+    <mat-form-field>
+      <input type="text" matInput placeholder="Your Name" ngModel name="name" required #nameInput="ngModel">
+      <mat-error *ngIf="nameInput.hasError('required')">Field must not be empty.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="text" matInput placeholder="Your email" ngModel name="email" required #emailInput="ngModel">
+      <mat-error *ngIf="emailInput.hasError('required')">Field must not be empty.</mat-error>
+      <mat-error *ngIf="!emailInput.hasError('required')">E-Mail is invalid.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field hintLabel="Should be at least 6 characters long.">
+      <input type="password" matInput placeholder="Your password" ngModel name="password" required minlength="6" #pwInput="ngModel">
+      <mat-hint align="end">{{ pwInput.value?.length }} / 6</mat-hint>
+      <mat-error>Has to be at least 6 characters long.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="password" matInput placeholder="Repeat password" ngModel name="cpassword" required minlength="6" #cpwInput="ngModel">
+      <mat-hint align="end">{{ cpwInput.value?.length }} / 6</mat-hint>
+      <mat-error *ngIf="cpwInput.hasError('required')">Field must not be empty.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Your birthdate" [matDatepicker]="picker" [max]="maxDate" ngModel name="birthdate" required>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-checkbox ngModel name="agree" required color="primary">Agree to Terms and Conditions.</mat-checkbox>
+    <button *ngIf="!isloading" [disabled]="f.invalid" type="submit" mat-raised-button class="bttn-primary margin-top-20">REGISTER</button>
+    <mat-spinner *ngIf="isloading"></mat-spinner>
+  </form>
+</div>

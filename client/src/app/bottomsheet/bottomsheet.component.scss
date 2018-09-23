@@ -1,0 +1,33 @@
+@import "../shared/styles/base/variables.scss";
+
+img{
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+  }
+.sec{
+  padding: 4px;
+}
+
+button{
+  width: 100% !important;
+  
+}
+.content{
+display: flex;
+flex-direction: column;
+}
+
+.child-parent{
+display: flex;
+}
+.addresscss{
+width: 60%;
+margin: 20px 0px 0px 10px;
+}
+.logocss img{
+width: 100%;
+}
+.logocss{
+width: 50%;
+}

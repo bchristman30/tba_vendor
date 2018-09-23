@@ -1,0 +1,119 @@
+<div id="singleLocationLogo">
+    <img src="{{location.logo_string}}">
+</div>
+
+<mat-accordion class="margin-bottom-20 margin-top-20" id="breweryHours">
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <b>Open Today</b>
+            </mat-panel-title>
+            <mat-panel-description>
+                2 PM - 10 PM
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div>
+            <p>Sunday ................. 2 PM - 10 PM</p>
+        </div>
+        <div>
+            <p>Monday ................. 2 PM - 10 PM</p>
+        </div>
+        <div>
+            <p>Tudesday ................. 2 PM - 10 PM</p>
+        </div>
+        <div class="active-date">
+            <p>Wednesday ................. 2 PM - 10 PM</p>
+        </div>
+        <div>
+            <p>Thursday ................. 2 PM - 10 PM</p>
+        </div>
+        <div>
+            <p>Friday ................. 2 PM - 10 PM</p>
+        </div>
+        <div>
+            <p>Saturday ................. 2 PM - 10 PM</p>
+        </div>
+        <div>
+            <p>Sunday ................. 2 PM - 10 PM</p>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>
+
+<mat-divider></mat-divider>
+
+<div id="addressSection" class="margin-bottom-20 margin-top-20">
+    <div>
+        <p class="bold">Address</p>
+        <p class="font-300">{{location.address}}</p>
+        <p class="font-300">{{location.city}}, {{location.state}} {{location.zipcode}}</p>
+    </div>
+    <div class="justify-right">
+        <a href="tel:{{location.phone}}">
+            <button mat-raised-button color="primary">Call</button>
+        </a>
+    </div>
+</div>
+
+<mat-divider></mat-divider>
+
+<div class="stamp-redeem" *ngIf="isAuth else noAuth">
+    <div *ngIf="issubcription else nosubscription">
+        <button *ngIf="!stampRedeemed" (click)="redeemStamp()" mat-raised-button class="bttn bttn-primary">Redeem Stamp</button>
+        <div *ngIf="stampRedeemed">
+            <p>
+                <strong>Stamp Redeemed</strong>
+            </p>
+            <p>{{ today | date:'medium' }}</p>
+        </div>
+    </div>
+    <ng-template #nosubscription>
+        <p>
+            <strong style="color:brown">Start subscription to redeem stamp from brewery,cheers!!</strong>
+        </p>
+    </ng-template>
+</div>
+<ng-template #noAuth>
+    <div class="stamp-redeem">
+        <p>
+            <strong style="color:brown">Please do Login and start subscription to redeem stamp from brewery,cheers!!</strong>
+        </p>
+    </div>
+</ng-template>
+
+<mat-divider></mat-divider>
+
+<div id="amenitiesWrap" class="margin-bottom-20 margin-top-20">
+    <i class="material-icons wrap-icon" *ngFor="let icon of location.location_amenities" [matMenuTriggerFor]="menu">
+        {{icon.amenity.icon}}
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item routerLinkActive="router-link-active">
+                <span>{{icon.amenity.help_text}}</span>
+            </button>
+        </mat-menu>
+    </i>
+
+</div>
+<mat-divider></mat-divider>
+<div id="singleLocationBrewNotes" class="margin-bottom-20 margin-top-20">
+    <p>{{ location.description }}</p>
+</div>
+<div class="margin-bottom-20">
+    <strong class="margin-bottom-10">Reviews</strong>
+</div>
+<app-review-card [review]="review" *ngFor="let review of location.location_reviews"></app-review-card>
+
+<div class="leave-review-wrapper">
+    <div>
+        <div class="bold">Rate this beer:</div>
+        <div>
+            <mat-slider></mat-slider>
+        </div>
+    </div>
+    <div class="bold">Your review:</div>
+    <div>
+        <textarea></textarea>
+    </div>
+    <div>
+        <button color="primary" mat-raised-button>Submit</button>
+    </div>
+</div>

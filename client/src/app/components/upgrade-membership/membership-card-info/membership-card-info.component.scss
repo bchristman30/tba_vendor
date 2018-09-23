@@ -1,0 +1,39 @@
+form.checkout {
+    margin: 2rem auto;
+    text-align: center;
+    background: white;
+  
+    font-family: 'Roboto';
+    color: #525252;
+    font-size: 1.1rem;
+  }
+
+  #card-info {
+    border: 2px solid #eee;
+    border-radius: 8px;
+    padding: 10px;
+  }
+  
+  form.checkout button {
+    margin-top: 80px;
+    padding: 0 50px;
+    border-radius: 20px;
+  }
+
+  .card-info-header {
+    margin-bottom: 20px;
+    font-weight: 400;
+    font-size: 20px;
+    font-family: 'Roboto';
+  }
+
+  .terms-of-service {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+  }
+
+  .tos-link {
+    color: #5c5cc8;
+    font-weight: 500;
+    text-decoration: underline;
+  }

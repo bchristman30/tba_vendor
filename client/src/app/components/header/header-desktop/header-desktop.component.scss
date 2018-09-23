@@ -1,0 +1,47 @@
+.headerDesktop {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 240px;
+    align-items: center;
+    padding: 0 40px;
+    background: #0D7069;
+    background-image: url('/assets/imgs/header-bg.png');
+    color: #fff;
+
+    img {
+        max-height: 200px;
+    }
+
+    h1 {
+        margin-bottom: 10px;
+        font-weight: 300;
+    }
+
+    .header-desktop-first {
+        display: grid;
+        grid-template-columns: 240px 1fr;
+        align-items: center;
+
+        .open-time {
+            color: #FFFFB4;
+        }
+    }
+
+    .header-desktop-second {
+        text-align: right;
+        display: grid;
+        grid-template-columns: 1fr;
+
+        button {
+            width: 250px;
+            background: #FFFFB4 !important;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            color: #555 !important;
+        }
+
+        .stamps-redeemed {
+            font-weight: 100;
+        }
+    }
+}

@@ -1,0 +1,39 @@
+$borderColor: #d9d9d9;
+$secondaryColor: #536883;
+$primaryColor: #555;
+.stamped_main_container{
+    overflow-y: scroll;
+    max-height: 110px;
+}
+#locationListWrapper {
+    .headerDetail {
+        color: $secondaryColor;
+        font-size: 1.2em;
+        margin-bottom: 5px;
+    }
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    grid-template-rows: 100px;
+    border: 1px solid $borderColor;
+    -webkit-box-shadow: #dcdde0 0 0 20px 0;
+    box-shadow: #dcdde0 0 0 20px 0;
+    background: #fff;
+    border-radius: 5px;
+    margin-bottom: 20px;
+
+    #locationLogo {
+        align-self: center;
+        text-align: center;
+
+        img {
+            height: 80px;
+            width: 80px;
+            border-radius: 10px;
+        }
+    }
+
+    #locationDetail {
+        border-left: 1px solid $borderColor;
+        padding: 15px;
+    }
+}

@@ -1,0 +1,27 @@
+<div id="singleFoodTruckLogo">
+    <img src="{{foodTruck.featured_image}}">
+</div>
+
+<mat-divider></mat-divider>
+
+<div id="addressSection" class="margin-bottom-20 margin-top-20">
+    <div>
+        <p class="bold">Address</p>
+        <p class="font-300">{{foodTruck.address}}</p>
+        <p class="font-300">{{foodTruck.city}}, {{foodTruck.state}} {{foodTruck.zipcode}}</p>
+    </div>
+    <div class="justify-right">
+        <a href="tel:{{foodTruck.phone}}">
+            <button mat-raised-button color="primary">Call</button>
+        </a>
+    </div>
+</div>
+
+<mat-divider></mat-divider>
+<div id="singleFoodTruckBrewNotes" class="margin-bottom-20 margin-top-20">
+    <p>{{ foodTruck.description }}</p>
+</div>
+<div class="margin-bottom-20">
+    <strong class="margin-bottom-10">Reviews</strong>
+</div>
+<app-review-card [review]="review" *ngFor="let review of foodTruck.food_trucks_reviews"></app-review-card>

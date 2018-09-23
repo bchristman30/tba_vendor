@@ -1,0 +1,13 @@
+<div>
+    <div *ngFor="let location of locations">
+        <div id="locationListWrapper" (click)="openLocation(location.id)">
+            <div id="locationLogo">
+                <img src="{{location.logo_string}}" src-fallback="{{ defaultLocationFallback }}"/>
+            </div>
+            <div id="locationDetail">
+                <p class="headerDetail font-18">{{ location.name }}</p>
+                <p class="subHeaderDetail font-14">{{ location.address }}</p>
+            </div>
+        </div>
+    </div>
+</div>

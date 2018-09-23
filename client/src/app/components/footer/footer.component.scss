@@ -1,0 +1,19 @@
+.mat-tab-link {
+    height: 60px;
+}
+
+.next-action {
+    &.mat-tab-link {
+        opacity: 1;
+        font-size: 20px;
+        font-weight: 200;
+    }
+}
+
+.submit-payment {
+
+    &.mat-tab-link {
+        background: #2fb92f;
+        opacity: 1;
+    }
+}

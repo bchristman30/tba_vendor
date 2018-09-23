@@ -1,0 +1,9 @@
+.header-wrap {
+    align-items: center;
+    display: grid;
+    grid-template-columns: 35px 1fr;
+
+    i {
+     font-size: 40px;   
+    }
+}

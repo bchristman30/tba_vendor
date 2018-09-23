@@ -1,0 +1,53 @@
+<div class="content">
+  <div>
+    <h4 style="color:red">You didn't redeemed stamp here yet!</h4>
+  </div>
+  <div class="child-parent">
+      <div class="logocss">
+        <img src="{{data.result[0].logo_string}}"/>
+      </div>
+      <div class="addresscss">
+        <div class="sec">
+          <h3>{{data.result[0].name}}</h3>
+        </div>
+        <div class="sec">
+          <p style="color:green;font-weight:bold;" *ngIf="data.result[0].isopentoday;else closednow">
+            Open Now!
+          <p>
+          <ng-template #closednow>
+              <p style="color:crimson;font-weight:bold;">
+                Closed Today!
+              </p>
+            </ng-template>
+                
+        </div>
+        <div class="sec">
+          <p>{{data.result[0].address}} {{data.result[0].city}} {{data.result[0].state}} {{data.result[0].zipcode}}</p>
+        </div>
+      </div>
+  </div>
+  <div class="sec">
+      <a href="tel:{{data.result[0].phone}}">
+          <button mat-raised-button color="primary">CALL TO BREWERY</button>
+      </a>
+  </div>
+  <div >
+      <mat-divider></mat-divider>
+    <div class="sec">
+      <i class="material-icons wrap-icon" *ngFor="let icon of data.result[0].location_amenities" [matMenuTriggerFor]="menu">
+        {{icon.amenity.icon}}
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item routerLinkActive="router-link-active">
+            <span>{{icon.amenity.help_text}}</span>
+          </button>
+        </mat-menu>
+      </i>
+
+    </div>
+    <mat-divider></mat-divider>
+  </div>
+  <div >
+    <button mat-button (click)="myaction('dismiss')">GO TO BREWERY PAGE</button> 
+  </div>
+
+</div>

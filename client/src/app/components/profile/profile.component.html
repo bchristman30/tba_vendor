@@ -1,0 +1,54 @@
+<mat-card class="profile">
+  <mat-card-content>
+    <mat-list *ngIf="isAuth">
+      <h3 matSubheader>Profile Information</h3>
+      <mat-list-item>
+        <mat-icon matListIcon>account_circle</mat-icon>
+        <h4 matLine>{{currentUser.name}}</h4>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon matListIcon>email</mat-icon>
+        <h4 matLine>{{currentUser.email}}</h4>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon matListIcon>cake</mat-icon>
+        <h4 matLine>{{currentUser.dob}}</h4>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <h3 matSubheader>Membership plan
+        <mat-icon *ngIf="!currentUser.subscription_expired" style="color:green">check_circle</mat-icon>
+        <mat-icon *ngIf="currentUser.subscription_expired" style="color:#911f30">error</mat-icon>
+      </h3>
+      <mat-list-item>
+        <mat-icon matListIcon>card_membership</mat-icon>
+        <h4 matLine>Plan:{{currentUser.subscription_type}}</h4>
+        <p matLine class="demo-2" *ngIf="currentUser.subscription_expiry_date!=null">Expiry Date: {{currentUser.subscription_expiry_date}}</p>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+       <div *ngIf="stampedbrewery?.length>0">   
+        <h3 matSubheader matBadge="{{stampedbrewery?.length}}" matBadgePosition="above after" matBadgeOverlap="false">STAMPED BREWERIES </h3>
+        <div class="stamped_main_container">
+            <div *ngFor="let stampedbrewery of stampedbrewery">
+                <div id="locationListWrapper">
+                    <div id="locationLogo">
+                        <img src="{{stampedbrewery.logo_string}}" src-fallback="{{ defaultLocationFallback }}"/>
+                    </div>
+                    <div id="locationDetail">
+                        <p class="headerDetail font-18">{{ stampedbrewery.name }}</p>
+                        <p class="subHeaderDetail font-14">{{ stampedbrewery.address }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+        <div *ngIf="stampedbrewery?.length==0">
+          No Stamped brewery list
+        </div>
+    </mat-list>
+
+    <div *ngIf="!isAuth">
+      <p>You are not logged in!!</p>
+    </div>
+  </mat-card-content>
+
+</mat-card>

@@ -1,0 +1,18 @@
+<div class="sectionNoTabWrapper">
+    <h1 class="margin-bottom-20">Upgrade Your Membership</h1>
+    <p>Please provide your infomation below to complete your order</p>
+    <form #checkout="ngForm" class="checkout">
+        <div class="form-row">
+          <div class="card-info-header">Credit Card Information</div>
+          <div id="card-info" #cardInfo></div>
+        </div>  
+    </form>
+    <div class="terms-of-service">
+      <div>
+          <mat-checkbox></mat-checkbox>
+      </div>
+      <div>
+          <p>I agree to <span class="tos-link" (click)="viewTermsOfServiceDialog()">terms of service</span> and understand my card will be charged <strong>$45</strong></p>
+      </div>
+    </div>
+</div>

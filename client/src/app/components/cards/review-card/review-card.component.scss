@@ -1,0 +1,88 @@
+.review-card-container {
+    margin: 10px 0px;
+}
+.review-card{
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    grid-template-rows: 1fr;
+    padding: 5px;
+    
+
+    .review-card-img {
+        justify-content: center;
+        display: grid;
+
+        img {
+            height: 60px;
+            width: 60px;
+        }
+    }
+    
+
+    .review-card-content-header {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+
+        .review-header-name {
+            font-weight: 500;
+            font-size: 18px;
+        }
+        .review-header-time {
+            font-size: 14px;
+            font-weight: 200;
+            color: rgba(0, 0, 0, 0.6);
+            text-align: right;
+        }
+    }
+    .review-card-content-message {
+        margin: 10px 0;
+    }
+
+    .review-card-content-rating {
+        display: grid;
+        grid-template-columns: 100px 1fr;
+        margin-top: 10px;
+        align-items: center;
+    }
+
+    .review-card-rating-container {
+        display: grid;
+        grid-template-columns: 17px 17px 17px 17px 17px;
+        grid-gap: 2px;
+        
+        &.rated-1 {
+            .rating-2,.rating-3, .rating-4, .rating-5 {
+                background: #FFFFB4;
+            }
+        }
+
+        &.rated-2 {
+            .rating-3, .rating-4, .rating-5 {
+                background: #FFFFB4;
+            }
+        }
+
+        &.rated-3 {
+            .rating-4, .rating-5 {
+                background: #FFFFB4;
+            }
+        }
+
+        &.rated-4 {
+            .rating-5 {
+                background: #FFFFB4;
+            }
+        }
+
+        .review-card-rating {
+            background: #FFCD83;
+            border-radius: 25px;
+            border: 1px solid #bcbbbb;
+            height: 15px;
+            width: 15px;
+            display: grid;
+            align-self: center;
+        }
+    }
+}

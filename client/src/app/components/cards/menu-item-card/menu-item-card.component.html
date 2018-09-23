@@ -1,0 +1,18 @@
+<mat-card class="padding-0">
+    <div id="beerCard">
+      <div class="beer-card-logo">
+        <div class="grid">
+            <img class="image-100" src="{{ menuItem.feature_image }}" >
+        </div>
+      </div>
+      <div class="beer-card-content">
+        <div class="beer-card-header">
+          <div class="font-600">{{ menuItem.name }}</div>
+          <div class="justify-right padding-right-10">{{ menuItem.price | currency : 'USD' : 'symbol' : '1.0' }} </div>
+        </div>
+        <div>
+          {{menuItem.description}}
+        </div>
+      </div>
+    </div>
+  </mat-card>

@@ -1,0 +1,31 @@
+#singleLocationDesktopContainer {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: 1fr;
+    padding: 40px;
+    grid-gap: 30px;
+
+    h2 {
+        margin-bottom: 10px;
+    }
+
+    .wrap-icon {
+        margin: 0 10px;
+    }
+
+    .brewery-secondary-content {
+        grid-column: 1/3;
+    }
+}
+
+.beer-on-tap-conainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+
+.review-wrapper {
+    margin-bottom: 20px;
+    padding: 0 20%;
+}
+
