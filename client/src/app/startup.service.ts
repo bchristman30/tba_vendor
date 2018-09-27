@@ -11,7 +11,7 @@ export class StartupService {
                 private locationService: LocationService) { }
 
   initializeApp(): Promise<any> | any {
-    return null;
+    return null; // why?
 //     return this.httpClient.get<LocationModel[]>('/api/location')
 //         .toPromise()
 //         .then(
