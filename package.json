@@ -43,5 +43,8 @@
     "brewerapp"
   ],
   "author": "esferasoft",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@angular/cli": "^6.2.3"
+  }
 }

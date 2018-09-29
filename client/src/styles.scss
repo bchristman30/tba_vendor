@@ -64,12 +64,12 @@ html {
             }
 
             #content {
-                height: calc(100% - 56px - 56px - 5px);
+                height: calc(100% );
                 -webkit-overflow-scrolling: touch;
                 overflow-y: auto;
                 display: block;
                 position: absolute;
-                top: 56px;
+                top: 0x;
                 bottom: 0;
                 left: 0;
                 right: 0;
@@ -263,3 +263,5 @@ button {
     }
 
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: 'Roboto', sans-serif; }

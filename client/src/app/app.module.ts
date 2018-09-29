@@ -21,6 +21,10 @@ import { AuthService } from './auth/auth.service';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { AuthGuard } from './auth/auth-guard.service';
 
+
+import {MatSidenavModule} from '@angular/material/sidenav';
+
+
 import { ToastrModule } from 'ngx-toastr';
 import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -144,7 +148,8 @@ export function init_app(appLoadService: StartupService) {
     LayoutModule,
     CarouselModule,
     WavesModule,
-    ButtonsModule
+    ButtonsModule,
+    MatSidenavModule
   ],
   providers: [
     UIService,
