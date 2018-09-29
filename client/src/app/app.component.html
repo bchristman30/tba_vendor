@@ -1,14 +1,14 @@
 <div id="appWrapper" *ngIf="isMobile()">
   <div class="header">
-      <app-header *ngIf="isMobile()"></app-header>
+      <!-- <app-header *ngIf="isMobile()"></app-header> -->
       <app-header-desktop *ngIf="!isMobile()"></app-header-desktop>
   </div>
   <div id="content">
     <router-outlet></router-outlet>
   </div>
-  <div id="footer" *ngIf="isMobile()">
+  <!-- <div id="footer" *ngIf="isMobile()">
       <app-footer></app-footer>
-  </div>
+  </div> -->
   <ngx-spinner type="square-loader">
       <p style="font-size: 20px; color: white">Making a drink...</p>
   </ngx-spinner>
