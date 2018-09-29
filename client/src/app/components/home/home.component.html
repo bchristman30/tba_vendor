@@ -1,74 +1,103 @@
-<div id="homeGrid" *ngIf="isMobile()">
-    <div class="homeImage">
-        <!--Carousel Wrapper-->
-    <mdb-carousel [isControls]="true" [interval]="8000" class="carousel slide carousel-fade" [animation]="'fade'">
-        <!--First slide-->
-        <mdb-carousel-item>
-            <div class="view w-100">
-                <img class="d-block w-100" src="/assets/imgs/slide-1.jpg" alt="First slide">
-                <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
-            </div>
-            <!-- <div class="carousel-caption">
-                <h3 class="h3-responsive">Socialize</h3>
-            </div> -->
-        </mdb-carousel-item>
-        <!--/First slide-->
-        <!--Second slide-->
-        <mdb-carousel-item>
-            <div class="view w-100">
-                <img class="d-block w-100" src="/assets/imgs/slide-2.jpg" alt="Second slide">
-                <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
-            </div>
-            <!-- <div class="carousel-caption">
-                <h3 class="h3-responsive">Try Something New</h3>
-            </div> -->
-        </mdb-carousel-item>
-        <!--/Second slide-->
-        <!--Third slide-->
-        <mdb-carousel-item>
-            <div class="view w-100">
-                <img class="d-block w-100" src="/assets/imgs/slide-3.jpg" alt="Third slide">
-                <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
-            </div>
-            <!-- <div class="carousel-caption">
-                <h3 class="h3-responsive">Enjoy</h3>
-            </div> -->
-        </mdb-carousel-item>
-        <!--/Third slide-->
-    </mdb-carousel>
-    <!--/.Carousel Wrapper-->
-    </div>
-    <div class="homeButton">
-        <div>
-            <a mat-raised-button (click)="showBreweryList()">START EXPLORING PUBS</a>
+<mat-drawer-container class="example-container" [hasBackdrop]="true" autosize>
+    <mat-drawer #drawer class="example-sidenav" mode="side">
+        <p>Auto-resizing sidenav</p>
+        <p>Auto-resizing sidenav</p>
+        <p>Auto-resizing sidenav</p>
+    </mat-drawer>
+                                   
+    <div class="example-sidenav-content">
+                        
+
+        <div class="headgrid">
+            
+            <mat-icon class="mat-left" (click)="drawer.toggle()">dehaze</mat-icon>
+             <p class="title"> Bottle Logic Brewary </p>
         </div>
-    </div>
-    <div class="homeAdditionalContent">
-        <div class="margin-bottom-20">
-            <div class="justify-left">
-                <h3>Most Popular Breweries</h3>
+        <div id="homeGrid" *ngIf="isMobile()">
+            <div class="homeImage">
+                <mdb-carousel [isControls]="true" [interval]="8000" class="carousel slide carousel-fade" [animation]="'fade'">
+                    <!--First slide-->
+                    <mdb-carousel-item>
+                        <div class="view w-100">
+                            <img class="d-block w-100" src="/assets/imgs/slide-1.jpg" alt="First slide">
+                            <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
+                        </div>
+                        <!-- <div class="carousel-caption">
+                    <h3 class="h3-responsive">Socialize</h3>          
+                </div> -->
+                    </mdb-carousel-item>
+                    <!--/First slide-->
+                    <!--Second slide-->
+                    <mdb-carousel-item>
+                        <div class="view w-100">
+                            <img class="d-block w-100" src="/assets/imgs/slide-2.jpg" alt="Second slide">
+                            <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
+                        </div>
+                        <!-- <div class="carousel-caption">
+                    <h3 class="h3-responsive">Try Something New</h3>
+                </div> -->
+                    </mdb-carousel-item>
+                    <!--/Second slide-->
+                    <!--Third slide-->
+                    <mdb-carousel-item>
+                        <div class="view w-100">
+                            <img class="d-block w-100" src="/assets/imgs/slide-3.jpg" alt="Third slide">
+                            <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
+                        </div>
+                        <!-- <div class="carousel-caption">
+                    <h3 class="h3-responsive">Enjoy</h3>
+                </div> -->
+                    </mdb-carousel-item>
+                    <!--/Third slide-->
+                </mdb-carousel>
+                <!--/.Carousel Wrapper-->
             </div>
-        </div>
-        <div class="grid-2-by-1 margin-bottom-20">
-            <app-event-card-square class="wide-event" [location]="location" *ngFor="let location of locations | slice:0:4;"></app-event-card-square>
-        </div>
-        <div class="margin-bottom-20">
-            <h4 class="link home-link" routerLink="/search">View All <i class="material-icons">keyboard_arrow_down</i></h4>
-        </div>
-        
-        <div class="margin-bottom-20">
-                <div class="justify-left">
-                    <h3>Events Happening Now</h3>
+            <div class="homeButton">
+                <div>
+                    <a mat-raised-button (click)="showBreweryList()">START EXPLORING PUBS</a>
                 </div>
             </div>
-            <div class="grid-2-by-1 margin-bottom-20">
-                <app-event-card-square class="wide-event" [location]="location" *ngFor="let location of locations | slice:0:4;"></app-event-card-square>
+            <div class="homeAdditionalContent">
+                <div class="margin-bottom-20">
+                    <div class="justify-left">
+                        <h3>Most Popular Breweries</h3>
+                    </div>
+                </div>
+                <div class="grid-2-by-1 margin-bottom-20">
+                    <app-event-card-square class="wide-event" [location]="location" *ngFor="let location of locations | slice:0:4;"></app-event-card-square>
+                </div>
+                <div class="margin-bottom-20">
+                    <h4 class="link home-link" routerLink="/search">View All
+                        <i class="material-icons">keyboard_arrow_down</i>
+                    </h4>
+                </div>
+
+                <div class="margin-bottom-20">
+                    <div class="justify-left">
+                        <h3>Events Happening Now</h3>
+                    </div>
+                </div>
+                <div class="grid-2-by-1 margin-bottom-20">
+                    <app-event-card-square class="wide-event" [location]="location" *ngFor="let location of locations | slice:0:4;"></app-event-card-square>
+                </div>
+                <div class="margin-bottom-20">
+                    <h4 class="link home-link" routerLink="/search">View All
+                        <i class="material-icons">keyboard_arrow_down</i>
+                    </h4>
+                </div>
             </div>
-            <div class="margin-bottom-20">
-                <h4 class="link home-link" routerLink="/search">View All <i class="material-icons">keyboard_arrow_down</i></h4>
-            </div>
+        </div>
     </div>
-</div>
+  
+</mat-drawer-container>
+
+
+
+<!--Carousel Wrapper-->
+
+
+
+
 
 <div *ngIf="!isMobile()">
     <app-home-desktop [locations]="locations"></app-home-desktop>
