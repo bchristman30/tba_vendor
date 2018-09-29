@@ -1,48 +1,3 @@
-<<<<<<< HEAD
-<div id="homeGrid" *ngIf="isMobile()">
-    <div class="homeImage">
-        <!--Carousel Wrapper-->
-    <mdb-carousel [isControls]="true" [interval]="8000" class="carousel slide carousel-fade" [animation]="'fade'">
-        <!--First slide-->
-        <mdb-carousel-item>
-            <div class="view w-100">
-                <img class="d-block w-100" src="/assets/imgs/slide-1.jpg" alt="First slide">
-                <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
-            </div>
-            <!-- <div class="carousel-caption">
-                <h3 class="h3-responsive">Socialize</h3>
-            </div> -->
-        </mdb-carousel-item>
-        <!--/First slide-->
-        <!--Second slide-->
-        <mdb-carousel-item>
-            <div class="view w-100">
-                <img class="d-block w-100" src="/assets/imgs/slide-2.jpg" alt="Second slide">
-                <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
-            </div>
-            <!-- <div class="carousel-caption">
-                <h3 class="h3-responsive">Try Something New</h3>
-            </div> -->
-        </mdb-carousel-item>
-        <!--/Second slide-->
-        <!--Third slide-->
-        <mdb-carousel-item>
-            <div class="view w-100">
-                <img class="d-block w-100" src="/assets/imgs/slide-3.jpg" alt="Third slide">
-                <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
-            </div>
-            <!-- <div class="carousel-caption">
-                <h3 class="h3-responsive">Enjoy</h3>
-            </div> -->
-        </mdb-carousel-item>
-        <!--/Third slide-->
-    </mdb-carousel>
-    <!--/.Carousel Wrapper-->
-    </div>
-    <div class="homeButton">
-        <div>
-            <a mat-raised-button (click)="showBreweryList()">START EXPLORING TEST</a>
-=======
 <mat-drawer-container class="example-container" [hasBackdrop]="true" autosize>
     <mat-drawer #drawer class="example-sidenav" mode="side">
         <p>Auto-resizing sidenav</p>
@@ -57,7 +12,6 @@
             
             <mat-icon class="mat-left" (click)="drawer.toggle()">dehaze</mat-icon>
              <p class="title"> Bottle Logic Brewary </p>
->>>>>>> c5f25d95b16f14da8e4797964cef6e29a132aae8
         </div>
         <div id="homeGrid" *ngIf="isMobile()">
             <div class="homeImage">
