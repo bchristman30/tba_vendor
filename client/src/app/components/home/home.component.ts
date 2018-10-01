@@ -17,7 +17,8 @@ export class HomeComponent implements OnInit {
   locationSub: Subscription = new Subscription();
   events: string[] = [];
   opened: boolean;
-
+  tilecolor: String = '#ccc';
+  color: String = '#000';
   shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
   constructor(private router: Router,
               private spinner: NgxSpinnerService,
