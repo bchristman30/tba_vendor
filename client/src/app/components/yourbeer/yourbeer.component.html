@@ -1,0 +1,118 @@
+<mat-drawer-container class="example-container" [hasBackdrop]="true" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="push">
+
+          <div class="xheadr">
+                 <div class="imagleft">
+                  <img src="https://tba-vendor-dev.herokuapp.com/static/location/brewery2.png" />
+              </div>
+
+                  <label class="grid-title">Happy Beer Brewery</label>
+
+          </div>
+
+          <mat-list>
+                  <mat-list-item>    
+                           <mat-icon >local_drink</mat-icon>
+                           <h5 class="h-text"> overview </h5>
+                   </mat-list-item>
+
+                  <mat-list-item>    
+                           <mat-icon >local_drink</mat-icon>
+                           <h5 class="h-text"> drinks </h5>
+                   </mat-list-item>
+
+
+                   <mat-list-item>    
+                          <mat-icon >event_available</mat-icon>
+                          <h5 class="h-text"> events </h5>
+                  </mat-list-item>
+
+
+
+                  <mat-list-item>    
+                          <mat-icon >panorama_fish_eye
+                              </mat-icon>
+                          <h5 class="h-text"> Stamp and Control </h5>
+                  </mat-list-item>
+
+
+
+
+                  <mat-list-item>    
+                          <mat-icon >rate_review</mat-icon>
+                          <h5 class="h-text"> Review list </h5>
+                  </mat-list-item>
+
+
+
+
+
+                  <mat-list-item>    
+                          <mat-icon >graphic_eq</mat-icon>
+                          <h5 class="h-text"> Statistics </h5>
+                  </mat-list-item>
+
+
+
+
+                  <mat-list-item>    
+                          <mat-icon ></mat-icon>
+                          <h5 class="h-text">  </h5>
+                  </mat-list-item>
+
+
+           </mat-list>
+
+<div  class="footer-grid">
+
+  <div class="ft-Ty">
+      <mat-list>
+              <mat-list-item>    
+                      <mat-icon >brightness_low</mat-icon>
+                      <h5 class="h-text"> settings </h5>
+              </mat-list-item>
+              <mat-list-item>    
+                      <mat-icon >sort</mat-icon>
+                      <h5 class="h-text"> Terms </h5>
+              </mat-list-item>
+
+
+</mat-list>
+</div>
+</div>
+          
+      <!-- <mat-icon class="mat-left" (click)="drawer.toggle()">dehaze</mat-icon> -->
+
+  </mat-drawer>
+                                 
+  <div class="example-sidenav-content">
+                      
+
+      <div class="headgrid">
+          <mat-icon class="mat-left" (click)="drawer.toggle()">dehaze</mat-icon>
+           <p class="title"> Your Beer </p>
+
+           <mat-icon class="mat-right" >add</mat-icon>
+
+      </div>
+      <div id="homeGrid" class="tab-pip" *ngIf="isMobile()">
+        <mat-tab-group>
+          <mat-tab class="new-width" label="First"> <div class="newc">Beer on Tap</div>  </mat-tab>
+          <mat-tab class="new-width" label="Second"> <div class="newc"> Archive</div> </mat-tab>
+        </mat-tab-group>
+      </div>
+  </div>
+
+</mat-drawer-container>
+
+
+
+<!--Carousel Wrapper-->
+
+
+
+
+
+<div *ngIf="!isMobile()">
+  <app-home-desktop [locations]="locations"></app-home-desktop>
+</div>

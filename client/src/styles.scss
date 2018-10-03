@@ -28,7 +28,7 @@ html {
         }
         
         color: $primaryTextColor;
-        font-family: 'Roboto';
+        font-family: 'Montserrat', sans-serif;
 
         #appWrapper {
             display: inline;
@@ -239,7 +239,20 @@ html {
         display:none !important;
     }
 }
-
+.mat-tab-label, .mat-tab-link {
+    color: #ffffff;
+}
+.mat-tab-label{
+    width: 50% !important;
+}
+.mat-tab-label {
+    height: auto !important;
+    padding: 18px 24px!important;
+    box-sizing: border-box!important;
+    opacity: 1!important;
+    background: #043B40;
+    font-size: 25px;
+}
 //Bootstrap overrride
 button {
     &:focus {
@@ -264,4 +277,4 @@ button {
 
 }
 html, body { height: 100%; }
-body { margin: 0; font-family: 'Roboto', sans-serif; }
+body { margin: 0;  }

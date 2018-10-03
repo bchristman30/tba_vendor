@@ -27,7 +27,9 @@
 mat-icon.mat-right.mat-icon.material-icons {
     float: right;
 }
-
+.mat-tab-body-content.ng-trigger.ng-trigger-translateTab {
+    background: white !important;
+}
 .imagleft {
     padding: 15px 20px 0;
 }
@@ -39,7 +41,7 @@ label.grid-title {
     color: white;
     font-weight: 700;
 }
-
+.tab-pip{background:#043B40}
 h5.h-text {
     margin-left: 25px;
     font-weight: 450;
@@ -52,6 +54,11 @@ h5.h-text {
     background: #043b40;
     color: white;
     font-size: 18px;
+    box-shadow: 0 0 2px 2px #043b40;
+}
+
+.mat-tab-label{
+    width: 50% !important;
 }
 .footer-grid{
     position: absolute;
@@ -60,7 +67,16 @@ h5.h-text {
     bottom: 0;
     background: #f2f2f2;
 }
-
+.mat-tab-header, .mat-tab-nav-bar {
+    border-bottom: none !important
+}
+.tab-pip .mat-tab-body-wrapper {
+    background: #fff;
+}
+.newc.ng-star-inserted {
+    width: 100%;
+    background: white;
+}
 
 .ft-Ty {
     margin-top: 10%;

@@ -28,10 +28,14 @@ import { MembershipCardInfoComponent } from './components/upgrade-membership/mem
 import { FoodTruckOverviewComponent } from './components/food-truck/single-food-truck/food-truck-overview/food-truck-overview.component';
 import { FoodTruckMenuComponent } from './components/food-truck/single-food-truck/food-truck-menu/food-truck-menu.component';
 import { FoodTruckCalendarComponent } from './components/food-truck/single-food-truck/food-truck-calendar/food-truck-calendar.component';
+import { YourbeerComponent } from './components/yourbeer/yourbeer.component';
+
 const routes: Routes = [
 
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
+  { path: 'yourbeer', component: YourbeerComponent },
+
   { path: 'user', component: ProfileComponent },
   { path: 'search', component: ViewLocationsComponent,
     children : [

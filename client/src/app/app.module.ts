@@ -77,7 +77,9 @@ import { FoodTruckOverviewComponent } from './components/food-truck/single-food-
 import { FoodTruckMenuComponent } from './components/food-truck/single-food-truck/food-truck-menu/food-truck-menu.component';
 import { FoodTruckCalendarComponent } from './components/food-truck/single-food-truck/food-truck-calendar/food-truck-calendar.component';
 import { MenuItemCardComponent } from './components/cards/menu-item-card/menu-item-card.component';
-import { CarouselModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md'
+import { CarouselModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md';
+import { YourbeerComponent } from './components/yourbeer/yourbeer.component';
+
 
 export function init_app(appLoadService: StartupService) {
   return () => appLoadService.initializeApp();
@@ -126,7 +128,8 @@ export function init_app(appLoadService: StartupService) {
       FoodTruckOverviewComponent,
       FoodTruckMenuComponent,
       FoodTruckCalendarComponent,
-      MenuItemCardComponent
+      MenuItemCardComponent,
+      YourbeerComponent
   ],
   imports: [
     BrowserModule,
