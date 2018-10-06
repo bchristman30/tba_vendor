@@ -29,12 +29,14 @@ import { FoodTruckOverviewComponent } from './components/food-truck/single-food-
 import { FoodTruckMenuComponent } from './components/food-truck/single-food-truck/food-truck-menu/food-truck-menu.component';
 import { FoodTruckCalendarComponent } from './components/food-truck/single-food-truck/food-truck-calendar/food-truck-calendar.component';
 import { YourbeerComponent } from './components/yourbeer/yourbeer.component';
+import { BeerinfoComponent } from './components/beerinfo/beerinfo.component';
 
 const routes: Routes = [
 
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'yourbeer', component: YourbeerComponent },
+  { path: 'beerinfo/:beer', component: BeerinfoComponent },
 
   { path: 'user', component: ProfileComponent },
   { path: 'search', component: ViewLocationsComponent,

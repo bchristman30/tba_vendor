@@ -79,6 +79,7 @@ import { FoodTruckCalendarComponent } from './components/food-truck/single-food-
 import { MenuItemCardComponent } from './components/cards/menu-item-card/menu-item-card.component';
 import { CarouselModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md';
 import { YourbeerComponent } from './components/yourbeer/yourbeer.component';
+import { BeerinfoComponent } from './components/beerinfo/beerinfo.component';
 
 
 export function init_app(appLoadService: StartupService) {
@@ -129,7 +130,8 @@ export function init_app(appLoadService: StartupService) {
       FoodTruckMenuComponent,
       FoodTruckCalendarComponent,
       MenuItemCardComponent,
-      YourbeerComponent
+      YourbeerComponent,
+      BeerinfoComponent
   ],
   imports: [
     BrowserModule,

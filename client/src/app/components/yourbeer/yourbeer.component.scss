@@ -2,12 +2,79 @@
     width: 75% !important;
     position: fixed !important;
     }
-
+    #beerCard {
+        display: -ms-grid;
+        display: grid;
+        -ms-grid-columns: 100px 1fr;
+        grid-template-columns: 110px 1fr;
+        -ms-grid-rows: 1fr;
+        grid-template-rows: 110px;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    
+    .beer-card-content {
+        padding: 5px;
+        .beer-card-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: 1fr;
+        }
+        .mat-standard-chip {
+            padding: 2px 12px !important;
+        }
+    }
+    
+    .beer-card-bottom {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+    
+        .beer-card-rating-container {
+            display: grid;
+            grid-template-columns: 17px 17px 17px 17px 17px;
+            grid-gap: 2px;
+    
+            &.rated-4 {
+                .rating-5 {
+                    background: #FFFFB4;
+                }
+            }
+    
+            .beer-card-rating {
+                background: #FFCD83;
+                border-radius: 25px;
+                border: 1px solid #bcbbbb;
+                height: 15px;
+                width: 15px;
+                display: grid;
+                align-self: center;
+            }
+        }
+    
+        .beer-card-read-more{
+            display: grid;
+            grid-template-rows: 1fr;
+            grid-template-columns: 1fr 20px;
+            text-align: right;
+            align-items: center;
+            font-size: 14px;
+            color: #4A9F97;
+        }
+    }
+    
+    
+    .lf-p{
+        float: left;
+    }
 .mat-left{
     float: left;
     font-size: 30px;
 }
-
+.beer-card-read-more {
+    font-weight: 400;
+    padding: 2px;
+    font-size: 14px;
+}
 .title{
     float: left;
     margin-left: 10%;
@@ -41,7 +108,7 @@ label.grid-title {
     color: white;
     font-weight: 700;
 }
-.tab-pip{background:#043B40}
+
 h5.h-text {
     margin-left: 25px;
     font-weight: 450;
@@ -81,6 +148,36 @@ h5.h-text {
 .ft-Ty {
     margin-top: 10%;
 }
+
+img.beer-img {
+    max-width: 100%;
+    float: left !important;
+    height: 100%;
+}
+.te-grid {
+    float: left;
+    padding: 10px;
+    margin: 5px;
+    width: 100%;
+    height: auto;
+}
+p.grid-p {
+    padding: 10px;
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: 400;
+}
+
+
+
+p.grid-pp {
+    padding: 10px;
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: 400;
+    color: #c52121;
+}
+
 
 #homeGrid {
     height: 100%;

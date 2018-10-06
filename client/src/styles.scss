@@ -241,7 +241,21 @@ html {
 }
 .mat-tab-label, .mat-tab-link {
     color: #ffffff;
+    background: #043B40;
+
 }
+div#mat-tab-label-0-0 {
+    background: #043b40;
+    font-size: 16px;
+
+}
+div#mat-tab-label-0-1{
+    background: #043b40;
+    font-size: 16px;
+
+}
+
+
 .mat-tab-label{
     width: 50% !important;
 }
@@ -249,9 +263,12 @@ html {
     height: auto !important;
     padding: 18px 24px!important;
     box-sizing: border-box!important;
-    opacity: 1!important;
     background: #043B40;
     font-size: 25px;
+    opacity: 1 !important;
+}
+.mat-drawer-container{
+
 }
 //Bootstrap overrride
 button {
