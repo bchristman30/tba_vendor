@@ -11,8 +11,88 @@
 
 <mat-tab-group>
   <mat-tab label="Info">
-    <h1>Some tab content</h1>
-    <p>...</p>
+
+  <div class="info-grid">
+    <div class="head-info">
+      <div class="head-left-grid">
+          <p>User Rate:</p>
+           <div class="margin-top-bottom-5 beer-card-bottom">
+              <div class="beer-card-rating-container rated-4">
+                <div class="beer-card-rating rating-1"></div>
+                 <div class="beer-card-rating rating-2"></div>
+                 <div class="beer-card-rating rating-3"></div>
+                  <div class="beer-card-rating rating-4"></div>
+                  <div class="beer-card-rating rating-5"></div>
+                </div>
+              </div>
+
+              <div class="image-upload">
+                  <label for="file-input">
+                      <img class="img-grid" src="assets/imgs/slide-3.jpg"/>
+                  </label>
+              
+                  <input id="file-input" type="file"/>
+                  <label class="grid-label">Delete photo</label>
+                </div>
+          </div>
+          
+      
+       
+          <div class="head-right-grid">
+                  <p class="up-p-grid">This Beer in Archive list</p>
+                  <label class="back-label-grid"> Send Back on Tap</label>
+
+                      <mat-form-field>
+                        <input matInput value=$5 placeholder="Price">
+                      </mat-form-field>
+                    
+                  
+                      <mat-form-field>
+                          <input matInput value=12% placeholder="Density">
+                        </mat-form-field> 
+
+                        <mat-form-field>
+                            <input matInput value=4,5 placeholder="Alcohal content">
+                          </mat-form-field>
+                        
+          </div>
+
+          <div class="fl-grid-input">
+              <div class="">
+                  <mat-form-field appearance="standard">
+                      <mat-label>Name</mat-label>
+                      <input matInput  value=Anupam placeholder="Placeholder">
+                    </mat-form-field>
+
+                      </div>
+          </div>
+          <div class="fl-grid-input">
+          <mat-form-field class="example-chip-list">
+              <mat-chip-list #chipList>
+                <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"
+                         [removable]="removable" (removed)="remove(fruit)">
+                  {{fruit.name}}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input placeholder="Tags"
+                       [matChipInputFor]="chipList"
+                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                       [matChipInputAddOnBlur]="addOnBlur"
+                       (matChipInputTokenEnd)="add($event)">
+              </mat-chip-list>
+            </mat-form-field>
+            </div>
+
+            <div class="fl-grid-input">
+            
+            
+            </div>
+    </div>
+  </div>
+
+
+
+
   </mat-tab>
   <mat-tab label="User Reviews">
     <h1>Some more tab content</h1>

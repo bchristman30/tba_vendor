@@ -39,6 +39,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { EventCardSquareComponent } from './components/event-card-square/event-card-square.component';
 import { StartupService } from './startup.service';
 import { MaterialModule } from './shared/modules/material.module';
+import {MatChipsModule} from '@angular/material/chips';
+
 import { HeaderComponent } from './components/header/header.component';
 import { BeerCardComponent } from './components/cards/beer-card/beer-card.component';
 import { Dialogbox } from './dialogbox/dialog.component';
@@ -137,6 +139,7 @@ export function init_app(appLoadService: StartupService) {
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
+    MatChipsModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
