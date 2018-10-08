@@ -23,7 +23,8 @@ import { AuthGuard } from './auth/auth-guard.service';
 
 
 import {MatSidenavModule} from '@angular/material/sidenav';
-
+import {MatRadioModule} from '@angular/material/radio';
+import {MatButtonModule} from '@angular/material/button';
 
 import { ToastrModule } from 'ngx-toastr';
 import { HomeComponent } from './components/home/home.component';
@@ -83,7 +84,9 @@ import { CarouselModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md
 import { YourbeerComponent } from './components/yourbeer/yourbeer.component';
 import { BeerinfoComponent } from './components/beerinfo/beerinfo.component';
 import { MaininfoComponent } from './components/maininfo/maininfo.component';
-import { NeweventComponent } from './newevent/newevent.component';
+import { NeweventComponent } from './components/newevent/newevent.component';
+
+
 
 
 export function init_app(appLoadService: StartupService) {
@@ -137,7 +140,8 @@ export function init_app(appLoadService: StartupService) {
       YourbeerComponent,
       BeerinfoComponent,
       MaininfoComponent,
-      NeweventComponent
+      NeweventComponent,
+      
   ],
   imports: [
     BrowserModule,
@@ -161,7 +165,9 @@ export function init_app(appLoadService: StartupService) {
     CarouselModule,
     WavesModule,
     ButtonsModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatRadioModule,
+    MatButtonModule
   ],
   providers: [
     UIService,

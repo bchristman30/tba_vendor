@@ -31,7 +31,8 @@ import { FoodTruckCalendarComponent } from './components/food-truck/single-food-
 import { YourbeerComponent } from './components/yourbeer/yourbeer.component';
 import { BeerinfoComponent } from './components/beerinfo/beerinfo.component';
 import { MaininfoComponent } from './components/maininfo/maininfo.component';
-
+import { NeweventComponent } from './components/newevent/newevent.component';
+import {MatButtonModule} from '@angular/material/button';
 const routes: Routes = [
 
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -39,6 +40,7 @@ const routes: Routes = [
   { path: 'yourbeer', component: YourbeerComponent },
   { path: 'beerinfo/:beer', component: BeerinfoComponent },
   { path: 'maininfo', component: MaininfoComponent },
+  { path: 'newevent', component: NeweventComponent },
 
 
 

@@ -1,0 +1,84 @@
+<div class="top-head-grid">
+  <div class="backspace">
+    <i class="material-icons">
+      keyboard_backspace
+    </i>
+  </div>
+  <label class="beername">
+    New Event
+  </label>
+</div>
+
+<!-- <div class="image-upload">
+  <label for="file-input">
+      <img class="img-grid" src="assets/imgs/slide-3.jpg"/>
+  </label>
+
+  <input id="file-input" type="file"/>
+</div> -->
+
+       <!--Carousel Wrapper-->
+       <mdb-carousel [isControls]="true" [interval]="8000" class="carousel slide carousel-fade" [animation]="'fade'">
+        <!--First slide-->
+        <mdb-carousel-item>
+            <div class="view w-100">
+                <img class="d-block w-100" src="/assets/imgs/slide-1.jpg" alt="First slide">
+                <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
+            </div>
+            <!-- <div class="carousel-caption">
+                <h3 class="h3-responsive">Socialize</h3>
+            </div> -->
+        </mdb-carousel-item>
+        <!--/First slide-->
+        <!--Second slide-->
+        <mdb-carousel-item>
+            <div class="view w-100">
+                <img class="d-block w-100" src="/assets/imgs/slide-2.jpg" alt="Second slide">
+                <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
+            </div>
+            <!-- <div class="carousel-caption">
+                <h3 class="h3-responsive">Try Something New</h3>
+            </div> -->
+        </mdb-carousel-item>
+        <!--/Second slide-->
+        <!--Third slide-->
+        <mdb-carousel-item>
+            <div class="view w-100">
+                <img class="d-block w-100" src="/assets/imgs/slide-3.jpg" alt="Third slide">
+                <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
+            </div>
+            <!-- <div class="carousel-caption">
+                <h3 class="h3-responsive">Enjoy</h3>
+            </div> -->
+        </mdb-carousel-item>
+        <!--/Third slide-->
+    </mdb-carousel>
+<!--/.Carousel Wrapper-->
+
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Title" value="">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Overview" value="">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Event Date" value="">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Start Time" value="">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Finish Time" value="">
+  </mat-form-field>
+<mat-radio-group class="example-radio-group" [(ngModel)]="favoriteSeason">
+  <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+    {{season}}
+  </mat-radio-button>
+</mat-radio-group>
+  
+<div class="button-row">
+  <button mat-flat-button color="accent">Save</button>
+</div>
+   
+</form>

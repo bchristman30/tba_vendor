@@ -64,16 +64,13 @@ html {
             }
 
             #content {
-                height: calc(100% );
-                -webkit-overflow-scrolling: touch;
-                overflow-y: auto;
-                display: block;
-                position: absolute;
-                top: 0x;
+                height: calc(100% - 56px - 56px - 5px);
+                top: 0;
                 bottom: 0;
+                position: absolute;
                 left: 0;
                 right: 0;
-                overflow: hidden;
+                display: block;
             }
 
             #footer {
