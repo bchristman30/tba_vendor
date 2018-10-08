@@ -8,12 +8,11 @@ import { BreakpointService } from '../../services/breakpoint.service';
 import {MatSidenav} from '@angular/material/sidenav';
 
 @Component({
-  selector: 'app-yourbeer',
-  templateUrl: './yourbeer.component.html',
-  styleUrls: ['./yourbeer.component.scss']
+  selector: 'app-maininfo',
+  templateUrl: './maininfo.component.html',
+  styleUrls: ['./maininfo.component.scss']
 })
-export class YourbeerComponent implements OnInit {
-
+export class MaininfoComponent implements OnInit {
   locations: Array<LocationModel>;
   locationSub: Subscription = new Subscription();
   events: string[] = [];
@@ -41,8 +40,5 @@ export class YourbeerComponent implements OnInit {
   isMobile(): boolean {
     return this.breakpointService.isMobile();
   }
-
-
-
 
 }

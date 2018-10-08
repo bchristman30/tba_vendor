@@ -1,0 +1,211 @@
+<mat-drawer-container class="example-container" [hasBackdrop]="true" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="push">
+
+          <div class="xheadr">
+                 <div class="imagleft">
+                  <img src="https://tba-vendor-dev.herokuapp.com/static/location/brewery2.png" />
+
+              </div>
+
+                  <label class="grid-title">Happy Beer Brewery</label>
+
+          </div>
+
+          <mat-list>
+                  <mat-list-item>    
+                           <mat-icon >local_drink</mat-icon>
+                           <h5 class="h-text"> overview </h5>
+                   </mat-list-item>
+
+                  <mat-list-item>    
+                           <mat-icon >local_drink</mat-icon>
+                           <h5 class="h-text"> drinks </h5>
+                   </mat-list-item>
+
+
+                   <mat-list-item>    
+                          <mat-icon >event_available</mat-icon>
+                          <h5 class="h-text"> events </h5>
+                  </mat-list-item>
+
+
+
+                  <mat-list-item>    
+                          <mat-icon >panorama_fish_eye
+                              </mat-icon>
+                          <h5 class="h-text"> Stamp and Control </h5>
+                  </mat-list-item>
+
+
+
+
+                  <mat-list-item>    
+                          <mat-icon >rate_review</mat-icon>
+                          <h5 class="h-text"> Review list </h5>
+                  </mat-list-item>
+
+
+
+
+
+                  <mat-list-item>    
+                          <mat-icon >graphic_eq</mat-icon>
+                          <h5 class="h-text"> Statistics </h5>
+                  </mat-list-item>
+
+
+
+
+                  <mat-list-item>    
+                          <mat-icon ></mat-icon>
+                          <h5 class="h-text">  </h5>
+                  </mat-list-item>
+
+
+           </mat-list>
+
+<div  class="footer-grid">
+
+  <div class="ft-Ty">
+      <mat-list>
+              <mat-list-item>    
+                      <mat-icon >brightness_low</mat-icon>
+                      <h5 class="h-text"> settings </h5>
+              </mat-list-item>
+              <mat-list-item>    
+                      <mat-icon >sort</mat-icon>
+                      <h5 class="h-text"> Terms </h5>
+              </mat-list-item>
+
+
+</mat-list>
+</div>
+</div>
+          
+      <!-- <mat-icon class="mat-left" (click)="drawer.toggle()">dehaze</mat-icon> -->
+
+  </mat-drawer>
+                                 
+  <div class="example-sidenav-content">
+                      
+<div class="scroll">
+      <div class="headgrid">
+          <mat-icon class="mat-left" (click)="drawer.toggle()">dehaze</mat-icon>
+           <p class="title"> main info </p>
+      </div>
+      <div id="homeGrid" *ngIf="isMobile()">
+          <div class="homeImage">
+         
+              <img class="home-img" src="assets/imgs/slide-1.jpg" />
+              
+              
+          </div>
+          <div class="custom-block">
+            <b>Your contact info</b>
+            <form class="example-form">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Name of your Brewery" value="">
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Contact Phone" value="">
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Contact Email" value="">
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Website" value="">
+              </mat-form-field>
+            <div class="edito">
+              <b>Ammenities, which you offer<a href="#">Edit</a></b>
+            
+            </div>
+            <div class="edito_icon">
+                <i class="material-icons">
+                    add_comment
+                </i>
+                <i class="material-icons">
+                    local_dining
+                </i>
+                <i class="material-icons">
+                    access_time
+                </i>
+                        <i class="material-icons">
+                            access_time
+                        </i>
+                        
+            </div>
+            <div class="work_hors">
+            <b>Your Working Hours<a   href="#">Edit</a></b>
+            <div class="sun"> 
+              <label class="whl">Sunday</label><label class="whr">12:00-17:00</label>
+              </div>
+              <div class="sun"> 
+              <label class="whl">Monday</label><label class="whr">12:00-17:00</label>
+              </div>
+              <div class="sun"> 
+              <label class="whl">Tuesday</label><label class="whr">12:00-17:00</label>
+              </div>
+              <div class="sun"> 
+              <label class="whl">Wednesday</label><label class="whr">12:00-17:00</label>
+              </div>
+              <div class="sun"> 
+              <label class="whl">Thursday</label><label class="whr">12:00-17:00</label>
+              </div>
+              <div class="sun"> 
+              <label class="whl">Friday</label><label class="whr">12:00-17:00</label>
+              </div>
+              <div class="sun"> 
+              <label class="whl">Saturday</label><label class="whr">12:00-17:00</label>
+            </div> 
+            
+            
+            
+            
+            
+          </div>
+
+          <b>Adress</b>
+          <mat-form-field class="example-full-width">
+              <input matInput placeholder="Name of State" value="">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Name of City" value="">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Address" value="">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Address" value="">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="zipcode" value="">
+              </mat-form-field>
+             
+             <div class="buttn">
+                <button mat-flat-button color="accent">save</button>
+               </div>
+                
+
+            </form>
+            
+
+          </div>
+      </div>
+  </div>
+</div>
+</mat-drawer-container>
+
+
+
+<!--Carousel Wrapper-->
+
+
+
+
+
+<div *ngIf="!isMobile()">
+  <app-home-desktop [locations]="locations"></app-home-desktop>
+</div>
+
+
+

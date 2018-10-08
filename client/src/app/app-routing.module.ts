@@ -30,6 +30,7 @@ import { FoodTruckMenuComponent } from './components/food-truck/single-food-truc
 import { FoodTruckCalendarComponent } from './components/food-truck/single-food-truck/food-truck-calendar/food-truck-calendar.component';
 import { YourbeerComponent } from './components/yourbeer/yourbeer.component';
 import { BeerinfoComponent } from './components/beerinfo/beerinfo.component';
+import { MaininfoComponent } from './components/maininfo/maininfo.component';
 
 const routes: Routes = [
 
@@ -37,6 +38,9 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'yourbeer', component: YourbeerComponent },
   { path: 'beerinfo/:beer', component: BeerinfoComponent },
+  { path: 'maininfo', component: MaininfoComponent },
+
+
 
   { path: 'user', component: ProfileComponent },
   { path: 'search', component: ViewLocationsComponent,
