@@ -1,12 +1,15 @@
 <div class="top-head-grid">
   <div class="backspace">
-    <i class="material-icons">
+    <i class="material-icons" routerLink="/yourbeer">
       keyboard_backspace
     </i>
   </div>
   <label class="beername">
     {{beername}}
   </label>
+  <i class="material-icons">
+    sort
+    </i>
 </div>
 
 <mat-tab-group>
@@ -24,7 +27,7 @@
                   <div class="beer-card-rating rating-4"></div>
                   <div class="beer-card-rating rating-5"></div>
                 </div>
-              </div>
+              </div> 
 
               <div class="image-upload">
                   <label for="file-input">
@@ -84,9 +87,16 @@
             </div>
 
             <div class="fl-grid-input">
-            
-            
-            </div>
+                <form class="example-form">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Description"
+                      value="Brewing a true larger take a litle bit more work and specialized equipment than Brewing an ale.">
+                    </mat-form-field>
+                  </form>
+                  </div> 
+                  <div class="button-row cen">
+                      <button mat-flat-button color="accent">DELETE THIS BEER</button>
+                  </div>
     </div>
   </div>
 
@@ -95,7 +105,77 @@
 
   </mat-tab>
   <mat-tab label="User Reviews">
-    <h1>Some more tab content</h1>
-    <p>...</p>
+    <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <div class="jony">
+          <div class="tsubt">
+          <mat-card-title>Tandem</mat-card-title>
+          <mat-card-subtitle>16.01.2018, 23:51</mat-card-subtitle>
+          </div>
+
+
+
+          <div class="margin-top-bottom-5 beer-card-bottom">
+            <div class="beer-card-rating-container rated-4">
+              <div class="beer-card-rating rating-1"></div>
+              <div class="beer-card-rating rating-2"></div>
+              <div class="beer-card-rating rating-3"></div>
+              <div class="beer-card-rating rating-4"></div>
+              <div class="beer-card-rating rating-5"></div>
+              <span class="ben">-3,4</span>
+            </div>
+            </div>
+            <!-- <div>5</div> -->
+            <mat-card-content>
+              <p>
+                We have passion for American craft beer and we believe that we should
+                enlighten ourfellow.
+              </p>
+            </mat-card-content>
+          </div> 
+        </mat-card-header>
+        
+      </mat-card>
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <div class="jony">
+          <div class="tsubt">
+          <mat-card-title>Tandem</mat-card-title>
+          <mat-card-subtitle>16.01.2018, 23:51</mat-card-subtitle>
+          </div>
+
+
+
+          <div class="margin-top-bottom-5 beer-card-bottom">
+            <div class="beer-card-rating-container rated-4">
+              <div class="beer-card-rating rating-1"></div>
+              <div class="beer-card-rating rating-2"></div>
+              <div class="beer-card-rating rating-3"></div>
+              <div class="beer-card-rating rating-4"></div>
+              <div class="beer-card-rating rating-5"></div>
+              <span class="ben">-3,4</span>
+            </div>
+            </div>
+            <!-- <div>5</div> -->
+            <mat-card-content>
+              <p>
+                We have passion for American craft beer and we believe that we should
+                enlighten ourfellow.
+                
+              </p>
+            </mat-card-content>
+          </div> 
+        </mat-card-header>
+        
+      </mat-card>    
+
+
+
+
+
+
+
   </mat-tab>
 </mat-tab-group>

@@ -33,14 +33,21 @@ import { BeerinfoComponent } from './components/beerinfo/beerinfo.component';
 import { MaininfoComponent } from './components/maininfo/maininfo.component';
 import { NeweventComponent } from './components/newevent/newevent.component';
 import {MatButtonModule} from '@angular/material/button';
-const routes: Routes = [
+import { EventsComponent } from './components/events/events.component';
+import { NewfoodtruckComponent } from './components/newfoodtruck/newfoodtruck.component';
+
+const routes: Routes = [ 
 
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'yourbeer', component: YourbeerComponent },
+  { path: 'yourbeer', component: YourbeerComponent }, 
   { path: 'beerinfo/:beer', component: BeerinfoComponent },
   { path: 'maininfo', component: MaininfoComponent },
   { path: 'newevent', component: NeweventComponent },
+  { path: 'events', component: EventsComponent},
+  { path: 'newfoodtruck', component: NewfoodtruckComponent},
+
+
 
 
 
@@ -98,6 +105,7 @@ const routes: Routes = [
       { path: 'calendar', component: FoodTruckCalendarComponent }
     ]
   },
+  
 ];
 
 @NgModule({

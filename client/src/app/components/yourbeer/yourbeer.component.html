@@ -11,55 +11,61 @@
                 </div>
 
                 <mat-list>
-                        <mat-list-item>
-                                <mat-icon>local_drink</mat-icon>
-                                <h5 class="h-text"> overview </h5>
-                        </mat-list-item>
- 
-                        <mat-list-item>
-                                <mat-icon>local_drink</mat-icon>
-                                <h5 class="h-text"> drinks </h5>
-                        </mat-list-item>
+                    <mat-list-item routerLink="/">    
+                      <mat-icon >local_drink</mat-icon>
+                      <h5 class="h-text"> overview </h5>
+              </mat-list-item>
+
+             <mat-list-item routerLink="/yourbeer">    
+                      <mat-icon >local_drink</mat-icon>
+                      <h5 class="h-text">
+                             <a >drinks</a></h5>
+              </mat-list-item>
 
 
-                        <mat-list-item>
-                                <mat-icon>event_available</mat-icon>
-                                <h5 class="h-text"> events </h5>
-                        </mat-list-item>
-
-
-
-                        <mat-list-item>
-                                <mat-icon>panorama_fish_eye
-                                </mat-icon>
-                                <h5 class="h-text"> Stamp and Control </h5>
-                        </mat-list-item>
+              <mat-list-item routerLink="/events">    
+                     <mat-icon >event_available</mat-icon>
+                     <h5 class="h-text">
+                             <a >events</a>
+                         </h5>
+             </mat-list-item>
 
 
 
-
-                        <mat-list-item>
-                                <mat-icon>rate_review</mat-icon>
-                                <h5 class="h-text"> Review list </h5>
-                        </mat-list-item>
+             <mat-list-item>    
+                     <mat-icon >panorama_fish_eye
+                         </mat-icon>
+                     <h5 class="h-text"> Stamp and Control </h5>
+             </mat-list-item>
 
 
 
 
-
-                        <mat-list-item>
-                                <mat-icon>graphic_eq</mat-icon>
-                                <h5 class="h-text"> Statistics </h5>
-                        </mat-list-item>
-
+             <mat-list-item>    
+                     <mat-icon >rate_review</mat-icon>
+                     <h5 class="h-text"> Review list </h5>
+             </mat-list-item>
 
 
 
-                        <mat-list-item>
-                                <mat-icon></mat-icon>
-                                <h5 class="h-text"> </h5>
-                        </mat-list-item>
 
+
+             <mat-list-item>    
+                     <mat-icon >graphic_eq</mat-icon>
+                     <h5 class="h-text"> Statistics </h5>
+             </mat-list-item>
+
+             <mat-list-item routerLink="/maininfo" >    
+                     <mat-icon >info</mat-icon>
+                     <h5 class="h-text"> add info </h5>
+             </mat-list-item>
+
+
+
+             <mat-list-item>    
+                     <mat-icon ></mat-icon>
+                     <h5 class="h-text">  </h5>
+             </mat-list-item>
 
                 </mat-list>
 
@@ -92,9 +98,9 @@
                         <mat-icon class="mat-left" (click)="drawer.toggle()">dehaze</mat-icon>
                         <p class="title"> Your Beer </p>
 
-                        <mat-icon class="mat-right">add</mat-icon>
+                        <mat-icon class="mat-right" routerLink="/beerinfo/:beer">add</mat-icon>
 
-                </div>
+                </div> 
                 <div id="homeGrid" class="tab-pip" *ngIf="isMobile()">
                         <mat-tab-group>
                                 <mat-tab class="new-width" label="Beer on Tap">
@@ -102,7 +108,7 @@
 
                                                         <p class="grid-p">3 Beer on tap</p>
                                                         <mat-card class="padding-0">
-                                                                        <div id="beerCard">
+                                                                        <div id="beerCard" routerLink="/beerinfo/:beer">
                                                                           <div class="beer-card-logo">
                                                                             <div class="grid">
                                                                                 <img class="image-100" src="assets/imgs/slide-3.jpg" >
@@ -142,7 +148,7 @@
                                                                       </mat-card>
 
                                                                       <mat-card class="padding-0">
-                                                                                <div id="beerCard">
+                                                                                <div id="beerCard" routerLink="/beerinfo/:beer">
                                                                                   <div class="beer-card-logo">
                                                                                     <div class="grid">
                                                                                         <img class="image-100" src="assets/imgs/slide-3.jpg" >
@@ -183,7 +189,7 @@
 
 
                                                                               <mat-card class="padding-0">
-                                                                                        <div id="beerCard">
+                                                                                        <div id="beerCard" routerLink="/beerinfo/:beer">
                                                                                           <div class="beer-card-logo">
                                                                                             <div class="grid">
                                                                                                 <img class="image-100" src="assets/imgs/slide-3.jpg" >
@@ -223,7 +229,7 @@
                                                                                       </mat-card>
 
                                                                                       <mat-card class="padding-0">
-                                                                                                <div id="beerCard">
+                                                                                                <div id="beerCard" routerLink="/beerinfo/:beer">
                                                                                                   <div class="beer-card-logo">
                                                                                                     <div class="grid">
                                                                                                         <img class="image-100" src="assets/imgs/slide-3.jpg" >
@@ -263,7 +269,7 @@
                                                                                               </mat-card>
 
                                                                                               <mat-card class="padding-0">
-                                                                                                        <div id="beerCard">
+                                                                                                        <div id="beerCard" routerLink="/beerinfo/:beer">
                                                                                                           <div class="beer-card-logo">
                                                                                                             <div class="grid">
                                                                                                                 <img class="image-100" src="assets/imgs/slide-3.jpg" >
@@ -322,7 +328,7 @@
                                 <mat-tab class="new-width" label="Archive">
                                         <div class="newc">   <p class="grid-pp">3 Beer in Archive list now</p>
                                                 <mat-card class="padding-0">
-                                                                <div id="beerCard">
+                                                                <div id="beerCard" routerLink="/beerinfo/:beer">
                                                                   <div class="beer-card-logo">
                                                                     <div class="grid">
                                                                         <img class="image-100" src="assets/imgs/slide-3.jpg" >
@@ -362,7 +368,7 @@
                                                               </mat-card>
 
                                                               <mat-card class="padding-0">
-                                                                        <div id="beerCard">
+                                                                        <div id="beerCard" routerLink="/beerinfo/:beer">
                                                                           <div class="beer-card-logo">
                                                                             <div class="grid">
                                                                                 <img class="image-100" src="assets/imgs/slide-3.jpg" >
@@ -402,7 +408,7 @@
                                                                       </mat-card>
 
                                                                       <mat-card class="padding-0">
-                                                                                <div id="beerCard">
+                                                                                <div id="beerCard" routerLink="/beerinfo/:beer">
                                                                                   <div class="beer-card-logo">
                                                                                     <div class="grid">
                                                                                         <img class="image-100" src="assets/imgs/slide-3.jpg" >
@@ -442,7 +448,7 @@
                                                                               </mat-card>
 
                                                                               <mat-card class="padding-0">
-                                                                                        <div id="beerCard">
+                                                                                        <div id="beerCard" routerLink="/beerinfo/:beer">
                                                                                           <div class="beer-card-logo">
                                                                                             <div class="grid">
                                                                                                 <img class="image-100" src="assets/imgs/slide-3.jpg" >
@@ -483,7 +489,7 @@
 
 
                                                                                       <mat-card class="padding-0">
-                                                                                                <div id="beerCard">
+                                                                                                <div id="beerCard" routerLink="/beerinfo/:beer">
                                                                                                   <div class="beer-card-logo">
                                                                                                     <div class="grid">
                                                                                                         <img class="image-100" src="assets/imgs/slide-3.jpg" >
@@ -522,7 +528,7 @@
                                                                                                 </div>
                                                                                               </mat-card>
                                                                       <mat-card class="padding-0">
-                                                                                <div id="beerCard">
+                                                                                <div id="beerCard" routerLink="/beerinfo/:beer">
                                                                                   <div class="beer-card-logo">
                                                                                     <div class="grid">
                                                                                         <img class="image-100" src="assets/imgs/slide-3.jpg" >

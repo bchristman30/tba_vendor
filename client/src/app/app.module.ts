@@ -85,6 +85,8 @@ import { YourbeerComponent } from './components/yourbeer/yourbeer.component';
 import { BeerinfoComponent } from './components/beerinfo/beerinfo.component';
 import { MaininfoComponent } from './components/maininfo/maininfo.component';
 import { NeweventComponent } from './components/newevent/newevent.component';
+import { EventsComponent } from './components/events/events.component';
+import { NewfoodtruckComponent } from './components/newfoodtruck/newfoodtruck.component';
 
 
 
@@ -109,7 +111,7 @@ export function init_app(appLoadService: StartupService) {
       LocationOverviewComponent,
       LocationMenuComponent,
       DialogRedeemStampComponent,
-      LocationEventsComponent,
+      LocationEventsComponent, 
       EventCardSquareComponent,
       HeaderComponent,
       BeerCardComponent,
@@ -134,13 +136,15 @@ export function init_app(appLoadService: StartupService) {
       DialogTermsOfServiceComponent,
       CalendarEventCardComponent,
       FoodTruckOverviewComponent,
-      FoodTruckMenuComponent,
+      FoodTruckMenuComponent, 
       FoodTruckCalendarComponent,
       MenuItemCardComponent,
       YourbeerComponent,
       BeerinfoComponent,
       MaininfoComponent,
       NeweventComponent,
+      EventsComponent,
+      NewfoodtruckComponent,
       
   ],
   imports: [

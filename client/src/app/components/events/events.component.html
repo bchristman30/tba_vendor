@@ -1,0 +1,244 @@
+<mat-drawer-container class="example-container" [hasBackdrop]="true" autosize>
+    <mat-drawer #drawer class="example-sidenav" mode="push">
+
+            <div class="xheadr">
+                   <div class="imagleft">
+                    <img src="https://tba-vendor-dev.herokuapp.com/static/location/brewery2.png" />
+
+                </div>
+
+                    <label class="grid-title">Happy Beer Brewery</label>
+
+            </div>
+
+            <mat-list> 
+                    <mat-list-item routerLink="/">    
+                        <mat-icon >local_drink</mat-icon>
+                        <h5 class="h-text"> overview </h5>
+                </mat-list-item>
+
+               <mat-list-item routerLink="/yourbeer">    
+                        <mat-icon >local_drink</mat-icon>
+                        <h5 class="h-text">
+                               <a >drinks</a></h5>
+                </mat-list-item>
+
+
+                <mat-list-item routerLink="/events">    
+                       <mat-icon >event_available</mat-icon>
+                       <h5 class="h-text">
+                               <a >events</a>
+                           </h5>
+               </mat-list-item>
+
+
+
+               <mat-list-item>    
+                       <mat-icon >panorama_fish_eye
+                           </mat-icon>
+                       <h5 class="h-text"> Stamp and Control </h5>
+               </mat-list-item>
+
+
+
+
+               <mat-list-item>    
+                       <mat-icon >rate_review</mat-icon>
+                       <h5 class="h-text"> Review list </h5>
+               </mat-list-item>
+
+
+
+
+
+               <mat-list-item>    
+                       <mat-icon >graphic_eq</mat-icon>
+                       <h5 class="h-text"> Statistics </h5>
+               </mat-list-item>
+
+               <mat-list-item routerLink="/maininfo" >    
+                       <mat-icon >info</mat-icon>
+                       <h5 class="h-text"> add info </h5>
+               </mat-list-item>
+
+
+
+               <mat-list-item>    
+                       <mat-icon ></mat-icon>
+                       <h5 class="h-text">  </h5>
+               </mat-list-item>
+
+
+             </mat-list>
+
+<div  class="footer-grid">
+
+    <div class="ft-Ty">
+        <mat-list>
+                <mat-list-item>    
+                        <mat-icon >brightness_low</mat-icon>
+                        <h5 class="h-text"> settings </h5>
+                </mat-list-item>
+                <mat-list-item>    
+                        <mat-icon >sort</mat-icon>
+                        <h5 class="h-text"> Terms </h5>
+                </mat-list-item>
+
+
+ </mat-list>
+</div>
+</div>
+            
+        <!-- <mat-icon class="mat-left" (click)="drawer.toggle()">dehaze</mat-icon> -->
+
+    </mat-drawer>
+                                   
+    <div class="example-sidenav-content">
+            <div class="scrolls">      
+
+        <div class="headgrid">
+            <mat-icon class="mat-left" (click)="drawer.toggle()">dehaze</mat-icon>
+             <p class="title"> Events</p>
+             <i class="material-icons" routerLink="/newevent">
+                    <a >add</a>
+             </i>
+        </div>
+        <div id="homeGrid" *ngIf="isMobile()"> 
+            <div class="custom-block">
+
+                <div class="cal">
+                    <h2>Choose Date:</h2>
+                    <mat-form-field class="example-full-width">
+                            <input matInput [matDatepicker]="picker" placeholder="Choose a date,to see, what plan on this date">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker touchUi #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+                    <div class="post-block">
+                            <img class="home-img" src="assets/imgs/slide-1.jpg" />
+                            <div class="post-caption">
+                                <div class="day-view">Friday</div>
+                                <div class="text-caption">
+                                    <h3>Hello Concert</h3>
+                                    <span>12.00 17:00</span>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="cal">
+                             <h2>Later this week:</h2>
+                            <br/>
+                    </div>
+                 <div class="partition">
+               <div class="post-block">
+                    <img class="home-img" src="assets/imgs/slide-1.jpg" />
+                    <div class="post-caption">
+                        <div class="day-view">Friday</div>
+                        <div class="text-caption">
+                            <h3>Hello Concert</h3>
+                            <span>12.00 17:00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="post-block">
+                    <img class="home-img" src="assets/imgs/slide-1.jpg" />
+                    <div class="post-caption">
+                        <div class="day-view">Friday</div>
+                        <div class="text-caption">
+                            <h3>Hello Concert</h3>
+                            <span>12.00 17:00</span>
+                        </div>
+                    </div>
+                </div>
+               </div>
+               <div class="partition">
+                <div class="post-block">
+                     <img class="home-img" src="assets/imgs/slide-1.jpg" />
+                     <div class="post-caption">
+                         <div class="day-view">Friday</div>
+                         <div class="text-caption">
+                             <h3>Hello Concert</h3>
+                             <span>12.00 17:00</span>
+                         </div>
+                     </div>
+                 </div>
+ 
+                 <div class="post-block">
+                     <img class="home-img" src="assets/imgs/slide-1.jpg" />
+                     <div class="post-caption">
+                         <div class="day-view">Friday</div>
+                         <div class="text-caption">
+                             <h3>Hello Concert</h3>
+                             <span>12.00 17:00</span>
+                         </div>
+                     </div>
+                 </div>
+                </div>
+                <div class="partition">
+                    <div class="post-block">
+                         <img class="home-img" src="assets/imgs/slide-1.jpg" />
+                         <div class="post-caption">
+                             <div class="day-view">Friday</div>
+                             <div class="text-caption">
+                                 <h3>Hello Concert</h3>
+                                 <span>12.00 17:00</span>
+                             </div>
+                         </div>
+                     </div>
+     
+                     <div class="post-block">
+                         <img class="home-img" src="assets/imgs/slide-1.jpg" />
+                         <div class="post-caption">
+                             <div class="day-view">Friday</div>
+                             <div class="text-caption">
+                                 <h3>Hello Concert</h3>
+                                 <span>12.00 17:00</span>
+                             </div>
+                         </div>
+                     </div>
+                    </div>
+                    <div class="partition">
+                            <div class="post-block">
+                                 <img class="home-img" src="assets/imgs/slide-1.jpg" />
+                                 <div class="post-caption">
+                                     <div class="day-view">Friday</div>
+                                     <div class="text-caption">
+                                         <h3>Hello Concert</h3>
+                                         <span>12.00 17:00</span>
+                                     </div>
+                                 </div>
+                             </div>
+             
+                             <div class="post-block">
+                                 <img class="home-img" src="assets/imgs/slide-1.jpg" />
+                                 <div class="post-caption">
+                                     <div class="day-view">Friday</div>
+                                     <div class="text-caption">
+                                         <h3>Hello Concert</h3>
+                                         <span>12.00 17:00</span>
+                                     </div>
+                                 </div>
+                             </div>
+                            </div>
+               </div>
+        </div>
+    </div>
+    </div>
+  
+</mat-drawer-container>
+
+
+
+<!--Carousel Wrapper-->
+
+
+
+
+
+<div *ngIf="!isMobile()">
+    <app-home-desktop [locations]="locations"></app-home-desktop>
+</div>
+
+
+

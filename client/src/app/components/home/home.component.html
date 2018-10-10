@@ -12,22 +12,25 @@
             </div>
 
             <mat-list>
-                    <mat-list-item>    
+                    <mat-list-item routerLink="/">    
                              <mat-icon >local_drink</mat-icon>
                              <h5 class="h-text"> overview </h5>
                      </mat-list-item>
 
-                    <mat-list-item>    
+                    <mat-list-item routerLink="/yourbeer">    
                              <mat-icon >local_drink</mat-icon>
-                             <h5 class="h-text"> drinks </h5>
+                             <h5 class="h-text">
+                                    <a >drinks</a></h5>
                      </mat-list-item>
 
 
-                     <mat-list-item>    
+                     <mat-list-item routerLink="/events">    
                             <mat-icon >event_available</mat-icon>
-                            <h5 class="h-text"> events </h5>
+                            <h5 class="h-text">
+                                    <a >events</a>
+                                </h5>
                     </mat-list-item>
-
+ 
 
 
                     <mat-list-item>    
@@ -53,6 +56,10 @@
                             <h5 class="h-text"> Statistics </h5>
                     </mat-list-item>
 
+                    <mat-list-item routerLink="/maininfo" >    
+                            <mat-icon >info</mat-icon>
+                            <h5 class="h-text"> add info </h5>
+                    </mat-list-item>
 
 
 
