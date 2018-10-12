@@ -1,0 +1,246 @@
+.top-head-grid{
+    width: 100%;
+    padding: 15px;
+    background: #043b40;
+    margin-bottom: 20px;
+}
+
+
+.backspace {
+   float: left;
+   width:10%;
+}
+
+.beername {
+   padding-left: 5%;
+   color: white;
+   font-size: 20px;
+   font-weight: 600;
+   width: 80%;
+}
+
+i.material-icons {
+   color: white;
+}
+.mat-tab-header, .mat-tab-nav-bar {
+   border-bottom: none !important
+}
+
+.mat-tab-label .mat-tab-label-content{
+   font-size: 14px !important;
+}
+
+.info-grid{
+   width: 100%;
+}
+
+.head-left-grid {
+   width: 45%;
+   float: left;
+   padding: 10px;
+
+}
+
+.head-info {
+   width: 100%;
+}
+
+.beer-card-rating-container {
+   display: grid;
+   grid-template-columns: 17px 17px 17px 17px 17px;
+   grid-gap: 2px;
+
+   &.rated-4 {
+       .rating-5 {
+           background: #FFFFB4;
+       }
+   }
+
+   .beer-card-rating {
+       background: #FFCD83;
+       border-radius: 25px;
+       border: 1px solid #bcbbbb;
+       height: 15px;
+       width: 15px;
+       display: grid;
+       align-self: center;
+   }
+}
+
+.beer-card-read-more{
+   display: grid;
+   grid-template-rows: 1fr;
+   grid-template-columns: 1fr 20px;
+   text-align: right;
+   align-items: center;
+   font-size: 14px;
+   color: #4A9F97;
+}
+
+
+.image-upload > input
+{
+   display: none;
+}
+
+.img-grid{
+   width: 125px;
+   height: 125px;
+   border-radius: 50%;
+}
+.grid-label{
+   padding: 2px;
+   margin-left: 15px;
+   color: #0a4146;
+
+}
+
+p.up-p-grid {
+   float: right;
+}
+
+.head-right-grid {
+   padding: 10px;
+}
+
+label.back-label-grid {
+   float: right;
+   color: #0a4146;
+   font-weight: 500;
+
+}
+
+.fl-grid-input{
+   width: 100%;
+}
+
+.fl-grid-input {
+   padding: 10px;
+}
+
+mat-form-field.mat-form-field.ng-tns-c5-3.mat-primary.mat-form-field-type-mat-input.mat-form-field-appearance-standard.mat-form-field-can-float.mat-form-field-should-float {
+   width: 100% !important;
+}
+
+mat-form-field.mat-form-field.ng-tns-c5-3.mat-primary.mat-form-field-type-mat-input.mat-form-field-appearance-standard.mat-form-field-can-float.mat-focused{
+   width: 100% !important;
+   color: #0a4146 !important;
+
+}
+
+mat-form-field.example-chip-list.mat-form-field.ng-tns-c5-4.mat-primary.mat-form-field-type-mat-chip-list.mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float.mat-form-field-hide-placeholder {
+   width: 100%;
+}
+.example-form {
+   min-width: 150px;
+   max-width: 500px;
+   width: 100%;
+ }
+ .anup  .mat-form-field
+ {
+     width: 100%;
+ }
+ .example-full-width {
+   width: 100%;
+ }
+.button-row button, .button-row a 
+{ 
+    text-align: center;
+    background-color: #0f8e6c;
+    color: white;
+    float: right;
+    margin: 20px;
+}
+.cen
+{
+   text-align: center;
+   padding-bottom: 10px;
+}
+
+
+p {
+   text-align: justify;
+}
+
+.example-card {
+   max-width: 400px;
+ }
+.example-header-image {
+   background-image: url('https://i.ytimg.com/vi/57epkyrxVXM/hqdefault.jpg');
+   background-size: cover;
+   height: 70px;
+   width: 20%;
+   background-position: top center;
+   float: left;
+ }
+.tsubt
+{
+   width: 100%;
+   float: left;
+}
+.tsubt .mat-card-title 
+{
+   font-weight: 800;
+   width: 30%;
+   float: left;
+   margin-bottom: 0px;
+}
+.mat-card-subtitle
+{
+   width: 70%;
+   float: left;
+}
+.mat-card-content
+{
+   width: 100%;
+   float: left;
+   font-size: 14px;
+   font-weight: 450;
+}
+.tsubt .mat-card-header .mat-card-subtitle:not(:first-child)
+{
+   margin-top: 0px;
+   margin-bottom: 0px;
+}
+.mat-card-header .mat-card-subtitle:not(:first-child) {
+   margin-top: 0px;
+   margin-bottom: 0px;
+}
+.beer-card-bottom {
+   display: grid;
+   grid-template-columns: 1.2fr 1fr;
+   width: 100%;
+   float: left;
+
+   .beer-card-rating-container {
+       display: grid;
+       grid-template-columns: 17px 17px 17px 17px 17px;
+       grid-gap: 2px;
+
+       &.rated-4 {
+           .rating-5 {
+               background: #FFFFB4;
+           }
+       }
+
+       .beer-card-rating {
+           background: #FFCD83;
+           border-radius: 25px;
+           border: 1px solid #bcbbbb;
+           height: 15px;
+           width: 15px;
+           display: grid;
+           align-self: center;
+       }
+   }
+
+   .beer-card-read-more{
+       display: grid;
+       grid-template-rows: 1fr;
+       grid-template-columns: 1fr 20px;
+       text-align: right;
+       align-items: center;
+       font-size: 14px;
+       color: #4A9F97;
+   }
+}

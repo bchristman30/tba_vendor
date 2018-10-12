@@ -18,7 +18,7 @@ import { SingleFoodTruckComponent } from './components/food-truck/single-food-tr
 import { LoginComponent } from './auth/signin/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './auth/auth.service';
-import { AuthInterceptor } from './auth/auth.interceptor';
+import { AuthInterceptor } from './auth/auth.interceptor'; 
 import { AuthGuard } from './auth/auth-guard.service';
 
 
@@ -87,6 +87,8 @@ import { MaininfoComponent } from './components/maininfo/maininfo.component';
 import { NeweventComponent } from './components/newevent/newevent.component';
 import { EventsComponent } from './components/events/events.component';
 import { NewfoodtruckComponent } from './components/newfoodtruck/newfoodtruck.component';
+import { NewbearComponent } from './components/newbear/newbear.component';
+import { WorkinghoursComponent } from './components/workinghours/workinghours.component';
 
 
 
@@ -145,6 +147,8 @@ export function init_app(appLoadService: StartupService) {
       NeweventComponent,
       EventsComponent,
       NewfoodtruckComponent,
+      NewbearComponent,
+      WorkinghoursComponent,
       
   ],
   imports: [

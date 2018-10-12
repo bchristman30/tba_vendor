@@ -35,20 +35,21 @@ import { NeweventComponent } from './components/newevent/newevent.component';
 import {MatButtonModule} from '@angular/material/button';
 import { EventsComponent } from './components/events/events.component';
 import { NewfoodtruckComponent } from './components/newfoodtruck/newfoodtruck.component';
+import { NewbearComponent } from './components/newbear/newbear.component';
+import { WorkinghoursComponent } from './components/workinghours/workinghours.component';
 
 const routes: Routes = [ 
-
+ 
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: HomeComponent }, 
   { path: 'yourbeer', component: YourbeerComponent }, 
   { path: 'beerinfo/:beer', component: BeerinfoComponent },
   { path: 'maininfo', component: MaininfoComponent },
   { path: 'newevent', component: NeweventComponent },
   { path: 'events', component: EventsComponent},
-  { path: 'newfoodtruck', component: NewfoodtruckComponent},
-
-
-
+  { path: 'newfoodtruck', component: NewfoodtruckComponent}, 
+  { path: 'newbear', component: NewbearComponent}, 
+  { path: 'workinghours', component: WorkinghoursComponent}, 
 
 
   { path: 'user', component: ProfileComponent },

@@ -1,0 +1,90 @@
+<div class="top-head-grid">
+  <div class="backspace">
+    <i class="material-icons" routerLink="/yourbeer">
+      keyboard_backspace
+    </i>
+  </div> 
+  <label class="beername">
+     New Beer
+  </label> 
+  </div>
+
+
+  <div class="info-grid">
+    <div class="head-info">
+      <div class="head-left-grid">
+          
+
+              <div class="image-upload">
+                  <label for="file-input">
+                      <img class="img-grid" src="assets/imgs/slide-3.jpg"/>
+                  </label>
+              
+                  <input id="file-input" type="file"/>
+                  <label class="grid-label">Delete photo</label>
+                </div>
+          </div>
+          
+      
+       
+          <div class="head-right-grid">
+                  <mat-form-field>
+                        <input matInput value=$5 placeholder="Price">
+                      </mat-form-field>
+                    
+                  
+                      <mat-form-field>
+                          <input matInput value=12% placeholder="Density">
+                        </mat-form-field> 
+
+                        <mat-form-field>
+                            <input matInput value=4,5 placeholder="Alcohal content">
+                          </mat-form-field>
+                        
+          </div>
+
+          <div class="fl-grid-input">
+              <div class="anup">
+                  <mat-form-field appearance="standard">
+                      <mat-label>Name</mat-label>
+                      <input matInput  value=Anupam placeholder="Placeholder">
+                    </mat-form-field>
+
+                      </div>
+          </div>
+          <div class="fl-grid-input">
+              <div class="anup">
+          <mat-form-field class="example-chip-list">
+              <mat-chip-list #chipList>
+                <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"
+                         [removable]="removable" (removed)="remove(fruit)">
+                  {{fruit.name}}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input placeholder="Tags"
+                       [matChipInputFor]="chipList"
+                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                       [matChipInputAddOnBlur]="addOnBlur"
+                       (matChipInputTokenEnd)="add($event)">
+              </mat-chip-list>
+            </mat-form-field>
+            </div>
+            </div>
+
+            <div class="fl-grid-input">
+                <form class="example-form">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Description"
+                      value="Brewing a true larger take a litle bit more work and specialized equipment than Brewing an ale.">
+                    </mat-form-field>
+                  </form>
+                  </div> 
+                  <div class="button-row cen">
+                      <button mat-flat-button color="accent">SAVE</button>
+                  </div>
+    </div>
+  </div>
+
+
+
+

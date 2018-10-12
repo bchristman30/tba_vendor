@@ -37,14 +37,14 @@ mat-icon.mat-right.mat-icon.material-icons {
 
 label.grid-title {
     padding: 10px;
-    font-size: 22px;
+    font-size: 16px;
     color: white;
-    font-weight: 700;
+    font-weight: 600;
 }
-
 h5.h-text {
     margin-left: 25px;
     font-weight: 450;
+    font-size: 16px;
 }
 
 .headgrid{
@@ -63,16 +63,16 @@ h5.h-text {
     float: left;
 }
 .headgrid .title
- {
+ { 
     float: left;
     margin-left: 5%;
-    font-weight: 700;
-    font-size: 22px;
+    font-weight: 500;
+    font-size: 20px;
     width: 70%;
 }
 .headgrid i
 {
-    font-size: 32px;
+    font-size: 28px;
 }
 .footer-grid{
     position: absolute;
@@ -260,10 +260,26 @@ h5.h-text {
     font-size: 16px;
 }
 .cal h2 {
-    font-weight: 700;
-    font-size: 18px;
+    font-weight: 600;
+    font-size: 16px;
 }
 .mat-form-field 
 {
     width: 100%;
+}
+
+.scrolls
+{
+    width: 100%;
+    float: left;
+    overflow: scroll;
+    height: auto;
+}
+
+.scrollm 
+{
+    width: 100%;
+    float: left;
+    overflow: scroll;
+    height: 335px;
 }

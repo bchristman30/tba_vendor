@@ -33,16 +33,17 @@ mat-icon.mat-right.mat-icon.material-icons {
 }
 .imagleft img{max-height:85px}
 
+
 label.grid-title {
     padding: 10px;
-    font-size: 22px;
+    font-size: 16px;
     color: white;
-    font-weight: 700;
+    font-weight: 600;
 }
-
 h5.h-text {
     margin-left: 25px;
     font-weight: 450;
+    font-size: 16px;
 }
 
 .headgrid{
@@ -51,6 +52,14 @@ h5.h-text {
     padding: 19px;
     background: #043b40;
     color: white;
+    font-size: 18px;
+    float: left;
+}
+.headgrid .title 
+{
+    float: left;
+    margin-left: 10%;
+    font-weight: 500;
     font-size: 18px;
 }
 .footer-grid{
@@ -71,6 +80,8 @@ h5.h-text {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 70px 2fr;
     overflow: auto;
+    width: 100%;
+    float: left;
    
     .grid-2-by-1 {
         margin-bottom: 20px;
@@ -104,7 +115,7 @@ h5.h-text {
         right: 0;
       }
       
-      .example-events {
+      .example-events { 
         width: 300px;
         height: 200px;
         overflow: auto;
@@ -112,7 +123,7 @@ h5.h-text {
       }
       .custom-block{background: #fff;padding: 15px}
       .top-block{display: table;width:100%;margin-bottom: 15px}
-      .top-block div{display: table-cell;width:33.3336%;text-align: center;font-weight: 700}
+      .top-block div{display: table-cell;width:33.3336%;text-align: center;font-weight: 600;font-size: 16px;}
       .top-block div:nth-child(2){border-left: 1px solid;border-right: 1px solid;border-color: #ccc}
       .post-block{position: relative;margin-bottom: 15px}
       .post-block .post-caption{position: absolute;top:0;right: 0;left: 0;bottom: 0}
@@ -175,4 +186,10 @@ h5.h-text {
 //     height: 800px;
 //     overflow-y: scroll;
 // }
-
+.scrollm 
+{
+    width: 100%;
+    float: left;
+    overflow: scroll;
+    height: 335px;
+}

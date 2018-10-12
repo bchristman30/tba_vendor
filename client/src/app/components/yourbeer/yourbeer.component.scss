@@ -14,8 +14,8 @@
     }
     
     .beer-card-content {
-        padding: 5px; 
-        .beer-card-header {
+                padding: 5px; 
+                  .beer-card-header {
             display: grid;
             grid-template-columns: 2fr 1fr;
             grid-template-rows: 1fr;
@@ -65,7 +65,7 @@
     
     .lf-p{
         float: left;
-    }
+    }    
 .mat-left{
     float: left;
     font-size: 30px;
@@ -73,13 +73,13 @@
 .beer-card-read-more {
     font-weight: 400;
     padding: 2px;
-    font-size: 14px;
+    font-size: 14px; 
 }
 .title{
     float: left;
     margin-left: 10%;
-    font-weight: 700;
-    font-size: 22px;
+    font-weight: 600;
+    font-size: 20px;
 }
 
 .home-img{
@@ -104,14 +104,15 @@ mat-icon.mat-right.mat-icon.material-icons {
 
 label.grid-title {
     padding: 10px;
-    font-size: 22px;
+    font-size: 16px;
     color: white;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 h5.h-text {
-    margin-left: 25px;
+    margin-left: 20px;
     font-weight: 450;
+    font-size: 16px;
 }
 
 .headgrid{
@@ -205,7 +206,7 @@ p.grid-pp {
         text-align: center;
         
         p {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: bold;
         }
     }
@@ -267,7 +268,7 @@ p.grid-pp {
     .homeAdditionalContent {
         grid-row: 3 / 5;
         grid-column: 1;
-        padding: 40px 15px 15px 15px;
+        padding: 40px 15px 15px 15px; 
     }
     
     .home-link {
@@ -287,3 +288,34 @@ p.grid-pp {
 //         width: 100%;
 //         overflow-y: scroll;
 //     }
+// .mat-tab-label-content {
+//     font-size: 16px;
+// } 
+
+.new-width label
+ {
+    font-size: 14px!important;
+}
+.mat-tab-label {
+    font-size: 14px!important; 
+}
+
+.mat-tab-label .mat-tab-label-content{
+    font-size: 14px!important; 
+
+}
+.scrolls
+{
+    width: 100%;
+    float: left;
+    overflow: scroll;
+    height: auto;
+}
+
+.scrollm 
+{
+    width: 100%;
+    float: left;
+    overflow: scroll;
+    height: 335px;
+}
