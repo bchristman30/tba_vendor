@@ -37,10 +37,11 @@ import { EventsComponent } from './components/events/events.component';
 import { NewfoodtruckComponent } from './components/newfoodtruck/newfoodtruck.component';
 import { NewbearComponent } from './components/newbear/newbear.component';
 import { WorkinghoursComponent } from './components/workinghours/workinghours.component';
+import { VendorLoginComponent } from './components/vendor-login/vendor-login.component';
 
 const routes: Routes = [ 
  
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'home', component: HomeComponent }, 
   { path: 'yourbeer', component: YourbeerComponent }, 
   { path: 'beerinfo/:beer', component: BeerinfoComponent },
@@ -60,12 +61,15 @@ const routes: Routes = [
       { path: 'map-view', component: MapViewComponent },
     ]
    },
-  { path: 'login', component: FrontComponent,
-    children: [
-      { path: '', component: LoginComponent },
-      { path: 'registration', component: SignupComponent }
-    ]
-  },
+
+   { path: 'login', component: VendorLoginComponent,
+ },
+  // { path: 'login', component: FrontComponent,
+  //   children: [
+  //     { path: '', component: LoginComponent },
+  //     { path: 'registration', component: SignupComponent }
+  //   ]
+  // },
   {
     path: 'upgrade', component: UpgradeMembershipComponent, canActivate: [AuthGuard],
     children: [

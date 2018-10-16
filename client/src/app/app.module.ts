@@ -90,6 +90,7 @@ import { NewfoodtruckComponent } from './components/newfoodtruck/newfoodtruck.co
 import { NewbearComponent } from './components/newbear/newbear.component';
 import { WorkinghoursComponent } from './components/workinghours/workinghours.component';
 
+import { VendorLoginComponent } from './components/vendor-login/vendor-login.component';
 
 
 
@@ -149,7 +150,7 @@ export function init_app(appLoadService: StartupService) {
       NewfoodtruckComponent,
       NewbearComponent,
       WorkinghoursComponent,
-      
+      VendorLoginComponent
   ],
   imports: [
     BrowserModule,

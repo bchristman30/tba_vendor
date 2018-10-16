@@ -1,0 +1,56 @@
+<div class="mat-top-card">
+<mat-card>
+
+<div class="appname">
+  <h1>App Logo</h1>
+</div>
+<form #f="ngForm" (ngSubmit)="login(f)">
+ <div class="login">
+  <mat-form-field>
+    <input type="text" matInput placeholder="Email Address" ngModel name="email" required #emailInput="ngModel">
+    <mat-error *ngIf="emailInput.hasError('required')">Field must not be empty.</mat-error>
+    <mat-error *ngIf="!emailInput.hasError('required')">E-Mail is invalid.</mat-error>
+  </mat-form-field>
+</div>
+
+<div class="password">
+
+  <mat-form-field>
+    <input  class="margin-bottom-10" type="password" matInput placeholder="Password" ngModel name="password" required #pwInput="ngModel">
+    <mat-error *ngIf="pwInput.hasError('required')">Password must not be empty.</mat-error>
+  </mat-form-field>
+
+</div>
+
+  <!-- <a routerLink="/resetpassword" class="margin-top-20 " class="forgot-pass"><span>Forget Password?</span></a> -->
+ <div class="btnlck">
+  <button *ngIf="!isloading" [disabled]="f.invalid" type="submit" mat-raised-button class="bttn-primary margin-top-20 ">Login</button>
+  <mat-spinner *ngIf="isloading"></mat-spinner>
+</div>
+
+</form>
+
+<!-- 
+<form #f="ngForm" (ngSubmit)="login(f)" class="example-form">
+  
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Email" value=""  #emailInput="ngModel">
+    <mat-error *ngIf="emailInput.hasError('required')">Field must not be empty.</mat-error>
+    <mat-error *ngIf="!emailInput.hasError('required')">E-Mail is invalid.</mat-error>
+  </mat-form-field>
+
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Password" value="" #pwInput="ngModel">
+    <mat-error *ngIf="pwInput.hasError('required')">Password must not be empty.</mat-error>
+  </mat-form-field>
+
+
+  <div class="button-row">
+    <button  type="submit" mat-raised-button color="primary">Login</button>
+  </div>
+
+</form> -->
+
+</mat-card>
+</div>

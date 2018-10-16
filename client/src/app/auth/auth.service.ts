@@ -26,7 +26,7 @@ export class AuthService {
         this.uiservice.isloadingstatus.next(true);
         let header = new HttpHeaders().set('content-type', 'application/x-www-form-urlencoded').append('Access-Control-Allow-Origin', '*');
         let login_data = 'email=' + email + '&password=' + password;
-        return this.http.post<any>('/api/user/login', login_data, { observe: 'response', responseType: 'json', headers: header }).pipe(map((res) => { this.uiservice.isloadingstatus.next(false); return res.body; }));
+        return this.http.post<any>('/api/brew_owner/login', login_data, { observe: 'response', responseType: 'json', headers: header }).pipe(map((res) => { this.uiservice.isloadingstatus.next(false); return res.body; }));
     }
     
     forgetpassword(user) {
