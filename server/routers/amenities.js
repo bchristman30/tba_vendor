@@ -17,6 +17,14 @@ router.route('/add').post(function (req, res) {
   });
 });
 
+//added
+router.route('/list').get(function(req,res){
+  db.amenities.findAll({}).then((amenities) => {
+    res.json({ error: false, result:amenities, text: 'data found' });
+}).catch((err) => {
+    res.json({ error: true, result:[], text: err });
+});
+});
 
 
 module.exports = router;
