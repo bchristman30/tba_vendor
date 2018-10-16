@@ -41,6 +41,10 @@ module.exports = function(sequelize, DataTypes) {
     },
     description: {
       type: DataTypes.TEXT('long')
+    },
+    total_redeemed_stamp:{
+      type: DataTypes.INTEGER,
+      defaultValue:0
     }
   },{
     underscored: true,

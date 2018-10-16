@@ -7,8 +7,8 @@ var async = require("async");
  * RETRIEVE BEER BASED ON BEER_ID *
  * URL:/api/beer/{beer_id}
  *******************************************************************/
-
-router.route('/:id').get(function (req, res) {
+//changed
+router.route('/:id(\\d+)').get(function (req, res) {
     db.beer.findAll({
         where: { id: req.params.id },
         attributes: ['id', 'name', 'Alchohol_content','beer_description','beer_logo','price'],
@@ -105,15 +105,15 @@ router.route('/location/:id').get(function (req, res) {
 
 
 
-router.route('/location/:id').post(function (req, res) {
-    let beer_id = req.body.beer_id;
-    let location_id = req.params.id;
-    db.location_beer.create({ beer_id: beer_id, location_id: location_id }).then((loc_beer) => {
-        res.json({ error: false, result: loc_beer });
-    }).catch((err) => {
-        res.json({ error: true, result: err.errors[0].message });
-    });
+// added new api
 
+router.route('/beerStyles').get(function(req,res){
+    console.log('/beerStyles');
+     db.beer_style.findAll({}).then(function (beerStyles) {
+        res.json({ error: false, result: beerStyles,text:'data found' });
+    }).catch(function (error) {
+        res.json({ error: true, result:[], text: 'Internal Server Error' });
+    });
 });
 
 router.route('/add_beer_style').post(function (req, res) {
@@ -130,28 +130,56 @@ router.route('/add_beer_style').post(function (req, res) {
     });
 });
 
-router.route('/add_beer').post(function (req, res) {
+//changed url and logic
+router.route('/location').post(function (req, res) {
     let cat = req.body.category;
-    console.log(cat);
-    db.beer.create(req.body).then(beer => {
-        //console.log('beer.id:' + beer.id);
-        if (beer.id != '') {
-            let comp = [];
-            for (let i = 0; i < cat.length; i++) {
-                comp.push({ beer_id: beer.id, beer_style_id: cat[i] });
-            }
-            db.beer_category.bulkCreate(comp).then(() => {
-                res.json({ error: false, result: beer });
+    var obj={
+        name:req.body.name,
+        Alchohol_content:req.body.Alchohol_content,
+        beer_description:req.body.beer_description,
+        beer_logo:req.body.beer_logo,
+        price:req.body.price
+    };
+    db.beer.findAll({
+        where: {
+            name: req.body.name
+        }
+    }).then(function (existbeer) {
+       if(existbeer.length==0)
+       {
+            db.beer.create(obj).then(beer => {
+                if (beer.id != '') {
+                    db.location_beer.create({ beer_id: beer.id, location_id: req.body.location_id }).then((loc_beer) => {
+                        let comp = [];
+                        for (let i = 0; i < cat.length; i++) {
+                            comp.push({ beer_id: beer.id, beer_style_id: cat[i] });
+                        }
+                        db.beer_category.bulkCreate(comp).then(() => {
+                            res.json({ error: false, result: beer });
+                        }).catch((err) => {
+                            res.json({ error: true, result: err });
+                        });
+                    }).catch((err) => {
+                        res.json({ error: true, result: err.errors[0].message });
+                    });
+                }
+                else {
+                    res.json({ error: true, result: '', text: 'Something is wrong' });
+                }
             }).catch((err) => {
                 res.json({ error: true, result: err });
             });
-        }
-        else {
-            res.json({ error: true, result: '', text: 'Something is wrong' });
-        }
-    }).catch((err) => {
-        res.json({ error: true, result: err });
+       }
+       else
+       {
+        res.json({ error: true, result: '', text: 'Beer Name already exist' });
+       }
+    }).catch(function (error) {
+        res.json({ error: true, result:[], text: 'Internal Server Error' });
     });
+
+
+
 });
 
 router.route('/').post(function (req, res) {

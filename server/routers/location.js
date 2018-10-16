@@ -255,9 +255,9 @@ router.route('/calendar/:id').get(function (req, res) {
     ],
     where: {
       location_id: req.params.id,
-      // start_date: {
-      //   $gt: myDate,
-      // },
+      start_date: {
+        $gte: myDate,
+      },
     },
     limit: 10
   }).then((calendar) => {

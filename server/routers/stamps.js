@@ -19,28 +19,34 @@ const verifytoken = require('../middleware/verifytoken.js');
 ************************************************/
 router.post('/redeem', [verifytoken, validate(require('../validation/redeem_stamp.js'))], function (req, res) {
 
-    db.user_location_stamp.findOne({
+    db.user_location_stamp.find({
         where: {
             user_id: req.body.user_id,
             location_id: req.body.location_id
         }
-    }).then(function (user_location_stamp) {
+    }).then((user_location_stamp) => {
         if (!user_location_stamp) {
             res.json({ error: true, result: '', text: 'There is no record found' });
         }
         else if (user_location_stamp.stamp == false) {
             user_location_stamp.update({ stamp: true }).then((response) => {
-                var data = {};
-                data.user_id = req.body.user_id;
-                data.location_id = req.body.location_id;
-                data.stamp = true;
-                db.user_stamps_entries.create(data).then(stamp_entry => {
-                    if (stamp_entry.id != '') {
-                        res.json({ error: false, result: '', text: 'Stamp redeemed successfully!!' });
+                db.locations.find({
+                    where: {
+                        id: req.body.location_id
                     }
-                }).catch((err) => {
-                    res.json({ error: true, result: err, text: 'Something is wrong' });
-                });
+                }).then((locationinfo) => {
+                    if (!locationinfo) {
+                        res.json({ error: true, result: '', text: 'There is no brewery data available' });
+                    }
+                    else {
+                        let total = locationinfo.total_redeemed_stamp + 1;
+                        locationinfo.update({ total_redeemed_stamp: total }).then((resp) => {
+                            res.json({ error: false, result: '', text: 'Stamp redeemed successfully!!' });
+                        }).catch((err) => {
+                            res.json({ error: true, result: err, text: 'Error found during updation*' });
+                        });
+                    }
+                }).catch((err1) => res.json({ error: true, result: err1, text: 'Something is wrong' }));
             }).catch((err) => {
                 res.json({ error: true, result: err, text: 'Error found during updation' });
             });
@@ -49,10 +55,9 @@ router.post('/redeem', [verifytoken, validate(require('../validation/redeem_stam
             res.json({ error: true, result: '', text: 'Stamp already redeem from this brewery!!' });
         }
     }).catch((err) => {
-        res.json({ error: true, result: err, text: 'Something is wrong!!' });
+        res.json({ error: true, result: err, text: 'Something is wrong*!!' });
     });
 });
-
 
 
 module.exports = router;
