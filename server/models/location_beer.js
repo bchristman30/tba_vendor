@@ -4,6 +4,10 @@ module.exports = function (sequelize, DataTypes) {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true
+      },
+      active:{
+        type: DataTypes.INTEGER,
+        defaultValue: 0
       }
     }, {
       underscored: true,

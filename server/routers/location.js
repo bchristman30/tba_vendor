@@ -187,6 +187,7 @@ router.get('/:id(\\d+)', validate(require('../validation/id.js')), function (req
     {
       limit: 5,
       attributes: ['id', 'location_id', 'beer_id'],
+      where: { active: 1 }, //active beer
       model: db.location_beer,
       include: [{
         attributes: ['id', 'name', 'Alchohol_content', 'beer_description', 'beer_logo', 'price'],
@@ -201,19 +202,18 @@ router.get('/:id(\\d+)', validate(require('../validation/id.js')), function (req
         }]
       }]
     },
-    // {
-    //   attributes: ['id',
-    //     [sequelize.fn('date_format', sequelize.col('start_date'), '%Y-%m-%d %H:%m:%s'), 'start_date'],
-    //     [sequelize.fn('date_format', sequelize.col('end_date'), '%Y-%m-%d %H:%m:%s'), 'end_date'],
-    //     'type',
-    //     'referring_id',
-    //     'location_id'
-    //   ],
-    //   model: db.location_calendar
-    // }
-  ]
+      // {
+      //   attributes: ['id',
+      //     [sequelize.fn('date_format', sequelize.col('start_date'), '%Y-%m-%d %H:%m:%s'), 'start_date'],
+      //     [sequelize.fn('date_format', sequelize.col('end_date'), '%Y-%m-%d %H:%m:%s'), 'end_date'],
+      //     'type',
+      //     'referring_id',
+      //     'location_id'
+      //   ],
+      //   model: db.location_calendar
+      // }
+    ]
   }).then((location) => {
-
     if (!location) {
       res.json({ error: true, result: location, text: 'There is no brewery data available of this id' });
     }
@@ -270,11 +270,11 @@ router.route('/calendar/:id').get(function (req, res) {
         var modal = '';
         var type = '';
         if (cal.type == 'events') {
-          type='event';
+          type = 'event';
           modal = db.events;
         }
         else {
-          type='foodtruck';
+          type = 'foodtruck';
           modal = db.food_trucks;
         }
         modal.findAll({
@@ -291,7 +291,7 @@ router.route('/calendar/:id').get(function (req, res) {
           }
           else {
             var maindata = [];
-            maindata.push(_.merge(info[0].dataValues, { type:type }));
+            maindata.push(_.merge(info[0].dataValues, { type: type }));
 
             if (cal.type == 'events') {
               calendar.splice(i, 1, { id: cal.id, start_date: cal.start_date, end_date: cal.end_date, type: cal.type, location_id: cal.location_id, referring_id: cal.referring_id, events: maindata });
