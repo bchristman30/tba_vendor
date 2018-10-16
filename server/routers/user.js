@@ -178,6 +178,7 @@ router.route('/register').post(function (req, res) {
           id: response.id,
           key: req.body.confirmation_key,
           email: response.email,
+          type:1,
           host: host
         }];
         sendmailtoUser('Confirmation', users);

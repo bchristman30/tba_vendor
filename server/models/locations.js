@@ -52,6 +52,7 @@ module.exports = function(sequelize, DataTypes) {
         locations.hasMany(models.location_calendar);
         locations.hasMany(models.location_beer);
         locations.hasMany(models.user_stamps_entries);
+        locations.belongsTo(models.brewery_owners);
       }
     }
   });

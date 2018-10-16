@@ -43,6 +43,7 @@ app.use(bodyParser.json());
 // =============================================================================
 
 var Userrouter = require('./routers/user');
+var Brewery_owner_router = require('./routers/brewery_owner');
 var location_router = require('./routers/location');
 var beer_router = require('./routers/beer');
 var amenities_router = require('./routers/amenities');
@@ -69,6 +70,7 @@ router.get('/', function (req, res) {
 
 
 app.use('/api/user', Userrouter);
+app.use('/api/brew_owner',Brewery_owner_router);
 app.use('/api/location', location_router);
 app.use('/api/beer',beer_router);
 app.use('/api/amenities',amenities_router);
