@@ -356,6 +356,61 @@ router.post('/nearest', validate(require('../validation/currentlocation.js')), f
   });
 });
 
+/******************************************************
+ * UPDATE AMENITIES OF A LOCATION *
+ * URL:/api/location/update_amenities/{location_id}
+ ******************************************************/
+router.post('/update_amenities/:id(\\d+)', function (req, res) {
+  var location_id = req.params.id;
+  var amenities = req.body.amenities;
+  db.locations.findAll({
+    where: {
+      id: location_id
+    }
+  }).then(function (location) {
+    if (location.length == 0) {
+      res.json({ error: true, result: location, text: 'There is no brewery data exist with this id.' });
+    }
+    else {
+      var loc_amenities = [];
+      for (let i = 0; i < amenities.length; i++) {
+        loc_amenities.push({ location_id: location_id, amenity_id: amenities[i] });
+      }
+
+      db.location_amenities.destroy({
+        where: {
+          location_id: location_id
+        }
+      }).then(function (rowDeleted) { // rowDeleted will return number of rows deleted
+
+        console.log(rowDeleted + 'Deleted successfully');
+        db.location_amenities.bulkCreate(loc_amenities).then(() => {
+
+          res.json({ error: false, result: loc_amenities, text: 'update amenities' + location_id });
+
+        }).catch((err) => {
+
+          res.json({ error: true, result: err });
+
+        });
+      }, function (err) {
+        console.log(err);
+        res.json({ error: true, result: err });
+      });
+    }
+  }).catch((err) => res.json({ error: true, result: err, text: 'Something is wrong' }));
+
+});
+
+
+
+/******************************************************
+* UPDATE WORKING HOURS OF A LOCATION *
+* URL:/api/location/update_workinghours/{location_id}
+******************************************************/
+router.post('/update_workinghours/:id(\\d+)', function (req, res) {
+  res.json({ error: false, result: [], text: req.params.id + 'update working hours' });
+});
 /*********************************************************************************************************************************
  * THIS FUNCTION TAKES IN LATITUDE AND LONGITUDE OF TWO LOCATION AND RETURNS THE DISTANCE BETWEEN THEM AS THE CROW FLIES (IN KM) *
  *********************************************************************************************************************************/

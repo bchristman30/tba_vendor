@@ -36,6 +36,9 @@ module.exports = function(sequelize, DataTypes) {
     website_url:{
       type: DataTypes.STRING
     },
+    support_email:{
+      type:DataTypes.STRING
+    },
     instagram:{
       type: DataTypes.STRING
     },

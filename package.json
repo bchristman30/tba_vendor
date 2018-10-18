@@ -30,6 +30,7 @@
     "path": "^0.12.7",
     "request": "^2.88.0",
     "sequelize": "^3.3.2",
+    "shortid": "^2.2.13",
     "stripe": "^6.10.0",
     "validator": "^4.0.6"
   },
