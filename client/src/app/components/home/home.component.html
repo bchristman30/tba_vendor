@@ -1,18 +1,20 @@
 <mat-drawer-container class="example-container" [hasBackdrop]="true" autosize>
     <mat-drawer #drawer class="example-sidenav" mode="push">
 
+        <!-- <div class="xyz" *ngFor="let post of allPost; let i = index"> -->
+
             <div class="xheadr">
                    <div class="imagleft">
-                    <img src="https://tba-vendor-dev.herokuapp.com/static/location/brewery2.png" />
+                    <img src={{bewIfo?.logo_string}} />
 
                 </div>
 
-                    <label class="grid-title">Happy Beer Brewery</label>
+                    <label class="grid-title">  {{location}} </label>
 
             </div>
             <div class="scrollm">
                 <mat-list>
-                    <mat-list-item routerLink="/">    
+                    <mat-list-item routerLink="/home">    
                              <mat-icon >local_drink</mat-icon>
                              <h5 class="h-text"> overview </h5>
                      </mat-list-item>
@@ -98,7 +100,7 @@
 
         <div class="headgrid">
             <mat-icon class="mat-left" (click)="drawer.toggle()">dehaze</mat-icon>
-             <p class="title"> Bottle Logic Brewary </p>
+             <p class="title">  {{location}} </p>
         </div>
         <div id="homeGrid" *ngIf="isMobile()">
             <div class="homeImage">

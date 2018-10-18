@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit {
     this.authSubscription = this.authService.authChange.subscribe(resp => {
       this.isAuth = resp.isauth;
       this.issubscription_expired = resp.issubscription_expired;
-      this.issubscription=resp.issubscription;
+      this.issubscription = resp.issubscription;
     });
     this.isAuth = this.authService.isLoggedIn();
     if (this.isAuth) {

@@ -70,6 +70,8 @@ import { DesktopSidebarComponent } from './components/desktop-sidebar/desktop-si
 import { DialogUpgradePaidComponent } from './components/dialogs/dialog-upgrade-paid/dialog-upgrade-paid.component';
 import { UpgradeMembershipComponent } from './components/upgrade-membership/upgrade-membership.component';
 import { PaymentService } from './services/payment.service';
+import { BreweryInfo } from './services/beweryinfo.service';
+
 import { MembershipThankYouComponent } from './components/upgrade-membership/membership-thank-you/membership-thank-you.component';
 import { MembershipSalesComponent } from './components/upgrade-membership/membership-sales/membership-sales.component';
 import { MembershipCardInfoComponent } from './components/upgrade-membership/membership-card-info/membership-card-info.component';
@@ -179,6 +181,7 @@ export function init_app(appLoadService: StartupService) {
     MatButtonModule
   ],
   providers: [
+    BreweryInfo,
     UIService,
     BeerService,
     LocationService,

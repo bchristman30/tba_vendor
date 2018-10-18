@@ -71,7 +71,7 @@ login(form: NgForm) {
             this.info = resp.text;
             this.status = false;
             this.authService.setSession(resp);
-             this.router.navigateByUrl('/maininfo');
+             this.router.navigateByUrl('/home');
              this.openDialog();
           } else {
             this.info = resp.text;

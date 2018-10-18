@@ -3,16 +3,16 @@
 
           <div class="xheadr">
                  <div class="imagleft">
-                  <img src="https://tba-vendor-dev.herokuapp.com/static/location/brewery2.png" />
+                  <img src={{bewIfo?.logo_string}} />
 
               </div>
 
-                  <label class="grid-title">Happy Beer Brewery</label>
+                  <label class="grid-title">{{bewIfo?.name}}</label>
 
           </div>
           <div class="scrollm">
           <mat-list>
-              <mat-list-item routerLink="/">    
+              <mat-list-item routerLink="/home">    
                 <mat-icon >local_drink</mat-icon>
                 <h5 class="h-text"> overview </h5>
         </mat-list-item>
@@ -102,7 +102,7 @@
       <div id="homeGrid" *ngIf="isMobile()">
           <div class="homeImage">
          
-              <img class="home-img" src="assets/imgs/slide-1.jpg" />
+              <img class="home-img" src={{bewIfo?.logo_string}} />
               
               
           </div> 
@@ -110,16 +110,16 @@
             <b>Your contact info</b>
             <form class="example-form">
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="Name of your Brewery" value="">
+                <input matInput placeholder="Name of your Brewery" value={{bewIfo?.name}}>
               </mat-form-field>
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="Contact Phone" value="">
+                <input matInput placeholder="Contact Phone" value={{bewIfo?.phone}}>
               </mat-form-field>
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="Contact Email" value="">
+                <input matInput placeholder="Contact Email" value={{bewIfo?.email}}>
               </mat-form-field>
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="Website" value="">
+                <input matInput placeholder="Website" value={{bewIfo?.website_url}}>
               </mat-form-field>
             <div class="edito">
               <b>Ammenities, which you offer<a href="#">Edit</a></b>
@@ -142,10 +142,12 @@
             </div>
             <div class="work_hors">
             <b>Your Working Hours<a routerLink="/workinghours"  href="#">Edit</a></b>
+            <div class="xyz" *ngFor="let loc of bewIfo?.location_hours; let i = index">
             <div class="sun"> 
-              <label class="whl">Sunday</label><label class="whr">12:00-17:00</label>
+              <label class="whl">{{loc?.day}}</label><label class="whr">{{loc?.opening_hour}}-{{loc?.closing_hour}}</label>
               </div>
-              <div class="sun"> 
+              </div>
+              <!-- <div class="sun"> 
               <label class="whl">Monday</label><label class="whr">12:00-17:00</label>
               </div>
               <div class="sun"> 
@@ -162,7 +164,7 @@
               </div>
               <div class="sun"> 
               <label class="whl">Saturday</label><label class="whr">12:00-17:00</label>
-            </div> 
+            </div>  -->
             
             
             
@@ -172,19 +174,17 @@
 
           <b>Adress</b>
           <mat-form-field class="example-full-width">
-              <input matInput placeholder="Name of State" value="">
+              <input matInput placeholder="Name of State" value={{bewIfo?.state}}>
             </mat-form-field>
             <mat-form-field class="example-full-width">
-              <input matInput placeholder="Name of City" value="">
+              <input matInput placeholder="Name of City" value={{bewIfo?.city}}>
             </mat-form-field>
             <mat-form-field class="example-full-width">
-              <input matInput placeholder="Address" value="">
+              <input matInput placeholder="Address" value={{bewIfo?.address}}>
             </mat-form-field>
+         
             <mat-form-field class="example-full-width">
-              <input matInput placeholder="Address" value="">
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-                <input matInput placeholder="zipcode" value="">
+                <input matInput placeholder="zipcode" value={{bewIfo?.zipcode}}>
               </mat-form-field>
              
              <div class="buttn">
