@@ -409,7 +409,104 @@ router.post('/update_amenities/:id(\\d+)', function (req, res) {
 * URL:/api/location/update_workinghours/{location_id}
 ******************************************************/
 router.post('/update_workinghours/:id(\\d+)', function (req, res) {
-  res.json({ error: false, result: [], text: req.params.id + 'update working hours' });
+
+  var data = req.body.data;
+  // console.log(req.body);
+  // console.log(data.length);
+  if (data.length == 7) {
+    let hours = [];
+    let day;
+    let weekday = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    for (let i = 0; i < 7; i++) {
+     day=weekday[i];
+      hours.push({ day: day, opening_hour:data[i][day]['opening_hour'], closing_hour: data[i][day]['closing_hour'], location_id: req.params.id });
+    }
+    //console.log(hours);
+    if(hours.length==7)
+    {
+      db.location_hours.destroy({
+        where: {
+          location_id: req.params.id
+        }
+      }).then(function (rowDeleted) { // rowDeleted will return number of rows deleted
+
+      //  console.log(rowDeleted + 'Deleted successfully');
+        db.location_hours.bulkCreate(hours).then(() => {
+          res.json({ error: false, result: req.body.data, text: 'Working hours updated successfully!!' });
+        }).catch((err) => {
+          res.json({ error: true, result: err });
+        });
+      }, function (err) {
+        console.log(err);
+        res.json({ error: true, result: err });
+      });
+    }
+    else
+    {
+      res.json({ error: true, result: [], text: 'Input is not correctly formatted!!' });
+    }
+  }
+  else {
+    res.json({ error: true, result: [], text: 'parameter not received' });
+  }
+});
+
+
+/******************************************************
+* UPDATE Basic Information OF A LOCATION *
+* URL:/api/location/update_basicinfo/{location_id}
+******************************************************/
+router.post('/update_basicinfo/:id(\\d+)', function (req, res) {
+  db.locations.findOne({
+    where: {
+      id: req.params.id
+    }
+  }).then(function (location) {
+    if (!location) {
+      res.json({ error: true, result: '', text: 'There is no brewery exist with this id'+req.params.id });
+    }
+    else {
+      let data = {
+        name:req.body.name,
+        address:req.body.address,
+        support_email:req.body.support_email,
+        city:req.body.city,
+        state:req.body.state,
+        zipcode: req.body.zipcode,
+        phone: req.body.phone,
+        website_url: req.body.website_url
+      };
+      location.update(data).then((response) => {
+       
+        res.json({ error: false, result:response, text: 'brewery information updated successfully!!' });
+      }).catch((err) => {
+        res.json({ error: true, result: err, text: 'Error found during updation' });
+      });
+    }
+  }).catch((err) => {
+    res.json({ error: true, result: err, text: 'Something is wrong!!' });
+  });
+
+});
+
+/******************************************************
+* UPDATE Basic Information OF A LOCATION *
+* URL:/api/location/update_basicinfo/{location_id}
+******************************************************/
+router.post('/is_name_available', function (req, res) {
+  db.locations.findAll({
+    where: ["name like ?", '%' +req.body.name+ '%'] 
+  }).then(function (location) {
+    if (location.length==0) {
+      res.json({ error: false, result:true, text: 'Brewery Name available' });
+    }
+    else {
+        res.json({ error: false, result:false, text: 'Brewery name already exist,try another' });
+    }
+  }).catch((err) => {
+    res.json({ error: true, result: err, text: 'Something is wrong!!' });
+  });
+
 });
 /*********************************************************************************************************************************
  * THIS FUNCTION TAKES IN LATITUDE AND LONGITUDE OF TWO LOCATION AND RETURNS THE DISTANCE BETWEEN THEM AS THE CROW FLIES (IN KM) *
