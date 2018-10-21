@@ -85,6 +85,12 @@
                         <mat-icon >sort</mat-icon>
                         <h5 class="h-text"> Terms </h5>
                 </mat-list-item>
+                
+
+                <mat-list-item (click)="xLogout()">    
+                    <mat-icon > logout </mat-icon>
+                    <h5 class="h-text"> logout </h5>
+            </mat-list-item>
 
 
  </mat-list>
@@ -105,7 +111,7 @@
         <div id="homeGrid" *ngIf="isMobile()">
             <div class="homeImage">
            
-                <img class="home-img" src="assets/imgs/slide-1.jpg" />
+                <img class="home-img" src="https://tba-vendor-dev.herokuapp.com/static/event/event1.jpeg" />
                 
                 
             </div>
@@ -116,48 +122,18 @@
                     <div>15 Beer<br/>on tap now</div>
                     <div>3 event<br/>this week</div>
                 </div>
-                <div class="post-block">
-                    <img class="home-img" src="assets/imgs/slide-1.jpg" />
+                <div class="post-block" *ngFor="let post of upEvents; let i = index">
+                    <img class="home-img" src={{post.events[0].featured_image}} />
                     <div class="post-caption">
                         <div class="day-view">Friday</div>
                         <div class="text-caption">
-                            <h3>Hello Concert</h3>
-                            <span>12.00 17:00</span>
+                            <h3>{{post.events[0].name}}</h3>
+                            <span>{{post.start_date}}</span>
                         </div>
                     </div>
                 </div>
-                <div class="post-block">
-                    <img class="home-img" src="assets/imgs/slide-1.jpg" />
-                    <div class="post-caption">
-                        <div class="day-view">Friday</div>
-                        <div class="text-caption">
-                            <h3>Hello Concert</h3>
-                            <span>12.00 17:00</span>
-                        </div>
-                    </div>
-                </div>
+              
 
-                <div class="post-block">
-                    <img class="home-img" src="assets/imgs/slide-1.jpg" />
-                    <div class="post-caption">
-                        <div class="day-view">Friday</div>
-                        <div class="text-caption">
-                            <h3>Hello Concert</h3>
-                            <span>12.00 17:00</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="post-block">
-                    <img class="home-img" src="assets/imgs/slide-1.jpg" />
-                    <div class="post-caption">
-                        <div class="day-view">Friday</div>
-                        <div class="text-caption">
-                            <h3>Hello Concert</h3>
-                            <span>12.00 17:00</span>
-                        </div>
-                    </div>
-                </div> 
                 </div>
         </div>
     </div>

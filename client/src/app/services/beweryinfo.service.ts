@@ -16,6 +16,11 @@ export class BreweryInfo {
      return this.http.get(`/api/location/3`).map(res => res);
 	}
 
+
+	getUpEvents(): Observable<any> {
+		return this.http.get(`/api/location/calendar/3`).map(res => res);
+	   }
+
 	getBeerByID(id: string): Observable<ServerResponseArray> {
 		return this.http.get<ServerResponseArray>('/api/beer/' + id);
 	}

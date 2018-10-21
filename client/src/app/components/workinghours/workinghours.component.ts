@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BreweryInfo } from '../../services/beweryinfo.service';
 
 @Component({
   selector: 'app-workinghours',
@@ -8,10 +9,21 @@ import { Component, OnInit } from '@angular/core';
 export class WorkinghoursComponent implements OnInit {
 
   panelOpenState = false;
-  constructor() { }
+  bewIfo: any;
+  isLoading: Boolean;
+
+  constructor(private bewInfo: BreweryInfo) { }
 
   ngOnInit() {
+    this.getInfo();
   }
-  
+
+  getInfo() {
+    this.bewInfo.getBreweryInfo().subscribe(
+      data => {this.bewIfo = data.result[0],
+      console.log('data is', data)},
+      error => console.log(error),
+      () => this.isLoading = false);
+  }
 }
 

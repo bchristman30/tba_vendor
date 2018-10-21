@@ -36,6 +36,7 @@ export class MaininfoComponent implements OnInit {
             ) { }
 
   ngOnInit() {
+    this.spinner.show();
     this.getInfo();
     this.locations = this.locationService.getLocations();
     this.locationSub = this.locationService.locationsDidChange$.subscribe(l => {
@@ -46,7 +47,9 @@ export class MaininfoComponent implements OnInit {
   getInfo() {
     this.bewInfo.getBreweryInfo().subscribe(
       data => {this.bewIfo = data.result[0],
-      console.log('data is', data)},
+      console.log('data is', data),
+      this.spinner.hide();
+    },
       error => console.log(error),
       () => this.isLoading = false);
 

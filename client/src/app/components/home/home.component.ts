@@ -31,7 +31,9 @@ export class HomeComponent implements OnInit {
   userdata: any;
   location: any;
   bewIfo: any;
+  upEvents: any;
   isLoading: Boolean;
+
   constructor(
               private router: Router,
               private spinner: NgxSpinnerService,
@@ -42,21 +44,48 @@ export class HomeComponent implements OnInit {
             ) { }
 
   ngOnInit() {
-    this.userdata = JSON.parse(localStorage.getItem('user'));
-    this.location = this.userdata.location.name;
-    this.getInfo();
-    console.log('logged in userdata', this.userdata);
-    console.log('logged in bew', this.bewIfo);
+
+    this.authSubscription = this.authService.authChange.subscribe(resp => {
+      this.isAuth = resp.isauth;
+      this.issubscription_expired = resp.issubscription_expired;
+      this.issubscription = resp.issubscription;
+    });
+
+    this.isAuth = this.authService.isLoggedIn();
+
+    if ( this.isAuth ) {
+      this.userdata = JSON.parse(localStorage.getItem('user'));
+      this.location = this.userdata.location.name;
+      this.getInfo();
+      this.getupcomingEvents();
+      console.log('logged in userdata', this.userdata);
+      console.log('logged in bew', this.bewIfo);
+    } else {
+      this.router.navigate(['/login']);
+    }
+
   }
 
 
   getInfo() {
-    this.bewInfo.getBreweryInfo().subscribe(
+      this.bewInfo.getBreweryInfo().subscribe(
       data => {this.bewIfo = data.result[0],
       console.log('data is', data)},
       error => console.log(error),
       () => this.isLoading = false);
 
+  }
+
+  getupcomingEvents() {
+    this.bewInfo.getUpEvents().subscribe(
+      data => {this.upEvents = data.result,
+      console.log('data events is', data)},
+      error => console.log(error),
+      () => this.isLoading = false);
+  }
+
+  xLogout() {
+    this.authService.logout();
   }
 
 

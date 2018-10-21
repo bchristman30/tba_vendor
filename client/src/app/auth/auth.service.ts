@@ -13,33 +13,39 @@ export class AuthService {
     authToken:any;
     user:any;
     authChange = new Subject<authobj>();
-    
-    constructor(private http: HttpClient,private router:Router, private uiservice:UIService) {
-        if(localStorage.getItem('user'))
-        {
-            this.user= localStorage.getItem('user'); 
-            this.authToken =localStorage.getItem('id_token');
+
+    constructor(private http: HttpClient, private router: Router, private uiservice: UIService) {
+        if (localStorage.getItem('user')) {
+            this.user = localStorage.getItem('user');
+            this.authToken = localStorage.getItem('id_token');
         }
     }
 
     login(email: string, password: string) {
         this.uiservice.isloadingstatus.next(true);
-        let header = new HttpHeaders().set('content-type', 'application/x-www-form-urlencoded').append('Access-Control-Allow-Origin', '*');
-        let login_data = 'email=' + email + '&password=' + password;
-        return this.http.post<any>('/api/brew_owner/login', login_data, { observe: 'response', responseType: 'json', headers: header }).pipe(map((res) => { this.uiservice.isloadingstatus.next(false); return res.body; }));
+        const header = new HttpHeaders().
+        set('content-type', 'application/x-www-form-urlencoded').append('Access-Control-Allow-Origin', '*');
+        const login_data = 'email=' + email + '&password=' + password;
+        return this.http.post<any>('/api/brew_owner/login', login_data,
+        { observe: 'response', responseType: 'json', headers: header }).
+        pipe(map((res) => { this.uiservice.isloadingstatus.next(false); return res.body; }));
     }
-    
+
+
     forgetpassword(user) {
-        let header = new HttpHeaders().set('content-type', 'application/x-www-form-urlencoded').append('Access-Control-Allow-Origin', '*');
-        let login_data = 'email=' +user.email;
+        const header = new HttpHeaders().
+        set('content-type', 'application/x-www-form-urlencoded').append('Access-Control-Allow-Origin', '*');
+        const login_data = 'email=' + user.email;
 
-        return this.http.post<any>('/api/user/forgetpassword', login_data, { observe: 'response', responseType: 'json', headers: header }).pipe(map((res) => { console.log(res.body); return res.body; }));
+        return this.http.post<any>('/api/user/forgetpassword', login_data,
+        { observe: 'response', responseType: 'json', headers: header }).pipe(map((res) => { console.log(res.body); return res.body; }));
     }
 
-    confirm_account(key:any,id:any)
-    {
-        let header = new HttpHeaders().set('content-type', 'application/x-www-form-urlencoded').append('Access-Control-Allow-Origin', '*');
-        return this.http.get<any>('/api/user/confirm_account?key='+key+"&id="+id, { observe: 'response', responseType: 'json', headers: header }).pipe(map((res) => { console.log(res.body); return res.body; }));
+    confirm_account(key: any, id: any) {
+        const header = new HttpHeaders().
+        set('content-type', 'application/x-www-form-urlencoded').append('Access-Control-Allow-Origin', '*');
+        return this.http.get<any>('/api/user/confirm_account?key=' + key + '&id=' + id,
+         { observe: 'response', responseType: 'json', headers: header }).pipe(map((res) => { console.log(res.body); return res.body; }));
     }
 
     changepassword(user) {
@@ -64,40 +70,42 @@ export class AuthService {
         return throwError('Something bad happened; please try again later.');
     }
 
-    signup(user:any) {
+    signup(user: any) {
         this.uiservice.isloadingstatus.next(true);
-        let header = new HttpHeaders().set('content-type', 'application/x-www-form-urlencoded').append('Access-Control-Allow-Origin', '*');
-        let login_data = 'username=' + user.name + '&email=' + user.email + '&dob=' + user.birthdate + '&password=' + user.password;  
-        return this.http.post<any>('/api/user/register', login_data, {observe: 'response', responseType: 'json', headers: header }).pipe(map(res=>{  this.uiservice.isloadingstatus.next(false); return res.body;}),catchError(this.handleError));
+        const header = new HttpHeaders().
+        set('content-type', 'application/x-www-form-urlencoded').append('Access-Control-Allow-Origin', '*');
+        const login_data = 'username=' + user.name + '&email=' + user.email + '&dob=' + user.birthdate + '&password=' + user.password;  
+        return this.http.post<any>('/api/user/register', login_data,
+          {observe: 'response', responseType: 'json', headers: header }).
+          pipe(map(res => {  this.uiservice.isloadingstatus.next(false); return res.body; }),
+          catchError(this.handleError));
     }
 
     setSession(authResult) {
-        // const expiresAt = moment().add(5000 , 'second');
+        const expiresAt = moment().add(authResult.expiresIn , 'second');
         localStorage.setItem('id_token', authResult.idToken);
         localStorage.setItem('user', JSON.stringify(authResult.result));
-        // localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
-       
+        localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
+        console.log('exp', expiresAt);
         this.authSuccessfully();
     }
-    
-    update_user_info(authResult){
+
+    update_user_info(authResult) {
         localStorage.setItem('user', JSON.stringify(authResult.result));
         this.authSuccessfully();
     }
 
-    authSuccessfully(){
+    authSuccessfully() {
         this.authToken = localStorage.getItem('id_token');
         this.user = JSON.parse(localStorage.getItem('user'));
-        this.authChange.next({isauth:true,issubscription_expired:this.user.subscription_expired,issubscription:this.user.issubscription});
+        this.authChange.next({isauth: true, issubscription_expired: this.user.subscription_expired,
+            issubscription: this.user.issubscription});
     }
 
-    Is_subscriprition_expired(){
-        if(this.isLoggedIn)
-        {
+    Is_subscriprition_expired() {
+        if ( this.isLoggedIn) {
             this.authSuccessfully();
-        }
-        else
-        {
+        } else {
             return null;
         }
     }
@@ -112,19 +120,19 @@ export class AuthService {
         localStorage.removeItem('expires_at');
         this.authToken = null;
         this.user = null;
-        this.authChange.next({isauth:false,issubscription_expired:true,issubscription:false});
+        this.authChange.next({isauth: false, issubscription_expired: true, issubscription: false});
         this.router.navigate(['/']);
     }
 
     public isLoggedIn() {
-        let expireinfo= moment().isBefore(this.getExpiration());
-        let isauth=this.user!=null;
-        if((expireinfo==true) && (isauth==true))
-        {
+        console.log('expireinfoo is');
+
+        const expireinfo = moment().isBefore(this.getExpiration());
+        console.log('expireinfoo is', expireinfo);
+        const isauth = this.user != null;
+        if ((expireinfo === true) && (isauth === true)) {
              return true;
-        }
-        else
-        {
+        }  else {
             return false;
         }
     }
@@ -136,6 +144,8 @@ export class AuthService {
     getExpiration() {
         const expiration = localStorage.getItem('expires_at');
         const expiresAt = JSON.parse(expiration);
+        console.log('expireinfoo is', expiresAt);
+
         return moment(expiresAt);
     }
 }
