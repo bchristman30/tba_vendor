@@ -118,9 +118,9 @@
             <div class="custom-block">
                     
                 <div class="top-block">
-                    <div>233 Beer<br/>Stamped</div>
+                    <div>{{stampCount}} Beer<br/>Stamped</div>
                     <div>15 Beer<br/>on tap now</div>
-                    <div>3 event<br/>this week</div>
+                    <div>{{totalevents}} event<br/>this week</div>
                 </div>
                 <div class="post-block" *ngFor="let post of upEvents; let i = index">
                     <img class="home-img" src={{post.events[0].featured_image}} />

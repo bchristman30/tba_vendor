@@ -3,7 +3,7 @@
 
 <div class="top-head-grid">
   <div class="backspace">
-    <i class="material-icons" routerLink="/home">
+    <i class="material-icons" routerLink="/maininfo">
       keyboard_backspace
     </i>
   </div>
@@ -12,20 +12,22 @@
   </label> 
   </div>  
 <form>
+
   <mat-accordion>
-    <mat-expansion-panel>
+    <mat-expansion-panel >
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Monday
+          {{monHours?.day}}
         </mat-panel-title>
         </mat-expansion-panel-header>
-  
+   
       <mat-form-field>
-        <input matInput placeholder="Opening in">
+        <input matInput placeholder="Opening in" value={{monHours?.opening_hour}}
+        >
       </mat-form-field>
   
       <mat-form-field>
-        <input matInput placeholder="Closure in">
+        <input matInput placeholder="Closure in" value={{monHours?.closing_hour}}>
       </mat-form-field>
       <mat-radio-group>
         <mat-radio-button value="1">Open 24 Hours</mat-radio-button>
@@ -34,20 +36,23 @@
       </mat-expansion-panel>
     </mat-accordion>
 
+
+
     <mat-accordion>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>
-            Tuesday
+            {{tueHours?.day}}
+
           </mat-panel-title>
           </mat-expansion-panel-header>
     
         <mat-form-field>
-          <input matInput placeholder="Opening in">
+          <input matInput placeholder="Opening in" value={{tueHours?.opening_hour}}>
         </mat-form-field>
     
         <mat-form-field>
-          <input matInput placeholder="Closure in">
+          <input matInput placeholder="Closure in" value={{tueHours?.closing_hour}}>
         </mat-form-field>
         <mat-radio-group>
           <mat-radio-button value="1">Open 24 Hours</mat-radio-button>
@@ -60,16 +65,17 @@
         <mat-expansion-panel>
           <mat-expansion-panel-header>
             <mat-panel-title>
-              Wednesday
+              {{wedHours?.day}}
+
             </mat-panel-title>
             </mat-expansion-panel-header>
       
           <mat-form-field>
-            <input matInput placeholder="Opening in">
+            <input matInput placeholder="Opening in" value={{wedHours?.opening_hour}}>
           </mat-form-field>
       
           <mat-form-field>
-            <input matInput placeholder="Closure in">
+            <input matInput placeholder="Closure in" value={{wedHours?.closing_hour}}>
           </mat-form-field>
           <mat-radio-group>
             <mat-radio-button value="1">Open 24 Hours</mat-radio-button>
@@ -82,16 +88,16 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Thursday
+                {{thurHours?.day}}
               </mat-panel-title>
               </mat-expansion-panel-header>
         
             <mat-form-field>
-              <input matInput placeholder="Opening in">
+              <input matInput placeholder="Opening in" value={{thurHours?.opening_hour}}>
             </mat-form-field>
         
             <mat-form-field>
-              <input matInput placeholder="Closure in">
+              <input matInput placeholder="Closure in" value={{thurHours?.closing_hour}}>
             </mat-form-field>
             <mat-radio-group>
               <mat-radio-button value="1">Open 24 Hours</mat-radio-button>
@@ -104,16 +110,16 @@
             <mat-expansion-panel>
               <mat-expansion-panel-header>
                 <mat-panel-title>
-                  Friday
+                  {{friHours?.day}}
                 </mat-panel-title>
                 </mat-expansion-panel-header>
           
               <mat-form-field>
-                <input matInput placeholder="Opening in">
+                <input matInput placeholder="Opening in" value={{friHours?.opening_hour}}>
               </mat-form-field>
           
               <mat-form-field>
-                <input matInput placeholder="Closure in">
+                <input matInput placeholder="Closure in" value={{friHours?.closing_hour}}>
               </mat-form-field>
               <mat-radio-group>
                 <mat-radio-button value="1">Open 24 Hours</mat-radio-button>

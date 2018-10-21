@@ -33,6 +33,9 @@ export class HomeComponent implements OnInit {
   bewIfo: any;
   upEvents: any;
   isLoading: Boolean;
+  totalevents: any;
+  stampCount: any;
+
 
   constructor(
               private router: Router,
@@ -70,15 +73,17 @@ export class HomeComponent implements OnInit {
   getInfo() {
       this.bewInfo.getBreweryInfo().subscribe(
       data => {this.bewIfo = data.result[0],
+        this.stampCount = data.result[0].total_redeemed_stamp,
       console.log('data is', data)},
       error => console.log(error),
       () => this.isLoading = false);
-
   }
+
 
   getupcomingEvents() {
     this.bewInfo.getUpEvents().subscribe(
       data => {this.upEvents = data.result,
+        this.totalevents = data.result.length,
       console.log('data events is', data)},
       error => console.log(error),
       () => this.isLoading = false);

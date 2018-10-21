@@ -9,7 +9,12 @@ import { BreweryInfo } from '../../services/beweryinfo.service';
 export class WorkinghoursComponent implements OnInit {
 
   panelOpenState = false;
-  bewIfo: any;
+  bewIfoHours: any;
+  monHours: any;
+  tueHours: any;
+  wedHours: any;
+  thurHours: any;
+  friHours: any;
   isLoading: Boolean;
 
   constructor(private bewInfo: BreweryInfo) { }
@@ -20,8 +25,14 @@ export class WorkinghoursComponent implements OnInit {
 
   getInfo() {
     this.bewInfo.getBreweryInfo().subscribe(
-      data => {this.bewIfo = data.result[0],
-      console.log('data is', data)},
+      data => {this.bewIfoHours = data.result[0].location_hours,
+        this.monHours = data.result[0].location_hours[0],
+        this.tueHours = data.result[0].location_hours[1],
+        this.wedHours = data.result[0].location_hours[2],
+        this.thurHours = data.result[0].location_hours[3],
+        this.friHours = data.result[0].location_hours[4],
+
+      console.log('working hours is', this.bewIfoHours)},
       error => console.log(error),
       () => this.isLoading = false);
   }
