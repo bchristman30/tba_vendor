@@ -2,7 +2,7 @@ var app = require('./server/server.js');
 const log4js = require('log4js');
 var request = require('request');
 var CronJob = require('cron').CronJob;
-var host="https://brew-pub-dev.herokuapp.com";
+var host="https://tba-vendor-dev.herokuapp.com";
 log4js.configure({
   appenders: { Brew_pub: { type: 'file', filename: './log/cronjob.log' } },
   categories: { default: { appenders: ['Brew_pub'], level: 'info' } }

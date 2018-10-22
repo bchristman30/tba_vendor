@@ -4,8 +4,8 @@ var db = require('../models/index');
 var async = require("async");
 
 /*******************************************************************
- * RETRIEVE BEER BASED ON BEER_ID *
- * URL:/api/beer/{beer_id}
+ * RETRIEVE event info BASED ON event id *
+ * URL:/api/event/{event_id}
  *******************************************************************/
 
 router.route('/:id').get(function (req, res) {

@@ -81,8 +81,7 @@ router.route('/page/:id').get(function (req, res) {
  * FETCH BEER LIST OF PARTICULAR BREWARY LOCATION USING LOCATION_ID *
  * URL:/api/beer/location/{location_id}
  ********************************************************************/
-
-router.route('/location/:id').get(function (req, res) {
+router.route('/location/:id(\\d+)').get(function (req, res) {
     let location_id = req.params.id;
     db.location_beer.findAll({
         where: {
@@ -98,16 +97,44 @@ router.route('/location/:id').get(function (req, res) {
             }]
         }]
     }).then(function (location_beer) {
-        res.json({ error: false, result: location_beer, text: 'data found' });
+        var activebeers=[];
+        var archivebeers=[];
+        var arr={};
+        if(location_beer.length>0)
+        {
+            for (var i=0; i<location_beer.length; i++) {
+                (function(num){
+                    if(location_beer[i].dataValues.active==1)
+                    {
+                        activebeers.push(location_beer[i].dataValues);
+                    }
+                    else
+                    {
+                        archivebeers.push(location_beer[i].dataValues);
+                    }
+                    console.log(i);
+                    if(i==location_beer.length-1)
+                    {
+                        arr.activebeers=activebeers;
+                        arr.archivebeers=archivebeers;
+                        res.json({ error: false, result: arr, text: 'data found' });
+                    }
+                })(i);  
+            } 
+        }
+        else
+        {
+            arr.activebeers=activebeers;
+            arr.archivebeers=archivebeers;
+            res.json({ error: false, result: arr, text: 'data not found' });
+        }
     }).catch(function (error) {
         res.json({ error: true, result: [], text: 'Internal Server Error' });
     });
 });
 
 
-
 // added new api
-
 router.route('/beerStyles').get(function (req, res) {
     console.log('/beerStyles');
     db.beer_style.findAll({}).then(function (beerStyles) {
@@ -129,6 +156,50 @@ router.route('/add_beer_style').post(function (req, res) {
         res.json({ error: true, result: err.errors[0].message });
     });
 });
+
+//update beer logo using beer id
+router.route('/update_beer_logo/:id(\\d+)').post(function (req, res) {
+    var host;
+    if (req.secure == true) {
+        host = 'https://' + req.headers.host;
+    }
+    else {
+        host = 'http://' + req.headers.host;
+    }
+    var base64Str = req.body.beer_logo;
+    var base64Image = base64Str.split(';base64,').pop();
+    var name = shortid.generate();
+    var filename = name.replace(/\s/g, "") + '.png';
+    var filepath = path.join(__dirname, '../public/location/' + filename);
+    var beer_logo = host + '/static/uploads/' + filename;
+    db.beer.findOne({
+        where: {
+            id: req.params.id
+        }
+    }).then(function (beer) {
+        if (!beer) {
+            res.json({ error: true, result: '', text: 'There is no beer data found' });
+        }
+        else {
+            fs.writeFile(filepath, base64Image, { encoding: 'base64' }, (err) => {
+                if (!err) {
+                    beer.update({ beer_logo: beer_logo }).then((response) => {
+                        res.json({ error: false, result: '', text: 'beer logo has been changed successfully' });
+                    }).catch((err) => {
+                        res.json({ error: true, result: err, text: 'Error found during updation' });
+                    });
+                }
+                else {
+                    res.json({ error: true, result: err });
+                }
+            });
+        }
+    }).catch(function (error) {
+        res.json({ error: true, result: [], text: 'Internal Server Error' });
+    });
+
+});
+
 
 router.route('/location').post(function (req, res) {
     var host;
@@ -218,4 +289,80 @@ router.route('/').post(function (req, res) {
     });
 });
 
+
+//remove beer
+router.route('/remove_beer/:id(\\d+)').post(function (req, res) {
+    var beer_id = req.params.id;
+    var location_id = req.body.location_id;
+    db.location_beer.destroy({
+        where: {
+            location_id: location_id,
+            beer_id: beer_id
+        }
+    }).then(function (rowDeleted) { // rowDeleted will return number of rows deleted
+        console.log(rowDeleted + 'Deleted successfully');
+        res.json({ error: false, result: [], text: 'beer successfully removed' });
+
+    }, function (err) {
+        console.log(err);
+        res.json({ error: true, result: err, text: 'Something is wrong' });
+    });
+});
+
+
+router.route('/move_to_ontap/:id(\\d+)').post(function(req,res){
+      
+        db.location_beer.findOne({
+            where: {
+                beer_id:req.params.id,
+                location_id:req.body.location_id,
+                active:0  //archive
+            }
+        }).then(function (location_beer) {
+            if (!location_beer) {
+                res.json({ error: true, result: '', text: 'beer is not archive beer' });
+            }
+            else {
+                var obj={
+                    active:1
+                };
+                location_beer.update(obj).then((response) => {
+                    res.json({ error: false, result: '', text: 'beer successfully moved to beer on tap.' });
+                }).catch((err) => {
+                    res.json({ error: true, result: err, text: 'Error found during updation' });
+                });
+            }
+        }).catch(function (error) {
+            res.json({ error: true, result: [], text: 'Internal Server Error' });
+        });
+});
+
+
+
+router.route('/move_to_archive/:id(\\d+)').post(function(req,res){
+      
+    db.location_beer.findOne({
+        where: {
+            beer_id:req.params.id,
+            location_id:req.body.location_id,
+            active:1 //active
+        }
+    }).then(function (location_beer) {
+        if (!location_beer) {
+            res.json({ error: true, result: '', text: 'beer is not archive beer' });
+        }
+        else {
+            var obj={
+                active:0
+            };
+            location_beer.update(obj).then((response) => {
+                res.json({ error: false, result: '', text: 'beer successfully moved to archive list.' });
+            }).catch((err) => {
+                res.json({ error: true, result: err, text: 'Error found during updation' });
+            });
+        }
+    }).catch(function (error) {
+        res.json({ error: true, result: [], text: 'Internal Server Error' });
+    });
+});
 module.exports = router;

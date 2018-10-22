@@ -10,7 +10,7 @@ const validate = require('express-validation');
 var _ = require('lodash');
 var today = getdate.format('dddd');
 var sequelize = require('sequelize');
-
+var shortid = require('shortid');
 /****************************************************
  * FETCH ALL LOCATION WITH HOUR ,REVIEWS DETAILS *
  * URL:/api/location
@@ -185,7 +185,7 @@ router.get('/:id(\\d+)', validate(require('../validation/id.js')), function (req
       }]
     },
     {
-      limit: 5,
+      limit: 9,
       attributes: ['id', 'location_id', 'beer_id'],
       where: { active: 1 }, //active beer
       model: db.location_beer,
@@ -227,11 +227,9 @@ router.get('/:id(\\d+)', validate(require('../validation/id.js')), function (req
         else {
           maindata.push(_.merge(location[0].dataValues, { isopentoday: false }));
         }
-        //location.splice(0, 0, obj);
       }
       else {
         maindata.push(_.merge(location[0].dataValues, { isopentoday: false }));
-        //location.splice(0, 0, obj);
       }
       res.json({ error: false, result: maindata, text: 'brewery data available*' });
     }
@@ -411,26 +409,23 @@ router.post('/update_amenities/:id(\\d+)', function (req, res) {
 router.post('/update_workinghours/:id(\\d+)', function (req, res) {
 
   var data = req.body.data;
-  // console.log(req.body);
-  // console.log(data.length);
   if (data.length == 7) {
     let hours = [];
     let day;
     let weekday = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     for (let i = 0; i < 7; i++) {
-     day=weekday[i];
-      hours.push({ day: day, opening_hour:data[i][day]['opening_hour'], closing_hour: data[i][day]['closing_hour'], location_id: req.params.id });
+      day = weekday[i];
+      hours.push({ day: day, opening_hour: data[i][day]['opening_hour'], closing_hour: data[i][day]['closing_hour'], location_id: req.params.id });
     }
     //console.log(hours);
-    if(hours.length==7)
-    {
+    if (hours.length == 7) {
       db.location_hours.destroy({
         where: {
           location_id: req.params.id
         }
       }).then(function (rowDeleted) { // rowDeleted will return number of rows deleted
 
-      //  console.log(rowDeleted + 'Deleted successfully');
+        //  console.log(rowDeleted + 'Deleted successfully');
         db.location_hours.bulkCreate(hours).then(() => {
           res.json({ error: false, result: req.body.data, text: 'Working hours updated successfully!!' });
         }).catch((err) => {
@@ -441,8 +436,7 @@ router.post('/update_workinghours/:id(\\d+)', function (req, res) {
         res.json({ error: true, result: err });
       });
     }
-    else
-    {
+    else {
       res.json({ error: true, result: [], text: 'Input is not correctly formatted!!' });
     }
   }
@@ -463,22 +457,21 @@ router.post('/update_basicinfo/:id(\\d+)', function (req, res) {
     }
   }).then(function (location) {
     if (!location) {
-      res.json({ error: true, result: '', text: 'There is no brewery exist with this id'+req.params.id });
+      res.json({ error: true, result: '', text: 'There is no brewery exist with this id' + req.params.id });
     }
     else {
       let data = {
-        name:req.body.name,
-        address:req.body.address,
-        support_email:req.body.support_email,
-        city:req.body.city,
-        state:req.body.state,
+        name: req.body.name,
+        address: req.body.address,
+        support_email: req.body.support_email,
+        city: req.body.city,
+        state: req.body.state,
         zipcode: req.body.zipcode,
         phone: req.body.phone,
         website_url: req.body.website_url
       };
       location.update(data).then((response) => {
-       
-        res.json({ error: false, result:response, text: 'brewery information updated successfully!!' });
+        res.json({ error: false, result: response, text: 'brewery information updated successfully!!' });
       }).catch((err) => {
         res.json({ error: true, result: err, text: 'Error found during updation' });
       });
@@ -490,24 +483,78 @@ router.post('/update_basicinfo/:id(\\d+)', function (req, res) {
 });
 
 /******************************************************
-* UPDATE Basic Information OF A LOCATION *
-* URL:/api/location/update_basicinfo/{location_id}
+* check brewery name availability *
+* URL:/api/location/is_name_available
 ******************************************************/
 router.post('/is_name_available', function (req, res) {
   db.locations.findAll({
-    where: ["name like ?", '%' +req.body.name+ '%'] 
+    where: ["name like ?", '%' + req.body.name + '%']
   }).then(function (location) {
-    if (location.length==0) {
-      res.json({ error: false, result:true, text: 'Brewery Name available' });
+    if (location.length == 0) {
+      res.json({ error: false, result: true, text: 'Brewery Name available' });
     }
     else {
-        res.json({ error: false, result:false, text: 'Brewery name already exist,try another' });
+      res.json({ error: false, result: false, text: 'Brewery name already exist,try another' });
     }
   }).catch((err) => {
     res.json({ error: true, result: err, text: 'Something is wrong!!' });
   });
 
 });
+
+
+/******************************************************
+* UPDATE Basic Information OF A LOCATION *
+* URL:/api/location/update_logo/{location_id}
+******************************************************/
+
+router.route('/update_logo/:id(\\d+)').post(function (req, res) {
+  var host;
+  var location_id = req.params.id;
+  if (req.secure == true) {
+    host = 'https://' + req.headers.host;
+  }
+  else {
+    host = 'http://' + req.headers.host;
+  }
+  var base64Str = req.body.beer_logo;
+  var base64Image = base64Str.split(';base64,').pop();
+  var name = shortid.generate();
+  var filename = name.replace(/\s/g, "") + '.png';
+  var filepath = path.join(__dirname, '../public/location/' + filename);
+  var logo = host + '/static/uploads/' + filename;
+
+  fs.writeFile(filepath, base64Image, { encoding: 'base64' }, (err) => {
+    if (!err) {
+      console.log('File created');
+      db.locations.findOne({
+        where: {
+          id: location_id
+        }
+      }).then(function (location) {
+        if (!location) {
+          res.json({ error: true, result: '', text: 'There is no brewery exist with this id' + req.params.id });
+        }
+        else {
+          let data = {
+            logo_string: logo
+          };
+          location.update(data).then((response) => {
+            res.json({ error: false, result: [], text: 'Brewery logo changed successfully!!' });
+          }).catch((err) => {
+            res.json({ error: true, result: err, text: 'Error found during updation' });
+          });
+        }
+      }).catch((err) => {
+        res.json({ error: true, result: err, text: 'Something is wrong!!' });
+      });
+    }
+    else {
+      res.json({ error: true, result: [], text: err });
+    }
+  });
+});
+
 /*********************************************************************************************************************************
  * THIS FUNCTION TAKES IN LATITUDE AND LONGITUDE OF TWO LOCATION AND RETURNS THE DISTANCE BETWEEN THEM AS THE CROW FLIES (IN KM) *
  *********************************************************************************************************************************/
