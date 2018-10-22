@@ -112,7 +112,6 @@ router.route('/location/:id(\\d+)').get(function (req, res) {
                     {
                         archivebeers.push(location_beer[i].dataValues);
                     }
-                    console.log(i);
                     if(i==location_beer.length-1)
                     {
                         arr.activebeers=activebeers;

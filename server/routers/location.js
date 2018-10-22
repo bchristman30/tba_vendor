@@ -240,7 +240,7 @@ router.get('/:id(\\d+)', validate(require('../validation/id.js')), function (req
  * GET LOCATION CALENDAR USING LOCATION ID [INCLUDE BOTH EVENTS AND FOODTRUCK SCHEDULE WITH DETAILS]*
  * URL:/api/location/calendar/{location_id}
  ***************************************************************************************************/
-router.route('/calendar/:id').get(function (req, res) {
+router.route('/calendar/:id(\\d+)').get(function (req, res) {
   var curdate = getdate.format('YYYY-MM-DD HH:mm:ss');
   var myDate = new Date(curdate);
   db.location_calendar.findAll({
@@ -257,7 +257,7 @@ router.route('/calendar/:id').get(function (req, res) {
         $gte: myDate,
       },
     },
-    limit: 10
+    //limit: 10
   }).then((calendar) => {
     if (calendar.length == 0) {
       res.json({ error: true, result: '', text: 'There is no brewery calendar data available' });
