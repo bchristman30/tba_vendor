@@ -30,7 +30,6 @@ export class SignupComponent implements OnInit {
     this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
     this.isloadsub=this.uiservice.isloadingstatus.subscribe((status)=>{
       this.isloading=status;
-     
     });
   }
 

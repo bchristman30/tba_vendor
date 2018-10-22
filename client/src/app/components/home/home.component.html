@@ -119,16 +119,16 @@
                     
                 <div class="top-block">
                     <div>{{stampCount}} Beer<br/>Stamped</div>
-                    <div>15 Beer<br/>on tap now</div>
+                    <div>{{tapbeer}} Beer<br/>on tap now</div>
                     <div>{{totalevents}} event<br/>this week</div>
                 </div>
                 <div class="post-block" *ngFor="let post of upEvents; let i = index">
                     <img class="home-img" src={{post.events[0].featured_image}} />
                     <div class="post-caption">
-                        <div class="day-view">Friday</div>
+                        <div class="day-view">{{post.start_date | date:'EEEE'  }}</div>
                         <div class="text-caption">
                             <h3>{{post.events[0].name}}</h3>
-                            <span>{{post.start_date}}</span>
+                            <span>{{post.start_date | date:'h:mm:ss a' }}   {{ post.end_date | date:'h:mm:ss a'}} </span>
                         </div>
                     </div>
                 </div>
