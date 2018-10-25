@@ -35,8 +35,8 @@ app.use('/static', express.static(path.join(__dirname, 'public')))
 
 // Configure the app to use bodyParser()
 // This will let us get the data from post
-app.use(bodyParser.urlencoded({extended: true,limit:'5mb'}));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true,limit:'5mb'}));
 
 
 

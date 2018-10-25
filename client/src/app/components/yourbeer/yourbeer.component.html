@@ -1,313 +1,161 @@
 <mat-drawer-container class="example-container" [hasBackdrop]="true" autosize>
-        <mat-drawer #drawer class="example-sidenav" mode="push">
+  <mat-drawer #drawer class="example-sidenav" mode="push">
 
-                <div class="xheadr">
-                        <div class="imagleft">
-                                <img src="https://tba-vendor-dev.herokuapp.com/static/location/brewery2.png" />
-                        </div>
+    <div class="xheadr">
+      <div class="imagleft">
+        <img src="https://tba-vendor-dev.herokuapp.com/static/location/brewery2.png" />
+      </div>
 
-                        <label class="grid-title">Happy Beer Brewery</label>
- 
-                </div>
-                <div class="scrollm">
-                <mat-list>
-                    <mat-list-item routerLink="/home">     
-                      <mat-icon >local_drink</mat-icon>
-                      <h5 class="h-text"> overview </h5>
-              </mat-list-item>
+      <label class="grid-title">Happy Beer Brewery</label>
 
-             <mat-list-item routerLink="/yourbeer">    
-                      <mat-icon >local_drink</mat-icon> 
-                      <h5 class="h-text">
-                             <a >drinks</a></h5>
-              </mat-list-item>
+    </div>
+    <div class="scrollm">
+      <mat-list>
+        <mat-list-item routerLink="/home">
+          <mat-icon>local_drink</mat-icon>
+          <h5 class="h-text"> overview </h5>
+        </mat-list-item>
 
-
-              <mat-list-item routerLink="/events">    
-                     <mat-icon >event_available</mat-icon>
-                     <h5 class="h-text">
-                             <a >events</a>
-                         </h5>
-             </mat-list-item>
+        <mat-list-item routerLink="/yourbeer">
+          <mat-icon>local_drink</mat-icon>
+          <h5 class="h-text">
+            <a>drinks</a>
+          </h5>
+        </mat-list-item>
 
 
-
-             <mat-list-item>    
-                     <mat-icon >panorama_fish_eye
-                         </mat-icon>
-                     <h5 class="h-text"> Stamp and Control </h5>
-             </mat-list-item>
+        <mat-list-item routerLink="/events">
+          <mat-icon>event_available</mat-icon>
+          <h5 class="h-text">
+            <a>events</a>
+          </h5>
+        </mat-list-item>
 
 
 
-
-             <mat-list-item>    
-                     <mat-icon >rate_review</mat-icon>
-                     <h5 class="h-text"> Review list </h5>
-             </mat-list-item>
+        <mat-list-item>
+          <mat-icon>panorama_fish_eye
+          </mat-icon>
+          <h5 class="h-text"> Stamp and Control </h5>
+        </mat-list-item>
 
 
 
 
-
-             <mat-list-item>    
-                     <mat-icon >graphic_eq</mat-icon>
-                     <h5 class="h-text"> Statistics </h5>
-             </mat-list-item>
-
-             <mat-list-item routerLink="/maininfo" >    
-                     <mat-icon >info</mat-icon>
-                     <h5 class="h-text"> add info </h5>
-             </mat-list-item>
+        <mat-list-item>
+          <mat-icon>rate_review</mat-icon>
+          <h5 class="h-text"> Review list </h5>
+        </mat-list-item>
 
 
 
-             <mat-list-item>    
-                     <mat-icon ></mat-icon>
-                     <h5 class="h-text">  </h5>
-             </mat-list-item>
-
-                </mat-list>
-                </div>
-
-                <div class="footer-grid">
-
-                        <div class="ft-Ty">
-                                <mat-list>
-                                        <mat-list-item>
-                                                <mat-icon>brightness_low</mat-icon>
-                                                <h5 class="h-text"> settings </h5>
-                                        </mat-list-item>
-                                        <mat-list-item>
-                                                <mat-icon>sort</mat-icon>
-                                                <h5 class="h-text"> Terms </h5>
-                                        </mat-list-item>
 
 
-                                </mat-list>
-                        </div>
-                </div>
- 
-                <!-- <mat-icon class="mat-left" (click)="drawer.toggle()">dehaze</mat-icon> -->
+        <mat-list-item>
+          <mat-icon>graphic_eq</mat-icon>
+          <h5 class="h-text"> Statistics </h5>
+        </mat-list-item>
 
-        </mat-drawer>
-        <div class="scroll"> 
+        <mat-list-item routerLink="/maininfo">
+          <mat-icon>info</mat-icon>
+          <h5 class="h-text"> add info </h5>
+        </mat-list-item>
 
-        <div class="example-sidenav-content">
 
-                <div class="headgrid">
-                        <mat-icon class="mat-left" (click)="drawer.toggle()">dehaze</mat-icon>
-                        <p class="title"> Your Beer </p>
 
-                        <mat-icon class="mat-right" routerLink="/newbear">add</mat-icon>
+        <mat-list-item>
+          <mat-icon></mat-icon>
+          <h5 class="h-text"> </h5>
+        </mat-list-item>
 
-                </div> 
-                <div id="homeGrid" class="tab-pip" *ngIf="isMobile()">
-                        <mat-tab-group>
-                            <mat-tab class="new-width" label="Beer on Tap">
-                                <div class="newc">
-                                   <p class="grid-p">3 Beer on tap</p>
-                                      <mat-card class="padding-0">
-                                          <div id="beerCard" routerLink="/beerinfo/:beer">
-                                              <div class="beer-card-logo">
-                                                  <div class="grid">
-                                                   <img class="image-100" src="assets/imgs/slide-3.jpg" >
-                                                  </div>
-                                              </div>
-                                              <div class="beer-card-content">
-                                                <div class="beer-card-header">
-                                                  <div class="font-600">title</div>
-                                                    <div class="justify-right padding-right-10">{{ 5 | currency : 'USD' : 'symbol' : '1.0' }} </div>
-                                                </div>
+      </mat-list>
+    </div>
 
-                    <div class="margin-top-bottom-5 beer-card-bottom">
-                      <div class="beer-card-rating-container rated-4">
-                        <div class="beer-card-rating rating-1"></div>
-                        <div class="beer-card-rating rating-2"></div>
-                        <div class="beer-card-rating rating-3"></div>
-                        <div class="beer-card-rating rating-4"></div>
-                        <div class="beer-card-rating rating-5"></div>
+    <div class="footer-grid">
+
+      <div class="ft-Ty">
+        <mat-list>
+          <mat-list-item>
+            <mat-icon>brightness_low</mat-icon>
+            <h5 class="h-text"> settings </h5>
+          </mat-list-item>
+          <mat-list-item>
+            <mat-icon>sort</mat-icon>
+            <h5 class="h-text"> Terms </h5>
+          </mat-list-item>
+
+
+        </mat-list>
+      </div>
+    </div>
+
+    <!-- <mat-icon class="mat-left" (click)="drawer.toggle()">dehaze</mat-icon> -->
+
+  </mat-drawer>
+  <div class="scroll">
+
+    <div class="example-sidenav-content">
+
+      <div class="headgrid">
+        <mat-icon class="mat-left" (click)="drawer.toggle()">dehaze</mat-icon>
+        <p class="title"> Your Beer </p>
+
+        <mat-icon class="mat-right" routerLink="/newbear">add</mat-icon>
+
+      </div>
+      <div id="homeGrid" class="tab-pip" *ngIf="isMobile()">
+        <mat-tab-group>
+          <mat-tab class="new-width" label="Beer on Tap">
+            <div class="newc">
+              <p class="grid-p">{{activeBeerCount}} Beer on tap</p>
+
+
+              <div *ngFor="let beerdt of activeBeers; let i = index">
+                <mat-card class="padding-0">
+                  <div id="beerCard" routerLink="/beerinfo/{{beerdt.beer.id}}">
+                    <div class="beer-card-logo">
+                      <div class="grid">
+                        <img class="image-100" src={{beerdt.beer.beer_logo}}>
                       </div>
-                         <!-- <div>5</div> -->
                     </div>
+                    <div class="beer-card-content">
+                      <div class="beer-card-header">
+                        <div class="font-600">{{beerdt.beer.name}}</div>
+                        <div class="justify-right padding-right-10">{{ beerdt.beer.price | currency : 'USD' : 'symbol' : '1.0' }} </div>
+                      </div>
 
-                    <div class="margin-top-bottom-5">
-                      <mat-chip-list>
-                        <mat-chip color="primary" selected >
-                           mango
-                        </mat-chip>
-                      </mat-chip-list>
+                      <div class="margin-top-bottom-5 beer-card-bottom">
+                        <div class="beer-card-rating-container rated-4">
+                          <div class="beer-card-rating rating-1"></div>
+                          <div class="beer-card-rating rating-2"></div>
+                          <div class="beer-card-rating rating-3"></div>
+                          <div class="beer-card-rating rating-4"></div>
+                          <div class="beer-card-rating rating-5"></div>
+                        </div>
+                        <!-- <div>5</div> -->
+                      </div>
 
-                    <div class="beer-card-read-more">Reviews
-                                                                                             
+                      <div class="margin-top-bottom-5">
+                        <mat-chip-list>
+                       
+                          <mat-chip color="primary"  *ngFor="let dt of beerdt.beer.beer_categories; let i = index" selected>
+                            {{dt.beer_style.type}}
+                          </mat-chip>
+                        </mat-chip-list>
+
+                        <div class="beer-card-read-more">Reviews
+
+                        </div>
+                      </div>
+
                     </div>
-                    </div>
-                                                                         
-                    </div>
-                    </div>
-                                                 </mat-card>
+                  </div>
+                </mat-card>
 
-                                                                      <mat-card class="padding-0">
-                                                                                <div id="beerCard" routerLink="/beerinfo/:beer">
-                                                                                  <div class="beer-card-logo">
-                                                                                    <div class="grid">
-                                                                                        <img class="image-100" src="assets/imgs/slide-3.jpg" >
-                                                                                    </div>
-                                                                                  </div>
-                                                                                  <div class="beer-card-content">
-                                                                                    <div class="beer-card-header">
-                                                                                      <div class="font-600">title</div>
-                                                                                      <div class="justify-right padding-right-10">{{ 5 | currency : 'USD' : 'symbol' : '1.0' }} </div>
-                                                                                    </div>
-        
-                                                                                    <div class="margin-top-bottom-5 beer-card-bottom">
-                                                                                                <div class="beer-card-rating-container rated-4">
-                                                                                                  <div class="beer-card-rating rating-1"></div>
-                                                                                                  <div class="beer-card-rating rating-2"></div>
-                                                                                                  <div class="beer-card-rating rating-3"></div>
-                                                                                                  <div class="beer-card-rating rating-4"></div>
-                                                                                                  <div class="beer-card-rating rating-5"></div>
-                                                                                                </div>
-                                                                                                <!-- <div>5</div> -->
-                                                                                            </div>
-        
-                                                                                    <div class="margin-top-bottom-5">
-                                                                                        <mat-chip-list>
-                                                                                          <mat-chip color="primary" selected >
-                                                                                           mango
-                                                                                          </mat-chip>
-                                                                                        </mat-chip-list>
-        
-                                                                                        <div class="beer-card-read-more">Reviews
-                                                                                                     
-                                                                                                        </div>
-                                                                                    </div>
-                                                                                 
-                                                                                  </div>
-                                                                                </div>
-                                                                              </mat-card>
+              </div>
 
 
-                                                                              <mat-card class="padding-0">
-                                                                                        <div id="beerCard" routerLink="/beerinfo/:beer">
-                                                                                          <div class="beer-card-logo">
-                                                                                            <div class="grid">
-                                                                                                <img class="image-100" src="assets/imgs/slide-3.jpg" >
-                                                                                            </div>
-                                                                                          </div>
-                                                                                          <div class="beer-card-content">
-                                                                                            <div class="beer-card-header">
-                                                                                              <div class="font-600">title</div>
-                                                                                              <div class="justify-right padding-right-10">{{ 5 | currency : 'USD' : 'symbol' : '1.0' }} </div>
-                                                                                            </div>
-                
-                                                                                            <div class="margin-top-bottom-5 beer-card-bottom">
-                                                                                                        <div class="beer-card-rating-container rated-4">
-                                                                                                          <div class="beer-card-rating rating-1"></div>
-                                                                                                          <div class="beer-card-rating rating-2"></div>
-                                                                                                          <div class="beer-card-rating rating-3"></div>
-                                                                                                          <div class="beer-card-rating rating-4"></div>
-                                                                                                          <div class="beer-card-rating rating-5"></div>
-                                                                                                        </div>
-                                                                                                        <!-- <div>5</div> -->
-                                                                                                    </div>
-                
-                                                                                            <div class="margin-top-bottom-5">
-                                                                                                <mat-chip-list>
-                                                                                                  <mat-chip color="primary" selected >
-                                                                                                   mango
-                                                                                                  </mat-chip>
-                                                                                                </mat-chip-list>
-                
-                                                                                                <div class="beer-card-read-more">Reviews
-                                                                                                             
-                                                                                                                </div>
-                                                                                            </div>
-                                                                                         
-                                                                                          </div>
-                                                                                        </div>
-                                                                                      </mat-card>
-
-                                                                                      <mat-card class="padding-0">
-                                                                                                <div id="beerCard" routerLink="/beerinfo/:beer">
-                                                                                                  <div class="beer-card-logo">
-                                                                                                    <div class="grid">
-                                                                                                        <img class="image-100" src="assets/imgs/slide-3.jpg" >
-                                                                                                    </div>
-                                                                                                  </div>
-                                                                                                  <div class="beer-card-content">
-                                                                                                    <div class="beer-card-header">
-                                                                                                      <div class="font-600">title</div>
-                                                                                                      <div class="justify-right padding-right-10">{{ 5 | currency : 'USD' : 'symbol' : '1.0' }} </div>
-                                                                                                    </div>
-                        
-                                                                                                    <div class="margin-top-bottom-5 beer-card-bottom">
-                                                                                                                <div class="beer-card-rating-container rated-4">
-                                                                                                                  <div class="beer-card-rating rating-1"></div>
-                                                                                                                  <div class="beer-card-rating rating-2"></div>
-                                                                                                                  <div class="beer-card-rating rating-3"></div>
-                                                                                                                  <div class="beer-card-rating rating-4"></div>
-                                                                                                                  <div class="beer-card-rating rating-5"></div>
-                                                                                                                </div>
-                                                                                                                <!-- <div>5</div> -->
-                                                                                                            </div>
-                        
-                                                                                                    <div class="margin-top-bottom-5">
-                                                                                                        <mat-chip-list>
-                                                                                                          <mat-chip color="primary" selected >
-                                                                                                           mango
-                                                                                                          </mat-chip>
-                                                                                                        </mat-chip-list>
-                        
-                                                                                                        <div class="beer-card-read-more">Reviews
-                                                                                                                     
-                                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                 
-                                                                                                  </div>
-                                                                                                </div>
-                                                                                              </mat-card>
-
-                                                                                              <mat-card class="padding-0">
-                                                                                                        <div id="beerCard" routerLink="/beerinfo/:beer">
-                                                                                                          <div class="beer-card-logo">
-                                                                                                            <div class="grid">
-                                                                                                                <img class="image-100" src="assets/imgs/slide-3.jpg" >
-                                                                                                            </div>
-                                                                                                          </div>
-                                                                                                          <div class="beer-card-content">
-                                                                                                            <div class="beer-card-header">
-                                                                                                              <div class="font-600">title</div>
-                                                                                                              <div class="justify-right padding-right-10">{{ 5 | currency : 'USD' : 'symbol' : '1.0' }} </div>
-                                                                                                            </div>
-                                
-                                                                                                            <div class="margin-top-bottom-5 beer-card-bottom">
-                                                                                                                        <div class="beer-card-rating-container rated-4">
-                                                                                                                          <div class="beer-card-rating rating-1"></div>
-                                                                                                                          <div class="beer-card-rating rating-2"></div>
-                                                                                                                          <div class="beer-card-rating rating-3"></div>
-                                                                                                                          <div class="beer-card-rating rating-4"></div>
-                                                                                                                          <div class="beer-card-rating rating-5"></div>
-                                                                                                                        </div>
-                                                                                                                        <!-- <div>5</div> -->
-                                                                                                                    </div>
-                                
-                                                                                                            <div class="margin-top-bottom-5">
-                                                                                                                <mat-chip-list>
-                                                                                                                  <mat-chip color="primary" selected >
-                                                                                                                   mango
-                                                                                                                  </mat-chip>
-                                                                                                                </mat-chip-list>
-                                
-                                                                                                                <div class="beer-card-read-more">Reviews
-                                                                                                                             
-                                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                         
-                                                                                                          </div>
-                                                                                                        </div>
-                                                                                                      </mat-card>
-                                                <!-- 
+              <!-- 
                                                 <div class="full-view-grid">
                                                         <div class="inner-grid">
                                                                 <img class="beer-img" src="assets/imgs/slide-3.jpg" alt="...">
@@ -323,255 +171,60 @@
                                                                 </div>
                                                         </div>
                                                 </div> -->
-                                        </div>
-                                </mat-tab>
-                                <mat-tab class="new-width" label="Archive">
-                                        <div class="newc">  
-                                           <p class="grid-pp">3 Beer in Archive list now</p>
-                                                <mat-card class="padding-0">
-                                                                <div id="beerCard" routerLink="/beerinfo/:beer">
-                                                                  <div class="beer-card-logo">
-                                                                    <div class="grid">
-                                                                        <img class="image-100" src="assets/imgs/slide-3.jpg" >
-                                                                    </div>
-                                                                  </div>
-                                                                  <div class="beer-card-content">
-                                                                    <div class="beer-card-header">
-                                                                      <div class="font-600">title</div>
-                                                                      <div class="justify-right padding-right-10">{{ 5 | currency : 'USD' : 'symbol' : '1.0' }} </div>
-                                                                    </div>
+            </div>
+          </mat-tab>
+          <mat-tab class="new-width" label="Archive">
+            <div class="newc">
+              <p class="grid-pp"> {{archiveBeerCount}} Beer in Archive list now</p>
 
-                                                                    <div class="margin-top-bottom-5 beer-card-bottom">
-                                                                                <div class="beer-card-rating-container rated-4">
-                                                                                  <div class="beer-card-rating rating-1"></div>
-                                                                                  <div class="beer-card-rating rating-2"></div>
-                                                                                  <div class="beer-card-rating rating-3"></div>
-                                                                                  <div class="beer-card-rating rating-4"></div>
-                                                                                  <div class="beer-card-rating rating-5"></div>
-                                                                                </div>
-                                                                                <!-- <div>5</div> -->
-                                                                            </div>
+              <div *ngFor="let beerar of archiveBeers; let i = index">
 
-                                                                    <div class="margin-top-bottom-5">
-                                                                        <mat-chip-list>
-                                                                          <mat-chip color="primary" selected >
-                                                                           mango
-                                                                          </mat-chip>
-                                                                        </mat-chip-list>
+                <mat-card class="padding-0">
+                  <div id="beerCard"  routerLink="/beerinfo/{{beerar.beer.id}}">
+                    <div class="beer-card-logo">
+                      <div class="grid">
+                        <img class="image-100" src={{beerar.beer.beer_logo}}>
+                      </div>
+                    </div>
+                    <div class="beer-card-content">
+                      <div class="beer-card-header">
+                        <div class="font-600">{{beerar.beer.name}}</div>
+                        <div class="justify-right padding-right-10">{{ beerar.beer.price | currency : 'USD' : 'symbol' : '1.0' }} </div>
+                      </div>
 
-                                                                        <div class="beer-card-read-more">Reviews
-                                                                                     
-                                                                                        </div>
-                                                                    </div>
-                                                                 
-                                                                  </div>
-                                                                </div>
-                                                              </mat-card>
+                      <div class="margin-top-bottom-5 beer-card-bottom">
+                        <div class="beer-card-rating-container rated-4">
+                          <div class="beer-card-rating rating-1"></div>
+                          <div class="beer-card-rating rating-2"></div>
+                          <div class="beer-card-rating rating-3"></div>
+                          <div class="beer-card-rating rating-4"></div>
+                          <div class="beer-card-rating rating-5"></div>
+                        </div>
+                        <!-- <div>5</div> -->
+                      </div>
 
-                                                              <mat-card class="padding-0">
-                                                                        <div id="beerCard" routerLink="/beerinfo/:beer">
-                                                                          <div class="beer-card-logo">
-                                                                            <div class="grid">
-                                                                                <img class="image-100" src="assets/imgs/slide-3.jpg" >
-                                                                            </div>
-                                                                          </div>
-                                                                          <div class="beer-card-content">
-                                                                            <div class="beer-card-header">
-                                                                              <div class="font-600">title</div>
-                                                                              <div class="justify-right padding-right-10">{{ 5 | currency : 'USD' : 'symbol' : '1.0' }} </div>
-                                                                            </div>
+                      <div class="margin-top-bottom-5">
+                        <mat-chip-list>
+                          <mat-chip color="primary" *ngFor="let dt of beerar.beer.beer_categories; let i = index" selected>
+                            {{dt.beer_style.type}}
+                          </mat-chip>
+                        </mat-chip-list>
 
-                                                                            <div class="margin-top-bottom-5 beer-card-bottom">
-                                                                                        <div class="beer-card-rating-container rated-4">
-                                                                                          <div class="beer-card-rating rating-1"></div>
-                                                                                          <div class="beer-card-rating rating-2"></div>
-                                                                                          <div class="beer-card-rating rating-3"></div>
-                                                                                          <div class="beer-card-rating rating-4"></div>
-                                                                                          <div class="beer-card-rating rating-5"></div>
-                                                                                        </div>
-                                                                                        <!-- <div>5</div> -->
-                                                                                    </div>
+                        <div class="beer-card-read-more">Reviews
 
-                                                                            <div class="margin-top-bottom-5">
-                                                                                <mat-chip-list>
-                                                                                  <mat-chip color="primary" selected >
-                                                                                   mango
-                                                                                  </mat-chip>
-                                                                                </mat-chip-list>
+                        </div>
+                      </div>
 
-                                                                                <div class="beer-card-read-more">Reviews
-                                                                                             
-                                                                                                </div>
-                                                                            </div>
-                                                                         
-                                                                          </div>
-                                                                        </div>
-                                                                      </mat-card>
-
-                                                                      <mat-card class="padding-0">
-                                                                                <div id="beerCard" routerLink="/beerinfo/:beer">
-                                                                                  <div class="beer-card-logo">
-                                                                                    <div class="grid">
-                                                                                        <img class="image-100" src="assets/imgs/slide-3.jpg" >
-                                                                                    </div>
-                                                                                  </div>
-                                                                                  <div class="beer-card-content">
-                                                                                    <div class="beer-card-header">
-                                                                                      <div class="font-600">title</div>
-                                                                                      <div class="justify-right padding-right-10">{{ 5 | currency : 'USD' : 'symbol' : '1.0' }} </div>
-                                                                                    </div>
-        
-                                                                                    <div class="margin-top-bottom-5 beer-card-bottom">
-                                                                                                <div class="beer-card-rating-container rated-4">
-                                                                                                  <div class="beer-card-rating rating-1"></div>
-                                                                                                  <div class="beer-card-rating rating-2"></div>
-                                                                                                  <div class="beer-card-rating rating-3"></div>
-                                                                                                  <div class="beer-card-rating rating-4"></div>
-                                                                                                  <div class="beer-card-rating rating-5"></div>
-                                                                                                </div>
-                                                                                                <!-- <div>5</div> -->
-                                                                                            </div>
-        
-                                                                                    <div class="margin-top-bottom-5">
-                                                                                        <mat-chip-list>
-                                                                                          <mat-chip color="primary" selected >
-                                                                                           mango
-                                                                                          </mat-chip>
-                                                                                        </mat-chip-list>
-        
-                                                                                        <div class="beer-card-read-more">Reviews
-                                                                                                     
-                                                                                                        </div>
-                                                                                    </div>
-                                                                                 
-                                                                                  </div>
-                                                                                </div>
-                                                                              </mat-card>
-
-                                                                              <mat-card class="padding-0">
-                                                                                        <div id="beerCard" routerLink="/beerinfo/:beer">
-                                                                                          <div class="beer-card-logo">
-                                                                                            <div class="grid">
-                                                                                                <img class="image-100" src="assets/imgs/slide-3.jpg" >
-                                                                                            </div>
-                                                                                          </div>
-                                                                                          <div class="beer-card-content">
-                                                                                            <div class="beer-card-header">
-                                                                                              <div class="font-600">title</div>
-                                                                                              <div class="justify-right padding-right-10">{{ 5 | currency : 'USD' : 'symbol' : '1.0' }} </div>
-                                                                                            </div>
-                
-                                                                                            <div class="margin-top-bottom-5 beer-card-bottom">
-                                                                                                        <div class="beer-card-rating-container rated-4">
-                                                                                                          <div class="beer-card-rating rating-1"></div>
-                                                                                                          <div class="beer-card-rating rating-2"></div>
-                                                                                                          <div class="beer-card-rating rating-3"></div>
-                                                                                                          <div class="beer-card-rating rating-4"></div>
-                                                                                                          <div class="beer-card-rating rating-5"></div>
-                                                                                                        </div>
-                                                                                                        <!-- <div>5</div> -->
-                                                                                                    </div>
-                
-                                                                                            <div class="margin-top-bottom-5">
-                                                                                                <mat-chip-list>
-                                                                                                  <mat-chip color="primary" selected >
-                                                                                                   mango
-                                                                                                  </mat-chip>
-                                                                                                </mat-chip-list>
-                
-                                                                                                <div class="beer-card-read-more">Reviews
-                                                                                                             
-                                                                                                                </div>
-                                                                                            </div>
-                                                                                         
-                                                                                          </div>
-                                                                                        </div>
-                                                                                      </mat-card>
-
-
-                                                                                      <mat-card class="padding-0">
-                                                                                                <div id="beerCard" routerLink="/beerinfo/:beer">
-                                                                                                  <div class="beer-card-logo">
-                                                                                                    <div class="grid">
-                                                                                                        <img class="image-100" src="assets/imgs/slide-3.jpg" >
-                                                                                                    </div>
-                                                                                                  </div>
-                                                                                                  <div class="beer-card-content">
-                                                                                                    <div class="beer-card-header">
-                                                                                                      <div class="font-600">title</div>
-                                                                                                      <div class="justify-right padding-right-10">{{ 5 | currency : 'USD' : 'symbol' : '1.0' }} </div>
-                                                                                                    </div>
-                        
-                                                                                                    <div class="margin-top-bottom-5 beer-card-bottom">
-                                                                                                                <div class="beer-card-rating-container rated-4">
-                                                                                                                  <div class="beer-card-rating rating-1"></div>
-                                                                                                                  <div class="beer-card-rating rating-2"></div>
-                                                                                                                  <div class="beer-card-rating rating-3"></div>
-                                                                                                                  <div class="beer-card-rating rating-4"></div>
-                                                                                                                  <div class="beer-card-rating rating-5"></div>
-                                                                                                                </div>
-                                                                                                                <!-- <div>5</div> -->
-                                                                                                            </div>
-                        
-                                                                                                    <div class="margin-top-bottom-5">
-                                                                                                        <mat-chip-list>
-                                                                                                          <mat-chip color="primary" selected >
-                                                                                                           mango
-                                                                                                          </mat-chip>
-                                                                                                        </mat-chip-list>
-                        
-                                                                                                        <div class="beer-card-read-more">Reviews
-                                                                                                                     
-                                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                 
-                                                                                                  </div>
-                                                                                                </div>
-                                                                                              </mat-card>
-                                                                      <mat-card class="padding-0">
-                                                                                <div id="beerCard" routerLink="/beerinfo/:beer">
-                                                                                  <div class="beer-card-logo">
-                                                                                    <div class="grid">
-                                                                                        <img class="image-100" src="assets/imgs/slide-3.jpg" >
-                                                                                    </div>
-                                                                                  </div>
-                                                                                  <div class="beer-card-content">
-                                                                                    <div class="beer-card-header">
-                                                                                      <div class="font-600">title</div>
-                                                                                      <div class="justify-right padding-right-10">{{ 5 | currency : 'USD' : 'symbol' : '1.0' }} </div>
-                                                                                    </div>
-        
-                                                                                    <div class="margin-top-bottom-5 beer-card-bottom">
-                                                                                                <div class="beer-card-rating-container rated-4">
-                                                                                                  <div class="beer-card-rating rating-1"></div>
-                                                                                                  <div class="beer-card-rating rating-2"></div>
-                                                                                                  <div class="beer-card-rating rating-3"></div>
-                                                                                                  <div class="beer-card-rating rating-4"></div>
-                                                                                                  <div class="beer-card-rating rating-5"></div>
-                                                                                                </div>
-                                                                                                <!-- <div>5</div> -->
-                                                                                            </div>
-        
-                                                                                    <div class="margin-top-bottom-5">
-                                                                                        <mat-chip-list>
-                                                                                          <mat-chip color="primary" selected >
-                                                                                           mango
-                                                                                          </mat-chip>
-                                                                                        </mat-chip-list>
-        
-                                                                                        <div class="beer-card-read-more">Reviews
-                                                                                                     
-                                                                                                        </div>
-                                                                                    </div>
-                                                                                 
-                                                                                  </div>
-                                                                                </div>
-                                                                              </mat-card></div>
-                                </mat-tab>
-                        </mat-tab-group>
-                </div>
-        </div>
+                    </div>
+                  </div>
+                </mat-card>
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
       </div>
+    </div>
+  </div>
 </mat-drawer-container>
 
 
@@ -583,5 +236,5 @@
 
 
 <div *ngIf="!isMobile()">
-        <app-home-desktop [locations]="locations"></app-home-desktop>
+  <app-home-desktop [locations]="locations"></app-home-desktop>
 </div>

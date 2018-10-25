@@ -409,8 +409,8 @@ router.post('/update_amenities/:id(\\d+)', function (req, res) {
 router.post('/update_workinghours/:id(\\d+)', function (req, res) {
 //console.log('working hours', req.body);
   var data = req.body.data;
-  console.log('working hours', req.body);
-
+  console.log('working hours', req.body.data);
+  
   if (data.length === 7) {
     console.log('working hours', req.body.data);
 

@@ -50,7 +50,7 @@ export class BreweryInfo {
 
 	updateInfoHr(formData, location_id): Observable<any> {
 		const header = new HttpHeaders().set('content-type', 'application/x-www-form-urlencoded');
-		const data = [
+		const xarray = [
 			{
 			'Monday': {
 			'opening_hour': formData.mon_open,
@@ -101,10 +101,11 @@ export class BreweryInfo {
 			}
 			}
 			];
-console.log('array is', data);
-		return this.http.post<any>(`/api/location/update_workinghours/${location_id}`,   data[0] ,
-		httpOptions)
-			.pipe(map((res) => { console.log(res.body); return res.body; }));
+		const data = 'data=' + xarray ;
+			console.log('array is', data);
+		return this.http.post<any>(`/api/location/update_workinghours/${location_id}`,   data ,
+		{ observe: 'response', responseType: 'json', headers: header })
+		.pipe(map((res) => { console.log(res.body); return res.body; }));
 	}
 
 }
