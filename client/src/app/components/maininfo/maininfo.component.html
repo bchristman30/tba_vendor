@@ -82,7 +82,11 @@
                       <mat-icon >sort</mat-icon>
                       <h5 class="h-text"> Terms </h5>
               </mat-list-item>
-
+              
+              <mat-list-item (click)="xLogout()">    
+                <mat-icon > logout </mat-icon>
+                <h5 class="h-text"> logout </h5>
+        </mat-list-item>
 
 </mat-list>
 </div>
@@ -108,18 +112,18 @@
           </div> 
           <div class="custom-block">
             <b>Your contact info</b>
-            <form class="example-form">
+            <form #f="ngForm" (ngSubmit)="updateInfo(f)" class="example-form" *ngIf="bewIfo">
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="Name of your Brewery" value={{bewIfo?.name}}>
+                <input matInput placeholder="Name of your Brewery" [(ngModel)]="bewIfo.name" name="name"     required>
               </mat-form-field>
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="Contact Phone" value={{bewIfo?.phone}}>
+                <input matInput placeholder="Contact Phone" [(ngModel)]="bewIfo.phone" name="phone"    required>
               </mat-form-field>
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="Contact Email" value={{bewIfo?.support_email}}>
+                <input matInput placeholder="Contact Email"  [(ngModel)]="bewIfo.support_email" name="support_email"     required>
               </mat-form-field>
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="Website" value={{bewIfo?.website_url}}>
+                <input matInput placeholder="Website"  [(ngModel)]="bewIfo.website_url" name="website_url"     required>
               </mat-form-field>
             <div class="edito">
               <b>Ammenities, which you offer<a href="#">Edit</a></b>
@@ -174,21 +178,21 @@
 
           <b>Adress</b>
           <mat-form-field class="example-full-width">
-              <input matInput placeholder="Name of State" value={{bewIfo?.state}}>
+              <input matInput placeholder="Name of State"   [(ngModel)]="bewIfo.state" name="state"    required  >
             </mat-form-field>
             <mat-form-field class="example-full-width">
-              <input matInput placeholder="Name of City" value={{bewIfo?.city}}>
+              <input matInput placeholder="Name of City"   [(ngModel)]="bewIfo.city" name="city"   required >
             </mat-form-field>
             <mat-form-field class="example-full-width">
-              <input matInput placeholder="Address" value={{bewIfo?.address}}>
+              <input matInput placeholder="Address"   [(ngModel)]="bewIfo.address" name="address"   required  > 
             </mat-form-field>
          
             <mat-form-field class="example-full-width">
-                <input matInput placeholder="zipcode" value={{bewIfo?.zipcode}}>
+                <input matInput placeholder="zipcode"   [(ngModel)]="bewIfo.zipcode" name="zipcode"    required >
               </mat-form-field>
              
              <div class="buttn">
-                <button mat-flat-button color="accent">save</button>
+                <button [disabled]="f.invalid" mat-flat-button color="accent">save</button>
                </div>
                 
 

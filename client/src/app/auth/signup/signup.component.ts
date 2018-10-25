@@ -15,8 +15,8 @@ export class SignupComponent implements OnInit {
   maxDate;
   info: any;
   status: any;
-  isloading:boolean=false;
-  isloadsub:Subscription;
+  isloading: boolean=false;
+  isloadsub: Subscription;
 
   constructor(public dialog: MatDialog,
      private authService: AuthService,

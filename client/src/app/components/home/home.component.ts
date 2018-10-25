@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
   totalevents: any;
   stampCount: any;
   tapbeer: any;
-
+  location_id: any;
   constructor(
               private router: Router,
               private spinner: NgxSpinnerService,
@@ -47,8 +47,7 @@ export class HomeComponent implements OnInit {
             ) { }
 
   ngOnInit() {
-
-    this.authSubscription = this.authService.authChange.subscribe(resp => {
+      this.authSubscription = this.authService.authChange.subscribe(resp => {
       this.isAuth = resp.isauth;
       this.issubscription_expired = resp.issubscription_expired;
       this.issubscription = resp.issubscription;
@@ -57,8 +56,10 @@ export class HomeComponent implements OnInit {
     this.isAuth = this.authService.isLoggedIn();
 
     if ( this.isAuth ) {
+      this.spinner.show();
       this.userdata = JSON.parse(localStorage.getItem('user'));
       this.location = this.userdata.location.name;
+      this.location_id = this.userdata.location.id;
       this.getInfo();
       this.getupcomingEvents();
       console.log('logged in userdata', this.userdata);
@@ -71,7 +72,7 @@ export class HomeComponent implements OnInit {
 
 
   getInfo() {
-      this.bewInfo.getBreweryInfo().subscribe(
+      this.bewInfo.getBreweryInfo(this.location_id).subscribe(
       data => {this.bewIfo = data.result[0],
         this.stampCount = data.result[0].total_redeemed_stamp,
         this.tapbeer = data.result[0].location_beers.length,
@@ -82,9 +83,10 @@ export class HomeComponent implements OnInit {
 
 
   getupcomingEvents() {
-    this.bewInfo.getUpEvents().subscribe(
+    this.bewInfo.getUpEvents(this.location_id).subscribe(
       data => {this.upEvents = data.result,
         this.totalevents = data.result.length,
+        this.spinner.hide(),
       console.log('data events is', data)},
       error => console.log(error),
       () => this.isLoading = false);

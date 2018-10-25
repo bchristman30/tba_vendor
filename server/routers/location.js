@@ -407,9 +407,13 @@ router.post('/update_amenities/:id(\\d+)', function (req, res) {
 * URL:/api/location/update_workinghours/{location_id}
 ******************************************************/
 router.post('/update_workinghours/:id(\\d+)', function (req, res) {
-
+//console.log('working hours', req.body);
   var data = req.body.data;
-  if (data.length == 7) {
+  console.log('working hours', req.body);
+
+  if (data.length === 7) {
+    console.log('working hours', req.body.data);
+
     let hours = [];
     let day;
     let weekday = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -460,6 +464,8 @@ router.post('/update_basicinfo/:id(\\d+)', function (req, res) {
       res.json({ error: true, result: '', text: 'There is no brewery exist with this id' + req.params.id });
     }
     else {
+      console.log( 'id is',req.params.id);
+      console.log('form data is ', req.body);
       let data = {
         name: req.body.name,
         address: req.body.address,
@@ -470,6 +476,8 @@ router.post('/update_basicinfo/:id(\\d+)', function (req, res) {
         phone: req.body.phone,
         website_url: req.body.website_url
       };
+      console.log('final update data is', data);
+      console.log('final id is', req.params.id);
       location.update(data).then((response) => {
         res.json({ error: false, result: response, text: 'brewery information updated successfully!!' });
       }).catch((err) => {

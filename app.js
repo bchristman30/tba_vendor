@@ -1,6 +1,7 @@
 var app = require('./server/server.js');
 const log4js = require('log4js');
 var request = require('request');
+
 var CronJob = require('cron').CronJob;
 var host="https://tba-vendor-dev.herokuapp.com";
 log4js.configure({

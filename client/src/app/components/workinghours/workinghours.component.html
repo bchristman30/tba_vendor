@@ -11,7 +11,33 @@
      Working Hours
   </label> 
   </div>  
-<form>
+
+  <!-- <mat-accordion *ngFor="let loc of bewIfoHours;">
+    <mat-expansion-panel >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{loc.day}}
+        </mat-panel-title>
+        </mat-expansion-panel-header>
+   
+      <mat-form-field>
+        <input matInput placeholder="Opening in"   [(ngModel)]="loc.opening_hour" name={{loc.day}}
+        >
+      </mat-form-field>
+  
+      <mat-form-field>
+        <input matInput placeholder="Closure in"   [(ngModel)]="loc.closing_hour" name={{loc.closing_hour}} 
+        >
+      </mat-form-field>
+      <mat-radio-group>
+        <mat-radio-button value="1">Open 24 Hours</mat-radio-button>
+        <mat-radio-button value="2">Day Off</mat-radio-button>
+      </mat-radio-group>   
+      </mat-expansion-panel>
+    </mat-accordion> -->
+
+
+<form #f="ngForm" (ngSubmit)="updateInfoHr(f)" *ngIf="bewIfoHours">
 
   <mat-accordion>
     <mat-expansion-panel >
@@ -22,17 +48,28 @@
         </mat-expansion-panel-header>
    
       <mat-form-field>
-        <input matInput placeholder="Opening in" value={{monHours?.opening_hour}}
-        >
+        <input matInput placeholder="Opening in"  [(ngModel)]="monHours.opening_hour" name="mon_open">
       </mat-form-field>
   
       <mat-form-field>
-        <input matInput placeholder="Closure in" value={{monHours?.closing_hour}}>
+        <input matInput placeholder="Closure in"   [(ngModel)]="monHours.closing_hour" name="mon_close" >
       </mat-form-field>
-      <mat-radio-group>
-        <mat-radio-button value="1">Open 24 Hours</mat-radio-button>
-        <mat-radio-button value="2">Day Off</mat-radio-button>
-      </mat-radio-group>   
+  
+      <mat-radio-group name="mon_status" *ngIf="monHours.isclose===0"   [(ngModel)]="mnButton">
+        
+        <mat-radio-button       value="0"  name="mon_status" >Open 24 Hours</mat-radio-button>
+
+        <mat-radio-button   value="1"  name="mon_status"  > Day Off </mat-radio-button>
+    </mat-radio-group>
+
+
+    <mat-radio-group name="mon_status" *ngIf="monHours.isclose===1"   [(ngModel)]="mnButtons">
+        
+      <mat-radio-button      value="0"  name="mon_status" >Open 24 Hours</mat-radio-button>
+
+      <mat-radio-button  [checked]="true"  value="1"  name="mon_status"  > Day Off </mat-radio-button>
+  </mat-radio-group>
+
       </mat-expansion-panel>
     </mat-accordion>
 
@@ -48,16 +85,28 @@
           </mat-expansion-panel-header>
     
         <mat-form-field>
-          <input matInput placeholder="Opening in" value={{tueHours?.opening_hour}}>
+          <input matInput placeholder="Opening in"  [(ngModel)]="tueHours.opening_hour" name="tue_open">
         </mat-form-field>
     
         <mat-form-field>
-          <input matInput placeholder="Closure in" value={{tueHours?.closing_hour}}>
+          <input matInput placeholder="Closure in"  [(ngModel)]="tueHours.opening_hour" name="tue_close">
         </mat-form-field>
-        <mat-radio-group>
-          <mat-radio-button value="1">Open 24 Hours</mat-radio-button>
-          <mat-radio-button value="2">Day Off</mat-radio-button>
-        </mat-radio-group>   
+    
+        <mat-radio-group name="tue_status" *ngIf="tueHours.isclose===0"   [(ngModel)]="tuButton">
+        
+          <mat-radio-button    [checked]="true"    value="0"  name="mon_status" >Open 24 Hours</mat-radio-button>
+  
+          <mat-radio-button    value="1"  name="mon_status"  > Day Off </mat-radio-button>
+      </mat-radio-group>
+  
+  
+      <mat-radio-group name="tue_status" *ngIf="tueHours.isclose===1"   [(ngModel)]="tuButtons">
+          
+        <mat-radio-button     value="0"  name="mon_status" >Open 24 Hours</mat-radio-button>
+  
+        <mat-radio-button  [checked]="true"  value="1"  name="mon_status"  > Day Off </mat-radio-button>
+    </mat-radio-group>
+   
         </mat-expansion-panel>
       </mat-accordion>
 
@@ -71,16 +120,28 @@
             </mat-expansion-panel-header>
       
           <mat-form-field>
-            <input matInput placeholder="Opening in" value={{wedHours?.opening_hour}}>
+            <input matInput placeholder="Opening in"  [(ngModel)]="wedHours.opening_hour" name="wed_open">
           </mat-form-field>
       
           <mat-form-field>
-            <input matInput placeholder="Closure in" value={{wedHours?.closing_hour}}>
+            <input matInput placeholder="Closure in"  [(ngModel)]="wedHours.opening_hour" name="wed_close">
           </mat-form-field>
-          <mat-radio-group>
-            <mat-radio-button value="1">Open 24 Hours</mat-radio-button>
-            <mat-radio-button value="2">Day Off</mat-radio-button>
-          </mat-radio-group>   
+     
+          <mat-radio-group name="wed_status" *ngIf="wedHours.isclose===0"   [(ngModel)]="wdButton">
+        
+            <mat-radio-button    [checked]="true"    value="0"  name="mon_status" >Open 24 Hours</mat-radio-button>
+    
+            <mat-radio-button   value="1"  name="mon_status"  > Day Off </mat-radio-button>
+        </mat-radio-group>
+    
+    
+        <mat-radio-group name="wed_status" *ngIf="wedHours.isclose===1"   [(ngModel)]="wdButtons">
+            
+          <mat-radio-button     value="0"  name="mon_status" >Open 24 Hours</mat-radio-button>
+    
+          <mat-radio-button  [checked]="true"  value="1"  name="mon_status"  > Day Off </mat-radio-button>
+      </mat-radio-group>
+    
           </mat-expansion-panel>
         </mat-accordion>
 
@@ -93,16 +154,28 @@
               </mat-expansion-panel-header>
         
             <mat-form-field>
-              <input matInput placeholder="Opening in" value={{thurHours?.opening_hour}}>
+              <input matInput placeholder="Opening in"  [(ngModel)]="thurHours.opening_hour" name="thu_open">
             </mat-form-field>
         
             <mat-form-field>
-              <input matInput placeholder="Closure in" value={{thurHours?.closing_hour}}>
+              <input matInput placeholder="Closure in"  [(ngModel)]="thurHours.opening_hour" name="thu_close">
             </mat-form-field>
-            <mat-radio-group>
-              <mat-radio-button value="1">Open 24 Hours</mat-radio-button>
-              <mat-radio-button value="2">Day Off</mat-radio-button>
-            </mat-radio-group>   
+
+            <mat-radio-group name="thu_status" *ngIf="thurHours.isclose===0"   [(ngModel)]="thButton">
+        
+              <mat-radio-button    [checked]="true"    value="0"  name="mon_status" >Open 24 Hours</mat-radio-button>
+      
+              <mat-radio-button   value="1"  name="mon_status"  > Day Off </mat-radio-button>
+          </mat-radio-group>
+      
+      
+          <mat-radio-group name="thu_status" *ngIf="thurHours.isclose===1"   [(ngModel)]="thButtons">
+              
+            <mat-radio-button       value="0"  name="mon_status" >Open 24 Hours</mat-radio-button>
+      
+            <mat-radio-button  [checked]="true"  value="1"  name="mon_status"  > Day Off </mat-radio-button>
+        </mat-radio-group>
+       
             </mat-expansion-panel>
           </mat-accordion>
 
@@ -115,18 +188,105 @@
                 </mat-expansion-panel-header>
           
               <mat-form-field>
-                <input matInput placeholder="Opening in" value={{friHours?.opening_hour}}>
+                <input matInput placeholder="Opening in"  [(ngModel)]="friHours.opening_hour" name="fri_open">
               </mat-form-field>
           
               <mat-form-field>
-                <input matInput placeholder="Closure in" value={{friHours?.closing_hour}}>
+                <input matInput placeholder="Closure in"  [(ngModel)]="friHours.opening_hour" name="fri_close">
               </mat-form-field>
-              <mat-radio-group>
-                <mat-radio-button value="1">Open 24 Hours</mat-radio-button>
-                <mat-radio-button value="2">Day Off</mat-radio-button>
-              </mat-radio-group>   
+       
+      <mat-radio-group name="fri_status" *ngIf="friHours.isclose===0"   [(ngModel)]="frButton">
+        
+        <mat-radio-button    [checked]="true"    value="0"  name="mon_status" >Open 24 Hours</mat-radio-button>
+
+        <mat-radio-button   value="1"  name="mon_status"  > Day Off </mat-radio-button>
+    </mat-radio-group>
+
+
+    <mat-radio-group name="fri_status" *ngIf="friHours.isclose===1"   [(ngModel)]="frButtons">
+        
+      <mat-radio-button    [checked]="true"    value="0"  name="mon_status" >Open 24 Hours</mat-radio-button>
+
+      <mat-radio-button   value="1"  name="mon_status"  > Day Off </mat-radio-button>
+  </mat-radio-group>
+ 
               </mat-expansion-panel>
             </mat-accordion>
+
+
+
+
+            <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    {{satHours?.day}}
+                  </mat-panel-title>
+                  </mat-expansion-panel-header>
+            
+                <mat-form-field>
+                  <input matInput placeholder="Opening in"  [(ngModel)]="satHours.opening_hour" name="sat_open">
+                </mat-form-field>
+            
+                <mat-form-field>
+                  <input matInput placeholder="Closure in" [(ngModel)]="satHours.opening_hour" name="sat_close">
+                </mat-form-field>
+         
+        <mat-radio-group name="sat_status" *ngIf="satHours.isclose===0"   [(ngModel)]="saButton">
+          
+          <mat-radio-button    [checked]="true"    value="0"  name="mon_status" >Open 24 Hours</mat-radio-button>
+  
+          <mat-radio-button   value="1"  name="mon_status"  > Day Off </mat-radio-button>
+      </mat-radio-group>
+  
+  
+      <mat-radio-group name="sat_status" *ngIf="satHours.isclose===1"   [(ngModel)]="saButtons">
+          
+        <mat-radio-button    [checked]="true"    value="0"  name="mon_status" >Open 24 Hours</mat-radio-button>
+  
+        <mat-radio-button   value="1"  name="mon_status"  > Day Off </mat-radio-button>
+    </mat-radio-group>
+   
+                </mat-expansion-panel>
+              </mat-accordion>
+
+
+
+
+              <mat-accordion>
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      {{sunHours?.day}}
+                    </mat-panel-title>
+                    </mat-expansion-panel-header>
+              
+                  <mat-form-field>
+                    <input matInput placeholder="Opening in"  [(ngModel)]="sunHours.opening_hour" name="sun_open">
+                  </mat-form-field>
+              
+                  <mat-form-field>
+                    <input matInput placeholder="Closure in"  [(ngModel)]="sunHours.opening_hour" name="sun_close">
+                  </mat-form-field>
+           
+          <mat-radio-group name="sun_status" *ngIf="sunHours.isclose===0"   [(ngModel)]="suButton">
+            
+            <mat-radio-button    [checked]="true"    value="0"  name="mon_status" >Open 24 Hours</mat-radio-button>
+    
+            <mat-radio-button   value="1"  name="mon_status"  > Day Off </mat-radio-button>
+        </mat-radio-group>
+    
+    
+        <mat-radio-group name="sun_status" *ngIf="sunHours.isclose===1"   [(ngModel)]="suButtons">
+            
+          <mat-radio-button    [checked]="true"    value="0"  name="mon_status" >Open 24 Hours</mat-radio-button>
+    
+          <mat-radio-button   value="1"  name="mon_status"  > Day Off </mat-radio-button>
+      </mat-radio-group>
+     
+                  </mat-expansion-panel>
+                </mat-accordion>
+
 
             <div class="button-row">
               <button mat-flat-button color="">Save</button>

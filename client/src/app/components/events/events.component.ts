@@ -6,6 +6,7 @@ import { LocationModel } from '../location/location.model';
 import { Subscription } from 'rxjs';
 import { BreakpointService } from '../../services/breakpoint.service';
 import {MatSidenav} from '@angular/material/sidenav';
+import { AuthService } from '../../auth/auth.service';
 
 
 @Component({
@@ -26,7 +27,9 @@ export class EventsComponent implements OnInit {
   constructor(private router: Router,
     private spinner: NgxSpinnerService,
     private locationService: LocationService,
-    private breakpointService: BreakpointService) { }
+    private breakpointService: BreakpointService,
+    private authService: AuthService,
+  ) { }
 
   ngOnInit() {
     this.locations = this.locationService.getLocations();
@@ -42,5 +45,12 @@ export class EventsComponent implements OnInit {
   isMobile(): boolean {
     return this.breakpointService.isMobile();
   }
+
+
+  xLogout() {
+    this.authService.logout();
+  }
+
+
 
 }
