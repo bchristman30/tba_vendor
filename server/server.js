@@ -5,7 +5,6 @@
 
 // Call the packages we need
 var express = require('express');
-
 var bodyParser = require('body-parser');
 const path = require('path');
 var ev = require('express-validation');
@@ -35,8 +34,8 @@ app.use('/static', express.static(path.join(__dirname, 'public')))
 
 // Configure the app to use bodyParser()
 // This will let us get the data from post
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true,limit:'5mb'}));
+app.use(bodyParser.json());
 
 
 
