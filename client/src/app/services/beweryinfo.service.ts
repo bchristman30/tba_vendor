@@ -107,19 +107,6 @@ export class BreweryInfo {
 			];
 
 		const data =  'data=' + JSON.stringify(xarray);
-		// return this.http.post<any>(`/api/location/update_workinghours/${location_id}`, data,
-		// { observe: 'response', responseType: 'json', headers: header })
-		// .pipe(map((res) => { console.log(res.body); return res.body; }));
-		// 		"Sunday": {
-		// 			"opening_hour": formData.sun_open,
-		// 			"closing_hour": formData.sun_close,
-		// 			"isclose": formData.sun_status
-		// 		}
-		// 	}]
-		// };
-		//const data = JSON.stringify(xarray);
-		//const data = JSON.stringify(xarray);
-		//console.log('array is', data);
 		return this.http.post<any>(`/api/location/update_workinghours/${location_id}`, data,
 			{ observe: 'response', responseType: 'json', headers: header })
 			.pipe(map((res) => { console.log(res.body); return res.body; }));
