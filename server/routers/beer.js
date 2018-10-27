@@ -3,6 +3,35 @@ var router = express.Router();
 var db = require('../models/index');
 var shortid = require('shortid');
 var async = require("async");
+var sequelize = require('sequelize');
+var _ = require('lodash');
+
+
+var get_avg_rating = (location_id) => {
+    return new Promise(function (resolve, reject) {
+        db.location_beer.findAll({
+            where: {
+                location_id: location_id
+            },
+            attributes: ['beer_id',
+                [sequelize.fn('AVG', sequelize.col('beer.beer_reviews.rating')), 'avg_rating']
+            ],
+            group: ['location_beer.beer_id'],
+            include: [{
+                model: db.beer,
+                include: [
+                    {
+                        model: db.beer_reviews
+                    }
+                ],
+            }]
+        }).then(function (reviewinfo) {
+            resolve(reviewinfo);
+        }).catch((err) => {
+            reject(err);
+        });
+    });
+}
 
 /*******************************************************************
  * RETRIEVE BEER BASED ON BEER_ID *
@@ -22,7 +51,7 @@ router.route('/:id(\\d+)').get(function (req, res) {
             }]
         },
         {
-            limit:10,
+            limit: 10,
             model: db.beer_reviews,
             attributes: ['beer_id', 'username', 'message', 'rating']
         }]
@@ -88,49 +117,64 @@ router.route('/page/:id').get(function (req, res) {
  * URL:/api/beer/location/{location_id}
  ********************************************************************/
 router.route('/location/:id(\\d+)').get(function (req, res) {
-    let location_id = req.params.id;
-    db.location_beer.findAll({
+    var location_id = req.params.id;
+    
+     db.location_beer.findAll({
         where: {
             location_id: location_id
         },
+       // group:['beer_id'],
         include: [{
             model: db.beer,
-            include: [{
-                model: db.beer_category,
-                include: [{
-                    model: db.beer_style
-                }]
-            }]
+            include: [
+                {
+                    model: db.beer_category,
+                    include: [{
+                        model: db.beer_style
+                    }]
+                }
+            ],
         }]
     }).then(function (location_beer) {
-        var activebeers = [];
-        var archivebeers = [];
-        var arr = {};
-        if (location_beer.length > 0) {
-            for (var i = 0; i < location_beer.length; i++) {
-                (function (num) {
-                    if (location_beer[i].dataValues.active == 1) {
-                        activebeers.push(location_beer[i].dataValues);
+        get_avg_rating(location_id).then(
+            result => {
+                var activebeers = [];
+                var archivebeers = [];
+                var arr = {};
+                if (result.length > 0) {
+                    for (var i = 0; i < result.length; i++) {
+                        (function (num) {
+                            if (location_beer[i].active == 1) {
+                        
+                                activebeers.push(_.merge(location_beer[i].dataValues, { avg_rating: result[i].dataValues.avg_rating }));
+                            }
+                            else {
+                                archivebeers.push(_.merge(location_beer[i].dataValues, { avg_rating: result[i].dataValues.avg_rating }));
+                            }
+                            if (i ==result.length - 1) {
+                                arr.activebeers = activebeers;
+                                arr.archivebeers = archivebeers;
+                                res.json({ error: false, result: arr, text: 'data found' });
+                            }
+                        })(i);
                     }
-                    else {
-                        archivebeers.push(location_beer[i].dataValues);
-                    }
-                    if (i == location_beer.length - 1) {
-                        arr.activebeers = activebeers;
-                        arr.archivebeers = archivebeers;
-                        res.json({ error: false, result: arr, text: 'data found' });
-                    }
-                })(i);
+                }
+                else {
+                    arr.activebeers = activebeers;
+                    arr.archivebeers = archivebeers;
+                    res.json({ error: false, result: arr, text: 'data not found' });
+                }
+            },
+            error => {
+                res.json({ error: true, result: error, text: 'data not found*' });
             }
-        }
-        else {
-            arr.activebeers = activebeers;
-            arr.archivebeers = archivebeers;
-            res.json({ error: false, result: arr, text: 'data not found' });
-        }
-    }).catch(function (error) {
-        res.json({ error: true, result: [], text: 'Internal Server Error' });
-    });
+        );
+        
+            
+
+    }).catch(function (err) {
+        res.json({ error: true, result: [], text: err });
+    }); 
 });
 
 
@@ -365,4 +409,6 @@ router.route('/move_to_archive/:id(\\d+)').post(function (req, res) {
         res.json({ error: true, result: [], text: 'Internal Server Error' });
     });
 });
+
+
 module.exports = router;

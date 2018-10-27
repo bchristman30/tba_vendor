@@ -199,15 +199,9 @@ router.get('/:id(\\d+)', validate(require('../validation/id.js')), function (req
             attributes: ['id', 'type'],
             model: db.beer_style
           }]
-        }],
-        include: [{
-          model: db.beer_reviews,
-          attributes: ['beer_id',[sequelize.fn('AVG', sequelize.col('beer.beer_reviews.rating')), 'avg_rating']],
-          group: 'beer_id'
         }]
       }]
     },
-    
       // {
       //   attributes: ['id',
       //     [sequelize.fn('date_format', sequelize.col('start_date'), '%Y-%m-%d %H:%m:%s'), 'start_date'],
@@ -414,9 +408,8 @@ router.post('/update_amenities/:id(\\d+)', function (req, res) {
 * URL:/api/location/update_workinghours/{location_id}
 ******************************************************/
 router.post('/update_workinghours/:id(\\d+)', function (req, res) {
-const data =  JSON.parse(req.body.data);
-console.log('data is = ', data);
   console.log(req.body);
+  var data = req.body.data;
 
   if (data.length == 7) {
     let hours = [];
