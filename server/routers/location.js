@@ -407,13 +407,9 @@ router.post('/update_amenities/:id(\\d+)', function (req, res) {
 * URL:/api/location/update_workinghours/{location_id}
 ******************************************************/
 router.post('/update_workinghours/:id(\\d+)', function (req, res) {
-//console.log('working hours', req.body);
-  var data = req.body.data;
-  console.log('working hours', req.body.data);
-  
-  if (data.length === 7) {
-    console.log('working hours', req.body.data);
-
+const data =  JSON.parse(req.body.data);
+console.log('data is = ', data);
+  if (data.length == 7) {
     let hours = [];
     let day;
     let weekday = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];

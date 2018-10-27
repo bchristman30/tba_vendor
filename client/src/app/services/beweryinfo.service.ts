@@ -13,8 +13,10 @@ const httpOptions = {
 	})
 };
 
+
 @Injectable()
 export class BreweryInfo {
+	dataList: any = [];
 
 	constructor(private http: HttpClient) {
 
@@ -49,7 +51,9 @@ export class BreweryInfo {
 
 
 	updateInfoHr(formData, location_id): Observable<any> {
-		const header = new HttpHeaders().set('content-type', 'application/x-www-form-urlencoded');
+		const header = new HttpHeaders().set('content-type', 'application/x-www-form-urlencoded').append('Access-Control-Allow-Origin', '*');
+
+
 		const xarray = [
 			{
 			'Monday': {
@@ -101,9 +105,9 @@ export class BreweryInfo {
 			}
 			}
 			];
-		const data = 'data=' + xarray ;
-			console.log('array is', data);
-		return this.http.post<any>(`/api/location/update_workinghours/${location_id}`,   data ,
+
+		const data =  'data=' + JSON.stringify(xarray);
+		return this.http.post<any>(`/api/location/update_workinghours/${location_id}`, data,
 		{ observe: 'response', responseType: 'json', headers: header })
 		.pipe(map((res) => { console.log(res.body); return res.body; }));
 	}
