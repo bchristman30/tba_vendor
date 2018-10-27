@@ -185,7 +185,7 @@ router.get('/:id(\\d+)', validate(require('../validation/id.js')), function (req
       }]
     },
     {
-      limit: 9,
+      limit: 10,
       attributes: ['id', 'location_id', 'beer_id'],
       where: { active: 1 }, //active beer
       model: db.location_beer,
@@ -199,9 +199,15 @@ router.get('/:id(\\d+)', validate(require('../validation/id.js')), function (req
             attributes: ['id', 'type'],
             model: db.beer_style
           }]
+        }],
+        include: [{
+          model: db.beer_reviews,
+          attributes: ['beer_id',[sequelize.fn('AVG', sequelize.col('beer.beer_reviews.rating')), 'avg_rating']],
+          group: 'beer_id'
         }]
       }]
     },
+    
       // {
       //   attributes: ['id',
       //     [sequelize.fn('date_format', sequelize.col('start_date'), '%Y-%m-%d %H:%m:%s'), 'start_date'],
@@ -233,7 +239,8 @@ router.get('/:id(\\d+)', validate(require('../validation/id.js')), function (req
       }
       res.json({ error: false, result: maindata, text: 'brewery data available*' });
     }
-  }).catch((err) => res.json({ error: true, result: err.errors[0].message }));
+  //}).catch((err) => res.json({ error: true, result: err.errors[0].message }));
+}).catch((err) => res.json({ error: true, result: err }));
 });
 
 /***************************************************************************************************
