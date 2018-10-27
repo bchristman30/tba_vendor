@@ -414,14 +414,10 @@ router.post('/update_amenities/:id(\\d+)', function (req, res) {
 * URL:/api/location/update_workinghours/{location_id}
 ******************************************************/
 router.post('/update_workinghours/:id(\\d+)', function (req, res) {
-<<<<<<< HEAD
 const data =  JSON.parse(req.body.data);
 console.log('data is = ', data);
-=======
   console.log(req.body);
-  var data = req.body.data;
 
->>>>>>> 6bf43c878164c1c4fb268cc20b8fcc1b9f882463
   if (data.length == 7) {
     let hours = [];
     let day;

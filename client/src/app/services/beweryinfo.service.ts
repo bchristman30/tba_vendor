@@ -51,7 +51,6 @@ export class BreweryInfo {
 
 
 	updateInfoHr(formData, location_id): Observable<any> {
-<<<<<<< HEAD
 		const header = new HttpHeaders().set('content-type', 'application/x-www-form-urlencoded').append('Access-Control-Allow-Origin', '*');
 
 
@@ -62,54 +61,43 @@ export class BreweryInfo {
 			'closing_hour': formData.mon_close,
 			'isclose': formData.mon_status
 			}
-=======
-		const header = new HttpHeaders().set('content-type', 'application/json').append('Access-Control-Allow-Origin', '*');
-		const xarray = {
-			"data": [{
-				"Monday": {
-					"opening_hour": formData.mon_open,
-					"closing_hour": formData.mon_close,
-					"isclose": formData.mon_status
-				}
->>>>>>> 6bf43c878164c1c4fb268cc20b8fcc1b9f882463
-			},
+		},
 			{
-				"Tuesday": {
-					"opening_hour": formData.tue_open,
-					"closing_hour": formData.tue_close,
-					"isclose": formData.tue_status
+				'Tuesday': {
+					'opening_hour': formData.tue_open,
+					'closing_hour': formData.tue_close,
+					'isclose': formData.tue_status
 				}
 			},
 			{
-				"Wednesday": {
-					"opening_hour": formData.wed_open,
-					"closing_hour": formData.wed_close,
-					"isclose": formData.wed_status
+				'Wednesday': {
+					'opening_hour': formData.wed_open,
+					'closing_hour': formData.wed_close,
+					'isclose': formData.wed_status
 				}
 			},
 			{
-				"Thursday": {
-					"opening_hour": formData.thu_open,
-					"closing_hour": formData.thu_close,
-					"isclose": formData.thu_status
+				'Thursday': {
+					'opening_hour': formData.thu_open,
+					'closing_hour': formData.thu_close,
+					'isclose': formData.thu_status
 				}
 			},
 			{
-				"Friday": {
-					"opening_hour": formData.fri_open,
-					"closing_hour": formData.fri_close,
-					"isclose": formData.fri_status
+				'Friday': {
+					'opening_hour': formData.fri_open,
+					'closing_hour': formData.fri_close,
+					'isclose': formData.fri_status
 				}
 			},
 			{
-				"Saturday": {
-					"opening_hour": formData.sat_open,
-					"closing_hour": formData.sat_close,
-					"isclose": formData.sat_status
+				'Saturday': {
+					'opening_hour': formData.sat_open,
+					'closing_hour': formData.sat_close,
+					'isclose': formData.sat_status
 				}
 			},
 			{
-<<<<<<< HEAD
 			'Sunday': {
 				'opening_hour': formData.sun_open,
 				'closing_hour': formData.sun_close,
@@ -119,24 +107,22 @@ export class BreweryInfo {
 			];
 
 		const data =  'data=' + JSON.stringify(xarray);
-		return this.http.post<any>(`/api/location/update_workinghours/${location_id}`, data,
-		{ observe: 'response', responseType: 'json', headers: header })
-		.pipe(map((res) => { console.log(res.body); return res.body; }));
-=======
-				"Sunday": {
-					"opening_hour": formData.sun_open,
-					"closing_hour": formData.sun_close,
-					"isclose": formData.sun_status
-				}
-			}]
-		};
+		// return this.http.post<any>(`/api/location/update_workinghours/${location_id}`, data,
+		// { observe: 'response', responseType: 'json', headers: header })
+		// .pipe(map((res) => { console.log(res.body); return res.body; }));
+		// 		"Sunday": {
+		// 			"opening_hour": formData.sun_open,
+		// 			"closing_hour": formData.sun_close,
+		// 			"isclose": formData.sun_status
+		// 		}
+		// 	}]
+		// };
 		//const data = JSON.stringify(xarray);
 		//const data = JSON.stringify(xarray);
 		//console.log('array is', data);
-		return this.http.post<any>(`/api/location/update_workinghours/${location_id}`, xarray,
+		return this.http.post<any>(`/api/location/update_workinghours/${location_id}`, data,
 			{ observe: 'response', responseType: 'json', headers: header })
 			.pipe(map((res) => { console.log(res.body); return res.body; }));
->>>>>>> 6bf43c878164c1c4fb268cc20b8fcc1b9f882463
 	}
 
 }
