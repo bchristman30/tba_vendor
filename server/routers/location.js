@@ -185,7 +185,7 @@ router.get('/:id(\\d+)', validate(require('../validation/id.js')), function (req
       }]
     },
     {
-      limit: 9,
+      limit: 10,
       attributes: ['id', 'location_id', 'beer_id'],
       where: { active: 1 }, //active beer
       model: db.location_beer,
@@ -199,9 +199,15 @@ router.get('/:id(\\d+)', validate(require('../validation/id.js')), function (req
             attributes: ['id', 'type'],
             model: db.beer_style
           }]
+        }],
+        include: [{
+          model: db.beer_reviews,
+          attributes: ['beer_id',[sequelize.fn('AVG', sequelize.col('beer.beer_reviews.rating')), 'avg_rating']],
+          group: 'beer_id'
         }]
       }]
     },
+    
       // {
       //   attributes: ['id',
       //     [sequelize.fn('date_format', sequelize.col('start_date'), '%Y-%m-%d %H:%m:%s'), 'start_date'],
@@ -233,7 +239,8 @@ router.get('/:id(\\d+)', validate(require('../validation/id.js')), function (req
       }
       res.json({ error: false, result: maindata, text: 'brewery data available*' });
     }
-  }).catch((err) => res.json({ error: true, result: err.errors[0].message }));
+  //}).catch((err) => res.json({ error: true, result: err.errors[0].message }));
+}).catch((err) => res.json({ error: true, result: err }));
 });
 
 /***************************************************************************************************
@@ -407,8 +414,14 @@ router.post('/update_amenities/:id(\\d+)', function (req, res) {
 * URL:/api/location/update_workinghours/{location_id}
 ******************************************************/
 router.post('/update_workinghours/:id(\\d+)', function (req, res) {
+<<<<<<< HEAD
 const data =  JSON.parse(req.body.data);
 console.log('data is = ', data);
+=======
+  console.log(req.body);
+  var data = req.body.data;
+
+>>>>>>> 6bf43c878164c1c4fb268cc20b8fcc1b9f882463
   if (data.length == 7) {
     let hours = [];
     let day;
@@ -424,7 +437,6 @@ console.log('data is = ', data);
           location_id: req.params.id
         }
       }).then(function (rowDeleted) { // rowDeleted will return number of rows deleted
-
         //  console.log(rowDeleted + 'Deleted successfully');
         db.location_hours.bulkCreate(hours).then(() => {
           res.json({ error: false, result: req.body.data, text: 'Working hours updated successfully!!' });
@@ -451,6 +463,7 @@ console.log('data is = ', data);
 * URL:/api/location/update_basicinfo/{location_id}
 ******************************************************/
 router.post('/update_basicinfo/:id(\\d+)', function (req, res) {
+console.log(req.body);
   db.locations.findOne({
     where: {
       id: req.params.id
@@ -460,8 +473,6 @@ router.post('/update_basicinfo/:id(\\d+)', function (req, res) {
       res.json({ error: true, result: '', text: 'There is no brewery exist with this id' + req.params.id });
     }
     else {
-      console.log( 'id is',req.params.id);
-      console.log('form data is ', req.body);
       let data = {
         name: req.body.name,
         address: req.body.address,
@@ -472,8 +483,6 @@ router.post('/update_basicinfo/:id(\\d+)', function (req, res) {
         phone: req.body.phone,
         website_url: req.body.website_url
       };
-      console.log('final update data is', data);
-      console.log('final id is', req.params.id);
       location.update(data).then((response) => {
         res.json({ error: false, result: response, text: 'brewery information updated successfully!!' });
       }).catch((err) => {

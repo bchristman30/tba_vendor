@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [2018-10-23T15:22:31.994] [INFO] Brew_pub - {"error":false,"result":[],"text":"No data all ok"}
 [2018-10-23T15:23:31.901] [INFO] Brew_pub - {"error":false,"result":[],"text":"No data all ok"}
 [2018-10-23T15:24:31.953] [INFO] Brew_pub - {"error":false,"result":[],"text":"No data all ok"}
@@ -1437,3 +1438,5 @@
 [2018-10-26T18:00:31.606] [INFO] Brew_pub - {"error":false,"result":[],"text":"No data all ok"}
 [2018-10-26T18:01:31.632] [INFO] Brew_pub - {"error":false,"result":[],"text":"No data all ok"}
 [2018-10-26T18:02:31.638] [INFO] Brew_pub - {"error":false,"result":[],"text":"No data all ok"}
+=======
+>>>>>>> 6bf43c878164c1c4fb268cc20b8fcc1b9f882463

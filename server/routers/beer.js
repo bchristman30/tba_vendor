@@ -20,7 +20,13 @@ router.route('/:id(\\d+)').get(function (req, res) {
                 attributes: ['id', 'type'],
                 model: db.beer_style
             }]
+        },
+        {
+            limit:10,
+            model: db.beer_reviews,
+            attributes: ['beer_id', 'username', 'message', 'rating']
         }]
+
     }).then((beer) => {
         res.json({ error: false, result: beer, text: 'data found' });
 
@@ -97,34 +103,29 @@ router.route('/location/:id(\\d+)').get(function (req, res) {
             }]
         }]
     }).then(function (location_beer) {
-        var activebeers=[];
-        var archivebeers=[];
-        var arr={};
-        if(location_beer.length>0)
-        {
-            for (var i=0; i<location_beer.length; i++) {
-                (function(num){
-                    if(location_beer[i].dataValues.active==1)
-                    {
+        var activebeers = [];
+        var archivebeers = [];
+        var arr = {};
+        if (location_beer.length > 0) {
+            for (var i = 0; i < location_beer.length; i++) {
+                (function (num) {
+                    if (location_beer[i].dataValues.active == 1) {
                         activebeers.push(location_beer[i].dataValues);
                     }
-                    else
-                    {
+                    else {
                         archivebeers.push(location_beer[i].dataValues);
                     }
-                    if(i==location_beer.length-1)
-                    {
-                        arr.activebeers=activebeers;
-                        arr.archivebeers=archivebeers;
+                    if (i == location_beer.length - 1) {
+                        arr.activebeers = activebeers;
+                        arr.archivebeers = archivebeers;
                         res.json({ error: false, result: arr, text: 'data found' });
                     }
-                })(i);  
-            } 
+                })(i);
+            }
         }
-        else
-        {
-            arr.activebeers=activebeers;
-            arr.archivebeers=archivebeers;
+        else {
+            arr.activebeers = activebeers;
+            arr.archivebeers = archivebeers;
             res.json({ error: false, result: arr, text: 'data not found' });
         }
     }).catch(function (error) {
@@ -309,50 +310,50 @@ router.route('/remove_beer/:id(\\d+)').post(function (req, res) {
 });
 
 
-router.route('/move_to_ontap/:id(\\d+)').post(function(req,res){
-      
-        db.location_beer.findOne({
-            where: {
-                beer_id:req.params.id,
-                location_id:req.body.location_id,
-                active:0  //archive
-            }
-        }).then(function (location_beer) {
-            if (!location_beer) {
-                res.json({ error: true, result: '', text: 'beer is not archive beer' });
-            }
-            else {
-                var obj={
-                    active:1
-                };
-                location_beer.update(obj).then((response) => {
-                    res.json({ error: false, result: '', text: 'beer successfully moved to beer on tap.' });
-                }).catch((err) => {
-                    res.json({ error: true, result: err, text: 'Error found during updation' });
-                });
-            }
-        }).catch(function (error) {
-            res.json({ error: true, result: [], text: 'Internal Server Error' });
-        });
-});
+router.route('/move_to_ontap/:id(\\d+)').post(function (req, res) {
 
-
-
-router.route('/move_to_archive/:id(\\d+)').post(function(req,res){
-      
     db.location_beer.findOne({
         where: {
-            beer_id:req.params.id,
-            location_id:req.body.location_id,
-            active:1 //active
+            beer_id: req.params.id,
+            location_id: req.body.location_id,
+            active: 0  //archive
         }
     }).then(function (location_beer) {
         if (!location_beer) {
             res.json({ error: true, result: '', text: 'beer is not archive beer' });
         }
         else {
-            var obj={
-                active:0
+            var obj = {
+                active: 1
+            };
+            location_beer.update(obj).then((response) => {
+                res.json({ error: false, result: '', text: 'beer successfully moved to beer on tap.' });
+            }).catch((err) => {
+                res.json({ error: true, result: err, text: 'Error found during updation' });
+            });
+        }
+    }).catch(function (error) {
+        res.json({ error: true, result: [], text: 'Internal Server Error' });
+    });
+});
+
+
+
+router.route('/move_to_archive/:id(\\d+)').post(function (req, res) {
+
+    db.location_beer.findOne({
+        where: {
+            beer_id: req.params.id,
+            location_id: req.body.location_id,
+            active: 1 //active
+        }
+    }).then(function (location_beer) {
+        if (!location_beer) {
+            res.json({ error: true, result: '', text: 'beer is not archive beer' });
+        }
+        else {
+            var obj = {
+                active: 0
             };
             location_beer.update(obj).then((response) => {
                 res.json({ error: false, result: '', text: 'beer successfully moved to archive list.' });

@@ -3,6 +3,7 @@ var router = express.Router();
 var db = require('../models/index');
 const moment = require('moment');
 const getdate = moment().tz('America/New_York');
+var sequelize = require('sequelize');
 
 /****************************************************
  * ADD FOOD TRUCK DETAILS *
@@ -41,7 +42,7 @@ router.route('/add').post(function (req, res) {
  * ADD REVIEW IN A BREWERY[LOCATION] *
  * URL:/api/foodtruck/add_review/{location_id}
  **************************************************/
-router.route('/add_review/:id').post(function (req, res) {
+router.route('/add_review/:id(\\d+)').post(function (req, res) {
   var data = {};
   data.username = req.body.username;
   data.message = req.body.message;
@@ -70,7 +71,7 @@ router.route('/add_review/:id').post(function (req, res) {
  * GET FOOD TRUCK DETAILS USING FOOD_TRUCK_ID *
  * URL:/api/foodtruck/{food_truck_id}
  **********************************************/
-router.route('/:id').get(function (req, res) {
+router.route('/:id(\\d+)').get(function (req, res) {
   db.food_trucks.findAll({
     where: { id: req.params.id },
     include: [{
@@ -97,7 +98,7 @@ router.route('/:id').get(function (req, res) {
 /***************************
  * FOOD TRUCK SCHEDULE ADD *
  ***************************/
-router.route('/add_calendar/:id').post(function (req, res) {
+router.route('/add_calendar/:id(\\d+)').post(function (req, res) {
   var data = {};
   data.start_date = req.body.startdate;
   data.type = 'food_trucks';
@@ -127,7 +128,7 @@ router.route('/add_calendar/:id').post(function (req, res) {
  * GET FOOD TRUCK CALENDAR USING FOOD_TRUCK_ID *
  * URL:/api/foodtruck/calendar/{food_truck_id}
  ***********************************************/
-router.route('/calendar/:id').get(function (req, res) {
+router.route('/calendar/:id(\\d+)').get(function (req, res) {
   var curdate = getdate.format('YYYY-MM-DD HH:mm:ss');
   var myDate = new Date(curdate);
   db.location_calendar.findAll({
@@ -149,6 +150,26 @@ router.route('/calendar/:id').get(function (req, res) {
   });
 });
 
+router.route('/popular').get(function (req, res) {
+  db.food_trucks_reviews.findAll({
+    attributes: ['food_truck_id', [sequelize.fn('AVG', sequelize.col('food_trucks_reviews.rating')), 'avg_rating']],
+    group: 'food_truck_id',
+    limit:8,
+    order: [[sequelize.fn('AVG', sequelize.col('food_trucks_reviews.rating')), 'DESC']],
+    include: [{
+      model: db.food_trucks
+    }]
+  }).then((foodtrucks) => {
+    if (!foodtrucks) {
+      res.json({ error: false, result: foodtrucks, text: 'No data found' });
+    }
+    else {
+      res.json({ error: false, result: foodtrucks, text: 'data found' });
+    }
 
+  }).catch((err) => {
+    res.json({ error: true, result: [], text: err });
+  });
+});
 
 module.exports = router;
