@@ -123,17 +123,37 @@
                         <div class="font-600">{{beerdt.beer.name}}</div>
                         <div class="justify-right padding-right-10">{{ beerdt.beer.price | currency : 'USD' : 'symbol' : '1.0' }} </div>
                       </div>
-
-                      <div class="margin-top-bottom-5 beer-card-bottom">
-                        <div class="beer-card-rating-container rated-4">
-                          <div class="beer-card-rating rating-1"></div>
-                          <div class="beer-card-rating rating-2"></div>
-                          <div class="beer-card-rating rating-3"></div>
+                      <!-- 
+                            <div class="margin-top-bottom-5 beer-card-bottom">
+                            <div class="beer-card-rating-container rated-{{beerdt.avg_rating}}">
+                            <div class="beer-card-rating rating-1"></div>
+                            <div class="beer-card-rating rating-2"></div>
+                            <div class="beer-card-rating rating-3"></div>
                           <div class="beer-card-rating rating-4"></div>
                           <div class="beer-card-rating rating-5"></div>
                         </div>
-                        <!-- <div>5</div> -->
+                      </div> -->
+
+
+                      <div class="review-card">
+                    
+                        <div class="review-card-content">
+                     
+                          <div class="review-card-content-rating">
+                              <div class="review-card-rating-container rated-{{beerdt.avg_rating}}">
+                                  <div class="review-card-rating rating-1"></div>
+                                  <div class="review-card-rating rating-2"></div>
+                                  <div class="review-card-rating rating-3"></div>
+                                  <div class="review-card-rating rating-4"></div>
+                                  <div class="review-card-rating rating-5"></div>
+                              </div>
+                              <div>{{beerdt.avg_rating}} / 5</div>
+                            </div>
+                       
+                        </div>
                       </div>
+
+
 
                       <div class="margin-top-bottom-5">
                         <mat-chip-list>
@@ -154,6 +174,132 @@
 
               </div>
 
+              <div *ngFor="let beerdt of activeBeers; let i = index">
+                <mat-card class="padding-0">
+                  <div id="beerCard" routerLink="/beerinfo/{{beerdt.beer.id}}">
+                    <div class="beer-card-logo">
+                      <div class="grid">
+                        <img class="image-100" src={{beerdt.beer.beer_logo}}>
+                      </div>
+                    </div>
+                    <div class="beer-card-content">
+                      <div class="beer-card-header">
+                        <div class="font-600">{{beerdt.beer.name}}</div>
+                        <div class="justify-right padding-right-10">{{ beerdt.beer.price | currency : 'USD' : 'symbol' : '1.0' }} </div>
+                      </div>
+                      <!-- 
+                            <div class="margin-top-bottom-5 beer-card-bottom">
+                            <div class="beer-card-rating-container rated-{{beerdt.avg_rating}}">
+                            <div class="beer-card-rating rating-1"></div>
+                            <div class="beer-card-rating rating-2"></div>
+                            <div class="beer-card-rating rating-3"></div>
+                          <div class="beer-card-rating rating-4"></div>
+                          <div class="beer-card-rating rating-5"></div>
+                        </div>
+                      </div> -->
+
+
+                      <div class="review-card">
+                    
+                        <div class="review-card-content">
+                     
+                          <div class="review-card-content-rating">
+                              <div class="review-card-rating-container rated-{{beerdt.avg_rating}}">
+                                  <div class="review-card-rating rating-1"></div>
+                                  <div class="review-card-rating rating-2"></div>
+                                  <div class="review-card-rating rating-3"></div>
+                                  <div class="review-card-rating rating-4"></div>
+                                  <div class="review-card-rating rating-5"></div>
+                              </div>
+                              <div>{{beerdt.avg_rating}} / 5</div>
+                            </div>
+                       
+                        </div>
+                      </div>
+
+
+
+                      <div class="margin-top-bottom-5">
+                        <mat-chip-list>
+                       
+                          <mat-chip color="primary"  *ngFor="let dt of beerdt.beer.beer_categories; let i = index" selected>
+                            {{dt.beer_style.type}}
+                          </mat-chip>
+                        </mat-chip-list>
+
+                        <div class="beer-card-read-more">Reviews
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </mat-card>
+
+              </div>
+              <div *ngFor="let beerdt of activeBeers; let i = index">
+                <mat-card class="padding-0">
+                  <div id="beerCard" routerLink="/beerinfo/{{beerdt.beer.id}}">
+                    <div class="beer-card-logo">
+                      <div class="grid">
+                        <img class="image-100" src={{beerdt.beer.beer_logo}}>
+                      </div>
+                    </div>
+                    <div class="beer-card-content">
+                      <div class="beer-card-header">
+                        <div class="font-600">{{beerdt.beer.name}}</div>
+                        <div class="justify-right padding-right-10">{{ beerdt.beer.price | currency : 'USD' : 'symbol' : '1.0' }} </div>
+                      </div>
+                      <!-- 
+                            <div class="margin-top-bottom-5 beer-card-bottom">
+                            <div class="beer-card-rating-container rated-{{beerdt.avg_rating}}">
+                            <div class="beer-card-rating rating-1"></div>
+                            <div class="beer-card-rating rating-2"></div>
+                            <div class="beer-card-rating rating-3"></div>
+                          <div class="beer-card-rating rating-4"></div>
+                          <div class="beer-card-rating rating-5"></div>
+                        </div>
+                      </div> -->
+
+
+                      <div class="review-card">
+                    
+                        <div class="review-card-content">
+                     
+                          <div class="review-card-content-rating">
+                              <div class="review-card-rating-container rated-{{beerdt.avg_rating}}">
+                                  <div class="review-card-rating rating-1"></div>
+                                  <div class="review-card-rating rating-2"></div>
+                                  <div class="review-card-rating rating-3"></div>
+                                  <div class="review-card-rating rating-4"></div>
+                                  <div class="review-card-rating rating-5"></div>
+                              </div>
+                              <div>{{beerdt.avg_rating}} / 5</div>
+                            </div>
+                       
+                        </div>
+                      </div>
+
+
+
+                      <div class="margin-top-bottom-5">
+                        <mat-chip-list>
+                       
+                          <mat-chip color="primary"  *ngFor="let dt of beerdt.beer.beer_categories; let i = index" selected>
+                            {{dt.beer_style.type}}
+                          </mat-chip>
+                        </mat-chip-list>
+
+                        <div class="beer-card-read-more">Reviews
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </mat-card>
+
+              </div>
 
               <!-- 
                                                 <div class="full-view-grid">

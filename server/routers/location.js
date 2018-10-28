@@ -409,7 +409,7 @@ router.post('/update_amenities/:id(\\d+)', function (req, res) {
 ******************************************************/
 router.post('/update_workinghours/:id(\\d+)', function (req, res) {
   console.log(req.body);
-  var data = req.body.data;
+  var data = JSON.parse(req.body.data);
 
   if (data.length == 7) {
     let hours = [];
