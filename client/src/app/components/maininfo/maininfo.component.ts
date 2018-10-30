@@ -12,6 +12,8 @@ import { Dialogbox } from '../../dialogbox/dialog.component';
 import { MatDialog } from '@angular/material';
 import { UIService } from '../../shared/snackbar/Ui.service';
 import { AuthService } from '../../auth/auth.service';
+import {ReplaySubject} from 'rxjs/ReplaySubject';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'app-maininfo',
@@ -38,6 +40,9 @@ export class MaininfoComponent implements OnInit {
   isAuth: Boolean = false;
   userdata: any;
   location_id: any;
+  imageUrl: any;
+  imageUrlnew: any;
+  base64textString = [];
 
 
   constructor(private router: Router,
@@ -121,6 +126,54 @@ export class MaininfoComponent implements OnInit {
           this.uiservice.showsnackbar(error.message, null, 3000);
         });
     }
+
+    _handleReaderLoaded(readerEvt) {
+      const binaryString = readerEvt.target.result;
+             this.imageUrlnew = btoa(binaryString);
+             console.log(btoa(binaryString));
+             return btoa(binaryString);
+     }
+
+     handleReaderLoaded(e) {
+      this.base64textString.push('data:image/png;base64,' + btoa(e.target.result));
+      this.imageUrlnew =  btoa(e.target.result).toString();
+      console.log('Image Logo',  this.imageUrl)
+    }
+
+
+    imageUpload(e) {
+      if (this.location_id) {
+      console.log('sasd');
+      const reader = new FileReader();
+      const file = e.target.files[0];
+      // console.log(file);
+      if (file) {
+        // reader.onload = this._handleReaderLoaded.bind(this);
+        // console.log('base 64 image isddddddddd new',   reader.onload );
+        reader.onload = this.handleReaderLoaded.bind(this);
+        reader.readAsBinaryString(file);
+        this.imageUrl = this.base64textString;
+
+        console.log('base 64 image  x      x is -',  this.imageUrlnew);
+        const formData: any = new FormData();
+        formData.append('avatar', file, file.name);
+        formData.append('_id', this.location_id);
+        const headers = new Headers();
+       }
+         } else {
+      // this.router.navigate(['/ofactr/login']);
+    }
+    }
+
+    public readFile(fileToRead: File): Observable<MSBaseReader> {
+      const base64Observable = new ReplaySubject<MSBaseReader>(1);
+      const fileReader = new FileReader();
+      fileReader.onload = event => {
+          base64Observable.next(fileReader.result);
+      };
+      fileReader.readAsDataURL(fileToRead);
+      return base64Observable;
+     }
 
 
   showBreweryList(): void {

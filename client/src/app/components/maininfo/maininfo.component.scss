@@ -251,3 +251,24 @@ h5.h-text {
     overflow: scroll;
     height: 335px;
 }
+.image-upload > input
+{
+    display: none;
+}
+
+.image-upload {
+    display: block;
+    margin: auto;
+    width: 100%;
+}
+
+label {
+    display: block;
+}           
+
+img.img-grid {
+    width: 200px;
+    margin: 0 auto;
+    display: block;
+    float: none;
+}
