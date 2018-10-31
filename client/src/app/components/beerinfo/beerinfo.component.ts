@@ -88,6 +88,39 @@ export class BeerinfoComponent implements OnInit {
       () => this.isLoading = false);
   }
 
+  imageUpload(e) {
+  //   if (this.location_id) {
+  //   console.log('sasd');
+  //   const reader = new FileReader();
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     const formData: any = new FormData();
+  //     formData.append('logo', file);
+  //     formData.append('logo_string_id', this.bewIfo.logo_string_id);
+  //     const headers = new Headers();
+  //     this.bewInfo.updateLogo( formData, this.location_id ).subscribe(res => {
+  //       if (res.error === false) {
+  //           this.info = res.text;
+  //           this.status = false;
+  //        //   form.reset();
+  //           this.openDialog();
+  //         } else {
+  //           this.info = res.text;
+  //           this.status = true;
+  //           this.uiservice.showsnackbar(res.text, null, 3000);
+  //         }
+  //       }, error => {
+  //         this.info = error;
+  //         this.status = false;
+  //         this.uiservice.showsnackbar(error.message, null, 3000);
+  //       });
+
+  //    }
+  //      } else {
+  //   this.router.navigate(['/ofactr/login']);
+  // }
+  }
+
 
   add(event: MatChipInputEvent): void {
     const input = event.input;

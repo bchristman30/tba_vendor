@@ -537,6 +537,7 @@ router.route('/update_logo/:id(\\d+)').post(function (req, res) {
         //console.log("file uploaded");
         //console.log(req.file);
         var logo_string_id = req.body.logo_string_id; //publicid
+        console.log('ss',logo_string_id);
         cloudinary.v2.uploader.upload(req.file.path, {
           folder: "brewery"
         },

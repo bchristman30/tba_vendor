@@ -12,7 +12,7 @@
     </i>
 </div>
 
-<mat-tab-group *ngIf="beerdata"> 
+<mat-tab-group *ngIf="beerdata" > 
   <mat-tab label="Info">
 
   <div class="info-grid">
@@ -35,7 +35,7 @@
                       />
                   </label>
               
-                  <input id="file-input" type="file"/>
+                  <input id="file-input" type="file" accept="image/*" (change)="imageUpload($event)"/>
                   <label class="grid-label">Delete photo</label>
                 </div>
           </div>
@@ -47,16 +47,16 @@
                   <label class="back-label-grid"> Send Back on Tap</label>
 
                       <mat-form-field>
-                        <input matInput [(ngModel)]="beerdata.price" placeholder="Price">
+                        <input matInput [(ngModel)]="beerdata.price" name="price" placeholder="Price">
                       </mat-form-field>
                     
                   
                       <mat-form-field>
-                          <input matInput [(ngModel)]="beerdata.Alchohol_content" placeholder="Density">
+                          <input matInput [(ngModel)]="beerdata.Alchohol_content" name="Alchohol_content" placeholder="Density">
                         </mat-form-field> 
 
                         <mat-form-field>
-                            <input matInput [(ngModel)]="beerdata.Alchohol_content" placeholder="Alcohal content">
+                            <input matInput [(ngModel)]="beerdata.Alchohol_content" name="Alchohol_content" placeholder="Alcohal content">
                           </mat-form-field>
                         
           </div>
@@ -65,7 +65,7 @@
               <div class="">
                   <mat-form-field appearance="standard">
                       <mat-label>Name</mat-label>
-                      <input matInput  [(ngModel)]="beerdata.name" placeholder="Placeholder">
+                      <input matInput  [(ngModel)]="beerdata.name"  name="name" placeholder="Placeholder">
                     </mat-form-field>
 
                       </div>
@@ -73,9 +73,9 @@
           <div class="fl-grid-input">
           <mat-form-field class="example-chip-list">
               <mat-chip-list #chipList>
-                <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"
+                <mat-chip *ngFor="let fruit of beerdata.beer_categories" [selectable]="selectable"
                          [removable]="removable" (removed)="remove(fruit)">
-                  {{fruit.name}}
+                  {{fruit.beer_style.type}}
                   <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                 </mat-chip>
                 <input placeholder="Tags"
@@ -87,14 +87,36 @@
             </mat-form-field>
             </div>
 
-            <div class="fl-grid-input">
-                <form class="example-form">
+            <!-- <div class="fl-grid-input">
                     <mat-form-field class="example-full-width">
-                      <input matInput placeholder="Description"
-                      [(ngModel)]="beerdata.beer_description" >
+                      <input matInput placeholder="Description"  [(ngModel)]="beerdata.beer_description" name="beer_description" >
                     </mat-form-field>
-                  </form>
-                  </div> 
+                  </div>  -->
+                  <!-- <div class="fl-grid-input">
+                      <div class="">
+                          <mat-form-field appearance="standard">
+                              <mat-label>Description</mat-label>
+                              <input matInput  [(ngModel)]="beerdata.beer_description"  name="beer_description" placeholder="Placeholder">
+                            </mat-form-field>
+        
+                              </div>
+                  </div> -->
+
+
+                
+
+
+                    <div class="fl-grid-input">
+                        <div class="">
+                            <mat-form-field appearance="standard">
+                                <mat-label>Description</mat-label>
+
+                                <textarea matInput [(ngModel)]="beerdata.beer_description" placeholder="Leave a comment"></textarea>
+                              </mat-form-field>
+                                </div>
+                    </div>
+
+
                   <div class="button-row cen">
                       <button mat-flat-button color="accent">DELETE THIS BEER</button>
                   </div>
@@ -106,73 +128,42 @@
 
   </mat-tab>
   <mat-tab label="User Reviews">
+
+      <div *ngFor="let rv of beerdata.beer_reviews; let i = index">
+
     <mat-card class="example-card">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
           <div class="jony">
           <div class="tsubt">
-          <mat-card-title>Tandem</mat-card-title>
+          <mat-card-title>{{rv.username}}</mat-card-title>
           <mat-card-subtitle>16.01.2018, 23:51</mat-card-subtitle>
           </div>
 
 
 
           <div class="margin-top-bottom-5 beer-card-bottom">
-            <div class="beer-card-rating-container rated-4">
+            <div class="beer-card-rating-container rated-{{rv.rating | number : '1.0-0'}}">
               <div class="beer-card-rating rating-1"></div>
               <div class="beer-card-rating rating-2"></div>
               <div class="beer-card-rating rating-3"></div>
               <div class="beer-card-rating rating-4"></div>
               <div class="beer-card-rating rating-5"></div>
-              <span class="ben">-3,4</span>
+              <span class="ben">{{rv.rating}}</span>
             </div>
             </div>
             <!-- <div>5</div> -->
             <mat-card-content>
               <p>
-                We have passion for American craft beer and we believe that we should
-                enlighten ourfellow.
+                  {{rv.message}}
               </p>
             </mat-card-content>
           </div> 
         </mat-card-header>
         
       </mat-card>
-      <mat-card class="example-card">
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
-          <div class="jony">
-          <div class="tsubt">
-          <mat-card-title>Tandem</mat-card-title>
-          <mat-card-subtitle>16.01.2018, 23:51</mat-card-subtitle>
-          </div>
-
-
-
-          <div class="margin-top-bottom-5 beer-card-bottom">
-            <div class="beer-card-rating-container rated-4">
-              <div class="beer-card-rating rating-1"></div>
-              <div class="beer-card-rating rating-2"></div>
-              <div class="beer-card-rating rating-3"></div>
-              <div class="beer-card-rating rating-4"></div>
-              <div class="beer-card-rating rating-5"></div>
-              <span class="ben">-3,4</span>
-            </div>
-            </div>
-            <!-- <div>5</div> -->
-            <mat-card-content>
-              <p>
-                We have passion for American craft beer and we believe that we should
-                enlighten ourfellow.
-                
-              </p>
-            </mat-card-content>
-          </div> 
-        </mat-card-header>
-        
-      </mat-card>    
-
-
+    
+</div>
 
 
 

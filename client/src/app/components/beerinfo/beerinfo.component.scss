@@ -37,7 +37,6 @@ i.material-icons {
     width: 45%;
     float: left;
     padding: 10px;
-
 }
 
 .head-info {
@@ -236,4 +235,20 @@ p {
         font-size: 14px;
         color: #4A9F97;
     }
+}
+
+mat-form-field.example-chip-list.mat-form-field.ng-tns-c16-8.mat-primary.mat-form-field-type-mat-chip-list.mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float.mat-form-field-hide-placeholder {
+    width: 100%;
+}
+
+mat-form-field.mat-form-field.ng-tns-c5-5.mat-primary.mat-form-field-type-mat-input.mat-form-field-appearance-standard.mat-form-field-can-float.ng-pristine.ng-valid.mat-form-field-should-float.ng-touched {
+    width: 100%;
+}
+
+.fl-grid-input {
+    width: 100% !important;
+}
+
+textarea#mat-input-4 {
+    width: 100% !important;
 }

@@ -163,19 +163,28 @@ export class MaininfoComponent implements OnInit {
       console.log('sasd');
       const reader = new FileReader();
       const file = e.target.files[0];
-      // console.log(file);
       if (file) {
-        // reader.onload = this._handleReaderLoaded.bind(this);
-        // console.log('base 64 image isddddddddd new',   reader.onload );
-        reader.onload = this.handleReaderLoaded.bind(this);
-        reader.readAsBinaryString(file);
-        this.imageUrl = this.base64textString;
-
-        console.log('base 64 image  x      x is -',  this.imageUrlnew);
         const formData: any = new FormData();
-        formData.append('avatar', file, file.name);
-        formData.append('_id', this.location_id);
+        formData.append('logo', file);
+        formData.append('logo_string_id', this.bewIfo.logo_string_id);
         const headers = new Headers();
+        this.bewInfo.updateLogo( formData, this.location_id ).subscribe(res => {
+          if (res.error === false) {
+              this.info = res.text;
+              this.status = false;
+           //   form.reset();
+              this.openDialog();
+            } else {
+              this.info = res.text;
+              this.status = true;
+              this.uiservice.showsnackbar(res.text, null, 3000);
+            }
+          }, error => {
+            this.info = error;
+            this.status = false;
+            this.uiservice.showsnackbar(error.message, null, 3000);
+          });
+
        }
          } else {
       // this.router.navigate(['/ofactr/login']);

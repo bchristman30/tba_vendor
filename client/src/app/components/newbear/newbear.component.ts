@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatChipInputEvent} from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { NgForm } from '@angular/forms';
 
 
 export interface Fruit {
@@ -19,6 +20,19 @@ export class NewbearComponent implements OnInit {
   selectable = true;
   removable = true;
   addOnBlur = true;
+
+  price: String= '';
+
+  density: String= '';
+
+  alchohol_content: String= '';
+
+  name: String= '';
+
+
+  beer_description: String= '';
+
+
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   fruits: Fruit[] = [
     {name: 'Lemon'},
@@ -58,7 +72,13 @@ export class NewbearComponent implements OnInit {
 }
 
 
+  addBear(form: NgForm) {
+          const val = form.value;
+      console.log('sadsadsad', val);
+
+}
+
+
+
   }
 
-
- 

@@ -50,10 +50,9 @@ export class BreweryInfo {
 	}
 
 
-	updateLogo(imageurl, location_id): Observable<any> {
-		const header = new HttpHeaders().set('content-type', 'application/x-www-form-urlencoded').append('Access-Control-Allow-Origin', '*');
-		const form_data = 'beer_logo=' + imageurl;
-		return this.http.post<any>(`/api/location/update_logo/${location_id}`, form_data,
+	updateLogo(formData, location_id): Observable<any> {
+		const header = new HttpHeaders();
+		return this.http.post<any>(`/api/location/update_logo/${location_id}`, formData,
 			{ observe: 'response', responseType: 'json', headers: header })
 			 .pipe(map((res) => { console.log(res.body); return res.body; }));
 	}
