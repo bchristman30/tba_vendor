@@ -19,6 +19,10 @@ module.exports = function (sequelize, DataTypes) {
     beer_logo: {
       type: DataTypes.TEXT('long')
     },
+    beer_logo_id:{
+      type:DataTypes.STRING,
+      allowNull:true
+    },
     price:{
       type: DataTypes.FLOAT
     }

@@ -10,7 +10,14 @@ const validate = require('express-validation');
 var _ = require('lodash');
 var today = getdate.format('dddd');
 const verifytoken = require('../middleware/verifytoken.js');
-
+var multer  = require('multer');
+var upload = multer({ dest: '../public/location/' }).single('foo');
+var cloudinary=require('cloudinary');
+cloudinary.config({ 
+    cloud_name: 'thatbeerapp', 
+    api_key: '416442547859432', 
+    api_secret: 'UF9i1FPy69toaWA5AWvZcVccnUw' 
+});
 
 /************************************************
 * Redeem stamp *
@@ -59,5 +66,46 @@ router.post('/redeem', [verifytoken, validate(require('../validation/redeem_stam
     });
 });
 
+/*test purpose start*/
+router.post('/upload_cloud_image',function (req, res) {
+    upload(req, res, function(err){		
+		if(err){ return res.end("Error")};
+		console.log("file uploaded");
+        console.log(req.file);
+        cloudinary.v2.uploader.upload(req.file.path, {
+            folder: "events/foodtrucks/menus"
+          },
+        function(error, result) {
+            console.log(result, error)
+            if(!error)
+            {
+                res.json(result);
+            }
+            else
+            {
+                res.json(error);
+            }
+        });
+    });	
+});
 
+
+
+router.post('/destroy_image_cloud',function (req, res) {
+
+        cloudinary.v2.uploader.destroy(req.body.publicid,
+        function(error, result) {
+            console.log(result, error)
+            if(!error)
+            {
+                res.json(result);
+            }
+            else
+            {
+                res.json(error);
+            }
+        });
+   
+});
+/*test purpose end*/
 module.exports = router;

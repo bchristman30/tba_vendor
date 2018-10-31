@@ -11,6 +11,14 @@ var _ = require('lodash');
 var today = getdate.format('dddd');
 var sequelize = require('sequelize');
 var shortid = require('shortid');
+var multer = require('multer');
+var upload = multer({ dest: '../public/location/' }).single('logo');
+var cloudinary = require('cloudinary');
+cloudinary.config({
+  cloud_name: 'thatbeerapp',
+  api_key: '416442547859432',
+  api_secret: 'UF9i1FPy69toaWA5AWvZcVccnUw'
+});
 /****************************************************
  * FETCH ALL LOCATION WITH HOUR ,REVIEWS DETAILS *
  * URL:/api/location
@@ -233,8 +241,8 @@ router.get('/:id(\\d+)', validate(require('../validation/id.js')), function (req
       }
       res.json({ error: false, result: maindata, text: 'brewery data available*' });
     }
-  //}).catch((err) => res.json({ error: true, result: err.errors[0].message }));
-}).catch((err) => res.json({ error: true, result: err }));
+    //}).catch((err) => res.json({ error: true, result: err.errors[0].message }));
+  }).catch((err) => res.json({ error: true, result: err }));
 });
 
 /***************************************************************************************************
@@ -452,7 +460,7 @@ router.post('/update_workinghours/:id(\\d+)', function (req, res) {
 * URL:/api/location/update_basicinfo/{location_id}
 ******************************************************/
 router.post('/update_basicinfo/:id(\\d+)', function (req, res) {
-console.log(req.body);
+  console.log(req.body);
   db.locations.findOne({
     where: {
       id: req.params.id
@@ -511,52 +519,80 @@ router.post('/is_name_available', function (req, res) {
 ******************************************************/
 
 router.route('/update_logo/:id(\\d+)').post(function (req, res) {
-  var host;
-  var location_id = req.params.id;
-  if (req.secure == true) {
-    host = 'https://' + req.headers.host;
-  }
-  else {
-    host = 'http://' + req.headers.host;
-  }
-  var base64Str = req.body.beer_logo;
-  var base64Image = base64Str.split(';base64,').pop();
-  var name = shortid.generate();
-  var filename = name.replace(/\s/g, "") + '.png';
-  var filepath = path.join(__dirname, '../public/location/' + filename);
-  var logo = host + '/static/uploads/' + filename;
-
-  fs.writeFile(filepath, base64Image, { encoding: 'base64' }, (err) => {
-    if (!err) {
-      console.log('File created');
-      db.locations.findOne({
-        where: {
-          id: location_id
-        }
-      }).then(function (location) {
-        if (!location) {
-          res.json({ error: true, result: '', text: 'There is no brewery exist with this id' + req.params.id });
-        }
-        else {
-          let data = {
-            logo_string: logo
-          };
-          location.update(data).then((response) => {
-            res.json({ error: false, result: [], text: 'Brewery logo changed successfully!!' });
-          }).catch((err) => {
-            res.json({ error: true, result: err, text: 'Error found during updation' });
-          });
-        }
-      }).catch((err) => {
-        res.json({ error: true, result: err, text: 'Something is wrong!!' });
-      });
+  console.log(req.params);
+  db.locations.findOne({
+    where: {
+      id: req.params.id
+    }
+  }).then(function (location) {
+    if (!location) {
+      res.json({ error: true, result: '', text: 'There is no brewery exist with this id' + req.params.id });
     }
     else {
-      res.json({ error: true, result: [], text: err });
+      upload(req, res, function (err) {
+        if (err) {
+          console.log(err);
+          return res.end("Error")
+        };
+        //console.log("file uploaded");
+        //console.log(req.file);
+        var logo_string_id = req.body.logo_string_id; //publicid
+        cloudinary.v2.uploader.upload(req.file.path, {
+          folder: "brewery"
+        },
+          function (error, result) {
+           // console.log(result, error);
+            if (!error) {
+              let data = {
+                logo_string: result.secure_url,
+                logo_string_id: result.public_id
+              };
+              remove_image(logo_string_id).then(
+                result => {
+                  //console.log('remove_image response' + JSON.stringify(result));
+                  location.update(data).then((response) => {
+
+                    res.json({ error: false, result:data, text: 'Brewery logo changed successfully!!' });
+
+                  }).catch((err) => {
+
+                    res.json({ error: true, result: err, text: 'Error found during updation' });
+
+                  });
+                },
+                error => {
+                 // console.log('remove_image err response' + error);
+                  res.json({ error: true, result: '', text: 'Unable to remove previous image' });
+                }
+              );
+            }
+            else {
+              res.json({ error: true, result: error, text: 'Error found during uplodation' });
+            }
+          });
+      });
     }
+  }).catch((err) => {
+    res.json({ error: true, result: err, text: 'Something is wrong!!' });
   });
+
 });
 
+
+function remove_image(logo_string_id) {
+  return new Promise(function (resolve, reject) {
+    cloudinary.v2.uploader.destroy(logo_string_id,
+      function (error, result) {
+        console.log(result, error)
+        if (!error) {
+          resolve(result);
+        }
+        else {
+          reject(error);
+        }
+      });
+  });
+}
 /*********************************************************************************************************************************
  * THIS FUNCTION TAKES IN LATITUDE AND LONGITUDE OF TWO LOCATION AND RETURNS THE DISTANCE BETWEEN THEM AS THE CROW FLIES (IN KM) *
  *********************************************************************************************************************************/
