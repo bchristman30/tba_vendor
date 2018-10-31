@@ -137,7 +137,24 @@ export class MaininfoComponent implements OnInit {
      handleReaderLoaded(e) {
       this.base64textString.push('data:image/png;base64,' + btoa(e.target.result));
       this.imageUrlnew =  btoa(e.target.result).toString();
-      console.log('Image Logo',  this.imageUrl)
+      console.log('Image Logo',  this.imageUrlnew);
+      this.bewInfo.updateLogo( this.imageUrlnew , this.location_id ).subscribe(res => {
+        if (res.error === false) {
+            this.info = res.text;
+            this.status = false;
+         //   form.reset();
+            this.openDialog();
+          } else {
+            this.info = res.text;
+            this.status = true;
+            this.uiservice.showsnackbar(res.text, null, 3000);
+          }
+        }, error => {
+          this.info = error;
+          this.status = false;
+          this.uiservice.showsnackbar(error.message, null, 3000);
+        });
+
     }
 
 

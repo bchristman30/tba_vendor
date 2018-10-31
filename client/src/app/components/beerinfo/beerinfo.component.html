@@ -1,18 +1,18 @@
-<div class="top-head-grid">
+<div class="top-head-grid" *ngIf="beerdata">
   <div class="backspace">
     <i class="material-icons" routerLink="/yourbeer">
       keyboard_backspace
     </i>
   </div>
   <label class="beername">
-    {{beername}}
+    {{beerdata.name}}
   </label> 
   <i class="material-icons">
     sort
     </i>
 </div>
 
-<mat-tab-group>
+<mat-tab-group *ngIf="beerdata"> 
   <mat-tab label="Info">
 
   <div class="info-grid">
@@ -31,7 +31,8 @@
 
               <div class="image-upload">
                   <label for="file-input">
-                      <img class="img-grid" src="assets/imgs/slide-3.jpg"/>
+                      <img class="img-grid" src={{beerdata.beer_logo}}
+                      />
                   </label>
               
                   <input id="file-input" type="file"/>
@@ -46,16 +47,16 @@
                   <label class="back-label-grid"> Send Back on Tap</label>
 
                       <mat-form-field>
-                        <input matInput value=$5 placeholder="Price">
+                        <input matInput [(ngModel)]="beerdata.price" placeholder="Price">
                       </mat-form-field>
                     
                   
                       <mat-form-field>
-                          <input matInput value=12% placeholder="Density">
+                          <input matInput [(ngModel)]="beerdata.Alchohol_content" placeholder="Density">
                         </mat-form-field> 
 
                         <mat-form-field>
-                            <input matInput value=4,5 placeholder="Alcohal content">
+                            <input matInput [(ngModel)]="beerdata.Alchohol_content" placeholder="Alcohal content">
                           </mat-form-field>
                         
           </div>
@@ -64,7 +65,7 @@
               <div class="">
                   <mat-form-field appearance="standard">
                       <mat-label>Name</mat-label>
-                      <input matInput  value=Anupam placeholder="Placeholder">
+                      <input matInput  [(ngModel)]="beerdata.name" placeholder="Placeholder">
                     </mat-form-field>
 
                       </div>
@@ -90,7 +91,7 @@
                 <form class="example-form">
                     <mat-form-field class="example-full-width">
                       <input matInput placeholder="Description"
-                      value="Brewing a true larger take a litle bit more work and specialized equipment than Brewing an ale.">
+                      [(ngModel)]="beerdata.beer_description" >
                     </mat-form-field>
                   </form>
                   </div> 

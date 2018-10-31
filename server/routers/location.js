@@ -417,7 +417,7 @@ router.post('/update_workinghours/:id(\\d+)', function (req, res) {
     let weekday = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     for (let i = 0; i < 7; i++) {
       day = weekday[i];
-      hours.push({ day: day, opening_hour: data[i][day]['opening_hour'], closing_hour: data[i][day]['closing_hour'], location_id: req.params.id });
+      hours.push({ day: day, opening_hour: data[i][day]['opening_hour'], closing_hour: data[i][day]['closing_hour'],isclose:data[i][day]['isclose'], location_id: req.params.id });
     }
     //console.log(hours);
     if (hours.length == 7) {
