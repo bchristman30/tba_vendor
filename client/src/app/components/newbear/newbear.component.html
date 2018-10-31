@@ -23,7 +23,7 @@
                       <img class="img-grid" src="assets/imgs/slide-3.jpg"/>
                   </label>
               
-                  <input id="file-input" type="file"/>
+                  <input id="file-input" type="file" accept="image/*" (change)="imageUpload($event)"  type="file"/>
                   <label class="grid-label">Delete photo</label>
                 </div>
           </div>
@@ -75,12 +75,10 @@
             </div>
 
             <div class="fl-grid-input">
-                <form class="example-form">
-                    <mat-form-field class="example-full-width">
+                    <mat-form-field >
                       <input matInput placeholder="Description"
-                      [(ngModel)]="beer_description" name="name">
+                      [(ngModel)]="beer_description" name="beer_description">
                     </mat-form-field>
-                  </form>
                   </div> 
                   <div class="button-row cen">
                       <button mat-flat-button color="accent">SAVE</button>
