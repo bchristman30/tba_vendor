@@ -11,6 +11,10 @@ module.exports = function (sequelize, DataTypes) {
     },
     featured_image: {
       type: DataTypes.TEXT('long')
+    },
+    featured_image_id:{
+      type:DataTypes.STRING,
+      allowNull:true
     }
   }, {
     underscored: true,

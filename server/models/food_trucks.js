@@ -5,12 +5,16 @@ module.exports = function (sequelize, DataTypes) {
             autoIncrement: true,
             primaryKey: true
         },
-        name:{
+        name: {
             type: DataTypes.STRING,
-            unique:true
+            unique: true
         },
         featured_image: {
             type: DataTypes.TEXT('long')
+        },
+        featured_image_id: {
+            type: DataTypes.STRING,
+            allowNull: true
         },
         description: {
             type: DataTypes.TEXT('medium'),
@@ -31,10 +35,10 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING
         }
     }, {
-        underscored: true,
+            underscored: true,
             classMethods: {
                 associate: function (models) {
-                   
+
                     food_trucks.hasMany(models.food_trucks_menu);
                     food_trucks.hasMany(models.food_trucks_reviews);
                 }

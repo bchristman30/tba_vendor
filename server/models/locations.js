@@ -12,6 +12,10 @@ module.exports = function(sequelize, DataTypes) {
     logo_string:{
       type: DataTypes.TEXT('long'),
     },
+    logo_string_id:{
+      type:DataTypes.STRING,
+      allowNull:true
+    },
     address: {
       type: DataTypes.STRING
     },
