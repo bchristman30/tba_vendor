@@ -48,7 +48,7 @@ var get_avg_rating = (location_id) => {
 router.route('/:id(\\d+)').get(function (req, res) {
     db.beer.findAll({
         where: { id: req.params.id },
-        attributes: ['id', 'name', 'Alchohol_content', 'beer_description', 'beer_logo', 'price'],
+        attributes: ['id', 'name', 'Alchohol_content', 'beer_description','beer_logo_id', 'beer_logo', 'price'],
         include: [{
             attributes: ['id', 'beer_style_id', 'beer_id'],
             model: db.beer_category,

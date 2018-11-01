@@ -8,6 +8,7 @@ import { BreakpointService } from '../../services/breakpoint.service';
 import {MatSidenav} from '@angular/material/sidenav';
 import { BeerService } from '../../services/beer.service';
 import { AuthService } from '../../auth/auth.service';
+import { BreweryInfo } from '../../services/beweryinfo.service';
 
 @Component({
   selector: 'app-yourbeer',
@@ -15,7 +16,6 @@ import { AuthService } from '../../auth/auth.service';
   styleUrls: ['./yourbeer.component.scss']
 })
 export class YourbeerComponent implements OnInit {
-
   locations: Array<LocationModel>;
   locationSub: Subscription = new Subscription();
   events: string[] = [];
@@ -32,7 +32,7 @@ export class YourbeerComponent implements OnInit {
   activeBeers: any;
   isLoading: any;
   archiveBeers: any;
-
+  bewIfo: any;
   activeBeerCount: any;
   archiveBeerCount: any;
 
@@ -42,6 +42,8 @@ export class YourbeerComponent implements OnInit {
               private spinner: NgxSpinnerService,
               private authService: AuthService,
               private locationService: LocationService,
+              private bewInfo: BreweryInfo,
+
               private breakpointService: BreakpointService) { }
 
   ngOnInit() {
@@ -58,6 +60,7 @@ export class YourbeerComponent implements OnInit {
       this.userdata = JSON.parse(localStorage.getItem('user'));
       this.location = this.userdata.location.name;
       this.location_id = this.userdata.location.id;
+      this.getInfo();
       this.locations = this.locationService.getLocations();
       this.getallBears();
       this.locationSub = this.locationService.locationsDidChange$.subscribe(l => {
@@ -68,6 +71,16 @@ export class YourbeerComponent implements OnInit {
     }
 
 
+  }
+
+  getInfo() {
+    this.bewInfo.getBreweryInfo(this.location_id).subscribe(
+      data => {this.bewIfo = data.result[0],
+      console.log('data is', data)  ,
+      this.spinner.hide();
+    },
+      error => console.log(error),
+      () => this.isLoading = false);
   }
 
   showBreweryList(): void {
@@ -86,7 +99,6 @@ export class YourbeerComponent implements OnInit {
       this.archiveBeerCount = data.result.archivebeers.length,
       this.archiveBeers = data.result.archivebeers,
       this.spinner.hide(),
-
     console.log('data beers', data)},
     error => console.log(error),
     () => this.isLoading = false);

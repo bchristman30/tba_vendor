@@ -44,7 +44,7 @@
        
           <div class="head-right-grid">
                   <p class="up-p-grid">This Beer in Archive list</p>
-                  <label class="back-label-grid"> Send Back on Tap</label>
+                  <label class="back-label-grid" (click)="beerOnTap(beerdata.id)"> Send Back on Tap</label>
 
                       <mat-form-field>
                         <input matInput [(ngModel)]="beerdata.price" name="price" placeholder="Price">
@@ -118,7 +118,7 @@
 
 
                   <div class="button-row cen">
-                      <button mat-flat-button color="accent">DELETE THIS BEER</button>
+                      <button mat-flat-button color="accent" (click)="deleteBeer(beerdata.id,beerdata.beer_logo_id)">DELETE THIS BEER</button>
                   </div>
     </div>
   </div>

@@ -11,7 +11,9 @@ import { BreakpointService } from '../../services/breakpoint.service';
 import {MatSidenav} from '@angular/material/sidenav';
 import { BeerService } from '../../services/beer.service';
 import { AuthService } from '../../auth/auth.service';
-
+import { Dialogbox } from '../../dialogbox/dialog.component';
+import { MatDialog } from '@angular/material';
+import { UIService } from '../../shared/snackbar/Ui.service';
 export interface Fruit {
   name: string;
 }
@@ -43,14 +45,18 @@ export class BeerinfoComponent implements OnInit {
   location_id: any;
   beerdata: any;
   isLoading: Boolean;
+  info: any;
+  status: any;
 
-
-  constructor(public route: ActivatedRoute,
+  constructor(
+    public route: ActivatedRoute,
     private router: Router,
     private beerService: BeerService,
     private spinner: NgxSpinnerService,
     private authService: AuthService,
+    public dialog: MatDialog,
     private locationService: LocationService,
+    private uiservice: UIService,
     private breakpointService: BreakpointService) { }
 
     ngOnInit() {
@@ -143,6 +149,69 @@ export class BeerinfoComponent implements OnInit {
     if (index >= 0) {
       this.fruits.splice(index, 1);
     }
+  }
+
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(Dialogbox, {
+      width: '350px',
+      data: { text: this.info, status: this.status }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed' + result);
+    });
+  }
+
+
+  deleteBeer(beerid, beerlogoid) {
+    const beer_id = beerid;
+        console.log('sadsadsad', beer_id);
+        console.log('sadsadsad', beerlogoid);
+
+        const id = this.location_id;
+        this.beerService.deleteBeer(beerid , beerlogoid, this.location_id).subscribe(res => {
+        if (res.error === false) {
+            this.info = res.text;
+            this.status = false;
+         //   form.reset();
+         this.router.navigateByUrl('/yourbeer');
+            this.openDialog();
+          } else {
+            this.info = res.text;
+            this.status = true;
+            this.uiservice.showsnackbar(res.text, null, 3000);
+          }
+        }, error => {
+          this.info = error;
+          this.status = false;
+          this.uiservice.showsnackbar(error.message, null, 3000);
+        });
+  }
+
+  beerOnTap(beerid) {
+    const beer_id = beerid;
+    console.log('sadsadsad', beer_id);
+
+    const id = this.location_id;
+    this.beerService.moveToTap(beerid , this.location_id).subscribe(res => {
+    if (res.error === false) {
+        this.info = res.text;
+        this.status = false;
+     //   form.reset();
+     this.router.navigateByUrl('/yourbeer');
+
+        this.openDialog();
+      } else {
+        this.info = res.text;
+        this.status = true;
+        this.uiservice.showsnackbar(res.text, null, 3000);
+      }
+    }, error => {
+      this.info = error;
+      this.status = false;
+      this.uiservice.showsnackbar(error.message, null, 3000);
+    });
   }
 
 }
