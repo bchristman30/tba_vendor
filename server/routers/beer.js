@@ -44,11 +44,10 @@ var get_avg_rating = (location_id) => {
  * RETRIEVE BEER BASED ON BEER_ID *
  * URL:/api/beer/{beer_id}
  *******************************************************************/
-//changed
 router.route('/:id(\\d+)').get(function (req, res) {
     db.beer.findAll({
         where: { id: req.params.id },
-        attributes: ['id', 'name', 'Alchohol_content', 'beer_description','beer_logo_id', 'beer_logo', 'price'],
+        attributes: ['id', 'name', 'Alchohol_content', 'beer_description', 'beer_logo', 'beer_logo_id', 'price'],
         include: [{
             attributes: ['id', 'beer_style_id', 'beer_id'],
             model: db.beer_category,
@@ -61,6 +60,41 @@ router.route('/:id(\\d+)').get(function (req, res) {
             limit: 10,
             model: db.beer_reviews,
             attributes: ['beer_id', 'username', 'message', 'rating']
+        }]
+
+    }).then((beer) => {
+        res.json({ error: false, result: beer, text: 'data found' });
+
+    }).catch((err) => {
+        res.json({ error: true, result: [], text: err });
+    });
+});
+
+/*******************************************************************
+ * RETRIEVE BEER BASED ON BEER_ID AND LOCATION ID*
+ * URL:/api/beer/{beer_id}/{location_id}
+ *******************************************************************/
+//changed
+router.route('/:id(\\d+)/:location_id(\\d+)').get(function (req, res) {
+    db.location_beer.findAll({
+        where: { beer_id: req.params.id, location_id: req.params.location_id },
+        attributes: ['id', 'location_id', 'beer_id', 'active'],
+        include: [{
+            attributes: ['id', 'name', 'Alchohol_content', 'beer_description', 'beer_logo', 'beer_logo_id', 'price'],
+            model: db.beer,
+            include: [{
+                attributes: ['id', 'beer_style_id', 'beer_id'],
+                model: db.beer_category,
+                include: [{
+                    attributes: ['id', 'type'],
+                    model: db.beer_style
+                }]
+            },
+            {
+                limit: 10,
+                model: db.beer_reviews,
+                attributes: ['beer_id', 'username', 'message', 'rating']
+            }]
         }]
 
     }).then((beer) => {
