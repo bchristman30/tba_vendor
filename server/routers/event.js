@@ -23,6 +23,8 @@ router.route('/:id(\\d+)').get(function (req, res) {
     });
 });
 
+
+
 //search events on a particular location using date
 router.post('/location/:id(\\d+)', validate(require('../validation/is_date.js')), function (req, res) {
         var myDate = new Date(req.body.searchdate);

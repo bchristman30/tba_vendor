@@ -12,6 +12,7 @@ var today = getdate.format('dddd');
 var sequelize = require('sequelize');
 var multer = require('multer');
 var upload = multer({ dest: '../public/location/' }).single('logo');
+var upload_event = multer({ dest: '../public/event/' }).single('feature_image');
 var cloudinary = require('cloudinary');
 cloudinary.config({
   cloud_name: 'thatbeerapp',
@@ -530,7 +531,7 @@ router.route('/update_logo/:id(\\d+)').post(function (req, res) {
       upload(req, res, function (err) {
         if (err) {
           console.log(err);
-          return res.end("Error")
+          return res.json({error:true,result:'',text:'Unable to upload image file.'});
         };
         //console.log("file uploaded");
         //console.log(req.file);
@@ -574,9 +575,59 @@ router.route('/update_logo/:id(\\d+)').post(function (req, res) {
   }).catch((err) => {
     res.json({ error: true, result: err, text: 'Something is wrong!!' });
   });
-
 });
 
+//create new event and schedule using location_id
+router.post('/event', function (req, res) {
+  upload_event(req, res, function (err) {
+    if (err) {
+      console.log(err);
+      return res.json({error:true,result:'',text:'Unable to upload image file.'});
+    };
+    console.log(req.body);
+    console.log("file uploaded");
+    console.log(req.file);
+    cloudinary.v2.uploader.upload(req.file.path, {
+      folder: "event"
+    },
+      function (error, result) {
+        // console.log(result, error);
+        if (!error) {
+          let data = {
+            name:req.body.name,
+            feature_image: result.secure_url,
+            featured_image_id: result.public_id
+          };
+          // console.log(data);
+          db.events.create(data).then(event => {
+            if (event.id != '') {
+                var up={
+                  start_date:req.body.start_date,
+                  end_date:req.body.end_date,
+                  type:'events',
+                  referring_id:event.id,
+                  location_id:req.body.location_id
+                };
+                // console.log(up);
+              db.location_calendar.create(up).then(location_calendar => {
+                if (location_calendar.id != '') {
+                    res.json({error:false,result:'',text:'events created and schedule successfully'});
+                  
+                }
+              }).catch((err) => {
+                res.json({ error: true, result: err,text:'unable to schedule event with brewery' });
+              });
+            }
+          }).catch((err) => {
+            res.json({ error: true, result: err,text:'unable to create event' });
+          });
+        }
+        else {
+          res.json({ error: true, result: error, text: 'Error found during uplodation' });
+        }
+      });
+  });
+});
 
 function remove_image(logo_string_id) {
   return new Promise(function (resolve, reject) {
