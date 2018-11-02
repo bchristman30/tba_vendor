@@ -76,6 +76,7 @@ router.route('/:id(\\d+)').get(function (req, res) {
  *******************************************************************/
 //changed
 router.route('/:id(\\d+)/:location_id(\\d+)').get(function (req, res) {
+    console.log('sa',req.params.id);
     db.location_beer.findAll({
         where: { beer_id: req.params.id, location_id: req.params.location_id },
         attributes: ['id', 'location_id', 'beer_id', 'active'],

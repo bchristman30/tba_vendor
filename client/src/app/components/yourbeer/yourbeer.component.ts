@@ -105,4 +105,9 @@ export class YourbeerComponent implements OnInit {
 }
 
 
+xLogout() {
+  this.authService.logout();
+}
+
+
 }

@@ -27,9 +27,11 @@ export class BeerService {
 		return this.http.get(`/api/beer/location/${location_id}`).map(res => res);
 	}
 
-	getBear(location_id): Observable<any> {
-		console.log('beer id is ', location_id);
-		return this.http.get(`/api/beer/${location_id}`).map(res => res);
+	getBear(beer_id, location_id ): Observable<any> {
+		console.log('location id is ', location_id);
+		console.log('beer id is ', beer_id);
+
+		return this.http.get(`/api/beer/${beer_id}/${location_id}`).map(res => res);
 	}
 
 

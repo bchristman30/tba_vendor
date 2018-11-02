@@ -86,10 +86,11 @@ export class BeerinfoComponent implements OnInit {
   }
 
   getBearInfo(beerid) {
-    this.beerService.getBear(beerid).subscribe(
-      data => {this.beerdata = data.result[0],
+    this.beerService.getBear(beerid, this.location_id).subscribe(
+      data => {
+        this.beerdata = data.result[0].beer,
         this.spinner.hide(),
-      console.log('data beers', data)},
+      console.log('data beers ak', data.result[0])},
       error => console.log(error),
       () => this.isLoading = false);
   }
