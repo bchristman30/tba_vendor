@@ -47,6 +47,7 @@ export class BeerinfoComponent implements OnInit {
   isLoading: Boolean;
   info: any;
   status: any;
+  active: any;
 
   constructor(
     public route: ActivatedRoute,
@@ -89,6 +90,8 @@ export class BeerinfoComponent implements OnInit {
     this.beerService.getBear(beerid, this.location_id).subscribe(
       data => {
         this.beerdata = data.result[0].beer,
+        this.active = data.result[0].active,
+
         this.spinner.hide(),
       console.log('data beers ak', data.result[0])},
       error => console.log(error),
@@ -191,11 +194,42 @@ export class BeerinfoComponent implements OnInit {
   }
 
   beerOnTap(beerid) {
+
+    this.info = 'want to delete';
+    this.status = false;
+    const c = this.openDialog();
+console.log('beer', c);
+
     const beer_id = beerid;
     console.log('sadsadsad', beer_id);
 
     const id = this.location_id;
     this.beerService.moveToTap(beerid , this.location_id).subscribe(res => {
+    if (res.error === false) {
+        this.info = res.text;
+        this.status = false;
+     //   form.reset();
+     this.router.navigateByUrl('/yourbeer');
+
+        this.openDialog();
+      } else {
+        this.info = res.text;
+        this.status = true;
+        this.uiservice.showsnackbar(res.text, null, 3000);
+      }
+    }, error => {
+      this.info = error;
+      this.status = false;
+      this.uiservice.showsnackbar(error.message, null, 3000);
+    });
+  }
+
+  beerOnArchive(beerid) {
+    const beer_id = beerid;
+    console.log('sadsadsad', beer_id);
+
+    const id = this.location_id;
+    this.beerService.moveToArchive(beerid , this.location_id).subscribe(res => {
     if (res.error === false) {
         this.info = res.text;
         this.status = false;

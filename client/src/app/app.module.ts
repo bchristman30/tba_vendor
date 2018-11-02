@@ -25,6 +25,7 @@ import { AuthGuard } from './auth/auth-guard.service';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatButtonModule} from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
 
 import { ToastrModule } from 'ngx-toastr';
 import { HomeComponent } from './components/home/home.component';
@@ -141,7 +142,7 @@ export function init_app(appLoadService: StartupService) {
       DialogTermsOfServiceComponent,
       CalendarEventCardComponent,
       FoodTruckOverviewComponent,
-      FoodTruckMenuComponent, 
+      FoodTruckMenuComponent,
       FoodTruckCalendarComponent,
       MenuItemCardComponent,
       YourbeerComponent,
@@ -178,7 +179,8 @@ export function init_app(appLoadService: StartupService) {
     ButtonsModule,
     MatSidenavModule,
     MatRadioModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule
   ],
   providers: [
     BreweryInfo,

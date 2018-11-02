@@ -43,14 +43,18 @@
       
        
           <div class="head-right-grid">
-                  <p class="up-p-grid">This Beer in Archive list</p>
-                  <label class="back-label-grid" (click)="beerOnTap(beerdata.id)" > Send Back on Tap</label>
+                  <div class="ar-div" *ngIf="active == 0">
+                      <p class="up-p-grid">This Beer in Archive list</p>
+                      <label class="back-label-grid" (click)="beerOnTap(beerdata.id)" > Send Back on Tap</label>
+                </div>
+
+                  <div class="ac-div" *ngIf="active == 1">
+                       <label class="back-label-grid" (click)="beerOnArchive(beerdata.id)" > Send To archive List </label>
+                  </div>
 
                       <mat-form-field>
                         <input matInput [(ngModel)]="beerdata.price" name="price" placeholder="Price">
                       </mat-form-field>
-                    
-                  
                       <mat-form-field>
                           <input matInput [(ngModel)]="beerdata.Alchohol_content" name="Alchohol_content" placeholder="Density">
                         </mat-form-field> 

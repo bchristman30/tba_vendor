@@ -62,4 +62,14 @@ export class BeerService {
 			 .pipe(map((res) => { console.log(res.body); return res.body; }));
 	}
 
+	moveToArchive(beerid, location_id): Observable<any> {
+		const header = new HttpHeaders().set('content-type', 'application/x-www-form-urlencoded').append('Access-Control-Allow-Origin', '*');
+		const form_data =
+		'location_id=' + location_id;
+
+		return this.http.post<any>(`/api/beer/move_to_archive/${beerid}`, form_data,
+			{ observe: 'response', responseType: 'json', headers: header })
+			 .pipe(map((res) => { console.log(res.body); return res.body; }));
+	}
+
 }
