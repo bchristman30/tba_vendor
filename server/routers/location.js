@@ -10,7 +10,6 @@ const validate = require('express-validation');
 var _ = require('lodash');
 var today = getdate.format('dddd');
 var sequelize = require('sequelize');
-var shortid = require('shortid');
 var multer = require('multer');
 var upload = multer({ dest: '../public/location/' }).single('logo');
 var cloudinary = require('cloudinary');
@@ -315,7 +314,6 @@ router.route('/calendar/:id(\\d+)').get(function (req, res) {
           res.json({ error: true, result: calendar, text: 'referring id does not exist*' + err });
         });
       });
-
     }
   }).catch((err) => { res.json({ error: true, result: '', text: err }); });
 });

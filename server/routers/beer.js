@@ -164,7 +164,6 @@ router.route('/location/:id(\\d+)').get(function (req, res) {
         where: {
             location_id: location_id
         },
-        // group:['beer_id'],
         include: [{
             model: db.beer,
             include: [
@@ -182,8 +181,8 @@ router.route('/location/:id(\\d+)').get(function (req, res) {
                 var activebeers = [];
                 var archivebeers = [];
                 var arr = {};
-                if (result.length > 0) {
-                    for (var i = 0; i < result.length; i++) {
+                if (location_beer.length > 0) {
+                    for (var i = 0; i < location_beer.length; i++) {
                         (function (num) {
                             if (location_beer[i].active == 1) {
 
@@ -192,7 +191,7 @@ router.route('/location/:id(\\d+)').get(function (req, res) {
                             else {
                                 archivebeers.push(_.merge(location_beer[i].dataValues, { avg_rating: result[i].dataValues.avg_rating }));
                             }
-                            if (i == result.length - 1) {
+                            if (i == location_beer.length - 1) {
                                 arr.activebeers = activebeers;
                                 arr.archivebeers = archivebeers;
                                 res.json({ error: false, result: arr, text: 'data found' });
