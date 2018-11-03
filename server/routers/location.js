@@ -588,7 +588,7 @@ router.post('/event', function (req, res) {
     console.log("file uploaded");
     console.log(req.file);
     cloudinary.v2.uploader.upload(req.file.path, {
-      folder: "event"
+      folder: "events/general"
     },
       function (error, result) {
         // console.log(result, error);
@@ -602,8 +602,8 @@ router.post('/event', function (req, res) {
           db.events.create(data).then(event => {
             if (event.id != '') {
                 var up={
-                  start_date:req.body.start_date,
-                  end_date:req.body.end_date,
+                  start_date: new Date(req.body.start_date).toLocaleString(),
+                  end_date: new Date(req.body.end_date).toLocaleString(),
                   type:'events',
                   referring_id:event.id,
                   location_id:req.body.location_id
