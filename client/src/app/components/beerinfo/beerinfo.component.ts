@@ -1,5 +1,5 @@
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Inject} from '@angular/core';
 import {MatChipInputEvent} from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
@@ -14,9 +14,12 @@ import { AuthService } from '../../auth/auth.service';
 import { Dialogbox } from '../../dialogbox/dialog.component';
 import { MatDialog } from '@angular/material';
 import { UIService } from '../../shared/snackbar/Ui.service';
+import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+
 export interface Fruit {
   name: string;
 }
+
 
 
 @Component({
@@ -24,6 +27,8 @@ export interface Fruit {
   templateUrl: './beerinfo.component.html',
   styleUrls: ['./beerinfo.component.scss']
 })
+
+
 export class BeerinfoComponent implements OnInit {
   beerid: String = 'default';
   visible = true;
@@ -48,6 +53,11 @@ export class BeerinfoComponent implements OnInit {
   info: any;
   status: any;
   active: any;
+  animal: string;
+  name: string;
+
+
+
 
   constructor(
     public route: ActivatedRoute,
@@ -194,15 +204,9 @@ export class BeerinfoComponent implements OnInit {
   }
 
   beerOnTap(beerid) {
-
-    this.info = 'want to delete';
     this.status = false;
-    const c = this.openDialog();
-console.log('beer', c);
-
     const beer_id = beerid;
     console.log('sadsadsad', beer_id);
-
     const id = this.location_id;
     this.beerService.moveToTap(beerid , this.location_id).subscribe(res => {
     if (res.error === false) {
@@ -250,3 +254,4 @@ console.log('beer', c);
   }
 
 }
+

@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { DatePipe } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { BeerComponent } from './components/beer/beer.component';
@@ -18,7 +19,7 @@ import { SingleFoodTruckComponent } from './components/food-truck/single-food-tr
 import { LoginComponent } from './auth/signin/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './auth/auth.service';
-import { AuthInterceptor } from './auth/auth.interceptor'; 
+import { AuthInterceptor } from './auth/auth.interceptor';
 import { AuthGuard } from './auth/auth-guard.service';
 
 
@@ -46,6 +47,8 @@ import {MatChipsModule} from '@angular/material/chips';
 import { HeaderComponent } from './components/header/header.component';
 import { BeerCardComponent } from './components/cards/beer-card/beer-card.component';
 import { Dialogbox } from './dialogbox/dialog.component';
+
+
 import { FrontComponent } from './Front/Front.component';
 import { ChangepasswordComponent } from './auth/forgetpassword/changepassword/changepassword.component';
 import { ForgetpasswordComponent } from './auth/forgetpassword/forgetpassword.component';
@@ -94,7 +97,9 @@ import { NewbearComponent } from './components/newbear/newbear.component';
 import { WorkinghoursComponent } from './components/workinghours/workinghours.component';
 
 import { VendorLoginComponent } from './components/vendor-login/vendor-login.component';
+import { DialogboxnewComponent } from './dialogboxnew/dialogboxnew.component';
 
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 
 export function init_app(appLoadService: StartupService) {
@@ -117,7 +122,7 @@ export function init_app(appLoadService: StartupService) {
       LocationOverviewComponent,
       LocationMenuComponent,
       DialogRedeemStampComponent,
-      LocationEventsComponent, 
+      LocationEventsComponent,
       EventCardSquareComponent,
       HeaderComponent,
       BeerCardComponent,
@@ -153,7 +158,8 @@ export function init_app(appLoadService: StartupService) {
       NewfoodtruckComponent,
       NewbearComponent,
       WorkinghoursComponent,
-      VendorLoginComponent
+      VendorLoginComponent,
+      DialogboxnewComponent
   ],
   imports: [
     BrowserModule,
@@ -165,6 +171,7 @@ export function init_app(appLoadService: StartupService) {
     HttpClientModule,
     AppRoutingModule,
     NgxSpinnerModule,
+    NgxMaterialTimepickerModule.forRoot(),
     ToastrModule.forRoot(),
     CalendarModule.forRoot(),
     NgbModule.forRoot(),
@@ -183,6 +190,7 @@ export function init_app(appLoadService: StartupService) {
     MatDialogModule
   ],
   providers: [
+    DatePipe,
     BreweryInfo,
     UIService,
     BeerService,
@@ -206,7 +214,7 @@ export function init_app(appLoadService: StartupService) {
     AuthGuard
   ],
   entryComponents: [
-    Dialogbox,
+    Dialogbox, DialogboxnewComponent,
     DialogRedeemStampComponent,
     DialogUpgradePaidComponent,
     DialogTermsOfServiceComponent,

@@ -16,12 +16,12 @@ import { Subscription } from 'rxjs';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit,OnDestroy {
+export class LoginComponent implements OnInit, OnDestroy {
 
   info: any;
   status: any;
-  isloading:boolean=false;
-  isloadsub:Subscription;
+  isloading: boolean = false;
+  isloadsub: Subscription;
 
   constructor(
     private authService: AuthService,

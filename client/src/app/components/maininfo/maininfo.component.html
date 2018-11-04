@@ -132,23 +132,19 @@
             </mat-form-field>
             <div class="edito">
               <b>Ammenities, which you offer
-                <a href="#">Edit</a>
+                <a >Edit</a>
               </b>
 
             </div>
             <div class="edito_icon">
+              <i  *ngFor="let amt of bewIfo?.location_amenities; let i = index">
               <i class="material-icons">
-                add_comment
+                  {{amt?.amenity.icon}}
               </i>
-              <i class="material-icons">
-                local_dining
+            
               </i>
-              <i class="material-icons">
-                access_time
-              </i>
-              <i class="material-icons">
-                access_time
-              </i>
+
+
 
             </div>
             <div class="work_hors">

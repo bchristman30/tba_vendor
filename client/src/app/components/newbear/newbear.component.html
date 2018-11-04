@@ -55,7 +55,7 @@
 
                       </div>
           </div>
-          <div class="fl-grid-input">
+          <!-- <div class="fl-grid-input">
               <div class="anup">
           <mat-form-field class="example-chip-list">
               <mat-chip-list #chipList>
@@ -72,7 +72,18 @@
               </mat-chip-list>
             </mat-form-field>
             </div>
-            </div>
+            </div> -->
+
+            <div class="fl-grid-input">
+              <div class="anup">
+            <mat-form-field>
+              <mat-select placeholder="Tags" [formControl]="toppings" multiple>
+                <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+           </div>
+        </div>
+
 
             <div class="fl-grid-input">
                     <mat-form-field >

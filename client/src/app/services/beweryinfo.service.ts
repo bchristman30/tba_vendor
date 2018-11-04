@@ -31,6 +31,15 @@ export class BreweryInfo {
 		return this.http.get(`/api/location/calendar/${location_id}`).map(res => res);
 	}
 
+	getUpEventsBydate(location_id, date): Observable<any> {
+		const header = new HttpHeaders().set('content-type', 'application/x-www-form-urlencoded').append('Access-Control-Allow-Origin', '*');
+		const form_data = 'searchdate=' + date;
+		return this.http.post<any>(`/api/event/location/${location_id}`, form_data,
+		{ observe: 'response', responseType: 'json', headers: header })
+		.pipe(map((res) => { console.log(res.body); return res.body; }));
+	}
+
+
 	getBeerByID(id: string): Observable<ServerResponseArray> {
 		return this.http.get<ServerResponseArray>('/api/beer/' + id);
 	}

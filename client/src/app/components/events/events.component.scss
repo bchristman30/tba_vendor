@@ -150,10 +150,11 @@ h5.h-text {
         bottom: 0;
         left: 0;
         right: 0;
-        padding: 10px;
+        padding: 0px;
+        margin: 0 auto;
     }
-    .text-caption h3{text-transform: capitalize;color:#fff;font-weight: 500}
-    .text-caption span{color:#f2f2f2;font-size: 20px}
+    .text-caption h3{text-transform: capitalize;color:#fff;font-weight: 500;   font-size: 14px;}
+    .text-caption span{color:#f2f2f2;font-size: 14px}
     .homeButton {    
         display: grid;
         align-items: center;
@@ -252,7 +253,7 @@ h5.h-text {
     text-transform: capitalize;
     color: #fff;
     font-weight: 500;
-    font-size: 20px;
+    font-size: 14px;
 }
 #homeGrid .partition .text-caption span 
  {

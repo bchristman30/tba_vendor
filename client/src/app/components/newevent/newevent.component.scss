@@ -9,6 +9,11 @@
    float: left;
 }
 
+.image-upload > input
+{
+   display: none;
+}
+
 .beername {
    margin-left: 10%;
    color: white;
@@ -35,9 +40,15 @@ i.material-icons {
 
 .img-grid{
     max-width: 100%;
-    height: 180px;
+    max-height: 100px;
+    margin: auto;
+    display: block;
+    text-align: center;
 }
-
+.image-upload {
+    width: 100%;
+    text-align: center;
+}
 
 .example-form {
     min-width: 150px;

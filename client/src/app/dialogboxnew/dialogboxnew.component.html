@@ -1,0 +1,14 @@
+<div>
+  <mat-dialog-content>
+    <p class="ptag">Would you like to create a Regular event or food Truck hosting? </p>
+    <mat-radio-group name="mnButtons" [(ngModel)]="mnButtons">
+      <mat-radio-button class="flspace" value="0" name="mnButtons">Regular Event</mat-radio-button>
+      <mat-radio-button class="flspace" value="1" name="mnButtons"> Food Truck Hosting </mat-radio-button>
+    </mat-radio-group>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-raised-button (click)="onCloseCancel()">Close</button>
+    <button mat-button [mat-dialog-close]="mnButtons" cdkFocusInitial>Create </button>
+  </mat-dialog-actions>
+</div>

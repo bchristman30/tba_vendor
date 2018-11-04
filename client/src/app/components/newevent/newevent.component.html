@@ -17,66 +17,62 @@
   <input id="file-input" type="file"/>
 </div> -->
 
-       <!--Carousel Wrapper-->
-       <mdb-carousel [isControls]="true" [interval]="8000" class="carousel slide carousel-fade" [animation]="'fade'">
-        <!--First slide-->
-        <mdb-carousel-item>
-            <div class="view w-100">
-                <img class="d-block w-100" src="/assets/imgs/slide-1.jpg" alt="First slide">
-                <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
-            </div>
-            <!-- <div class="carousel-caption">
-                <h3 class="h3-responsive">Socialize</h3>
-            </div> -->
-        </mdb-carousel-item>
-        <!--/First slide-->
-        <!--Second slide-->
-        <mdb-carousel-item>
-            <div class="view w-100">
-                <img class="d-block w-100" src="/assets/imgs/slide-2.jpg" alt="Second slide">
-                <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
-            </div>
-            <!-- <div class="carousel-caption">
-                <h3 class="h3-responsive">Try Something New</h3>
-            </div> -->
-        </mdb-carousel-item>
-        <!--/Second slide-->
-        <!--Third slide-->
-        <mdb-carousel-item>
-            <div class="view w-100">
-                <img class="d-block w-100" src="/assets/imgs/slide-3.jpg" alt="Third slide">
-                <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
-            </div>
-            <!-- <div class="carousel-caption">
-                <h3 class="h3-responsive">Enjoy</h3>
-            </div> -->
-        </mdb-carousel-item>
-        <!--/Third slide-->
-    </mdb-carousel>
-<!--/.Carousel Wrapper-->
+<div class="image-upload">
+  <label for="file-input">
+      <img class="img-grid" src="assets/imgs/slide-3.jpg"/>
+  </label>
 
-<form class="example-form">
+  <input id="file-input" type="file" accept="image/*" (change)="imageUpload($event)"  type="file"/>
+  <!-- <label class="grid-label">Delete photo</label> -->
+</div>
+
+<form #f="ngForm" (ngSubmit)="addEvents(f)" class="example-form" >
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="Title" value="">
+    <input matInput  [(ngModel)]="eventname" name="eventname" placeholder="Event Name">
   </mat-form-field>
+
+  <div class="cal">
+    <h5>Choose Start Date:</h5>
+    <mat-form-field class="example-full-width">
+        <input matInput [matDatepicker]="picker" [ngModel]="myDate" (ngModelChange)="updateMyDate($event)"  name="myDate" placeholder="Choose a date,to see, what plan on this date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker touchUi #picker  ></mat-datepicker>
+    </mat-form-field>
+</div>
+  
+
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="Overview" value="">
+    <input matInput [(ngModel)]="starttime" name="starttime" placeholder="starttime">
   </mat-form-field>
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="Event Date" value="">
-  </mat-form-field>
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="Start Time" value="">
-  </mat-form-field>
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="Finish Time" value="">
-  </mat-form-field>
-<mat-radio-group class="example-radio-group" [(ngModel)]="favoriteSeason">
+
+
+  <div class="cal">
+    <h5>Choose End Date:</h5>
+    <mat-form-field class="example-full-width">
+        <input matInput [matDatepicker]="pickers" [ngModel]="closeDate" (ngModelChange)="UpdateClose($event)"  name="closeDate" placeholder="Choose a date,to see, what plan on this date">
+        <mat-datepicker-toggle matSuffix [for]="pickers"></mat-datepicker-toggle>
+        <mat-datepicker touchUi #pickers  ></mat-datepicker>
+    </mat-form-field>
+    <!-- <mat-form-field>
+            <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="roomsFilter.date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker [(ngModel)]="roomsFilter.date" ngDefaultControl (selectedChanged)="onDate($event)"></mat-datepicker>
+          </mat-form-field> -->
+        
+</div>
+  
+
+<mat-form-field class="example-full-width">
+  <input matInput [(ngModel)]="closetime" name="closetime" placeholder="closetime">
+</mat-form-field>
+
+ 
+<!-- <mat-radio-group class="example-radio-group" [(ngModel)]="favoriteSeason">
   <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
     {{season}}
   </mat-radio-button>
 </mat-radio-group>
-  
+   -->
 <div class="button-row">
   <button mat-flat-button color="accent">Save</button>
 </div>

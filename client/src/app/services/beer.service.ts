@@ -35,9 +35,21 @@ export class BeerService {
 	}
 
 
+	getBeerStyles( ): Observable<any> {
+		return this.http.get(`/api/beer/beerStyles`).map(res => res);
+	}
+
+
 	addaBear(formData, location_id): Observable<any> {
 		const header = new HttpHeaders();
 		return this.http.post<any>(`/api/beer/location`, formData,
+			{ observe: 'response', responseType: 'json', headers: header })
+			 .pipe(map((res) => { console.log(res.body); return res.body; }));
+	}
+
+	addaEvent(formData, location_id): Observable<any> {
+		const header = new HttpHeaders();
+		return this.http.post<any>(`/api/location/event`, formData,
 			{ observe: 'response', responseType: 'json', headers: header })
 			 .pipe(map((res) => { console.log(res.body); return res.body; }));
 	}
