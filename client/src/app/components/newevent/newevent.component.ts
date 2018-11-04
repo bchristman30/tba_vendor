@@ -68,13 +68,19 @@ export class NeweventComponent implements OnInit {
     const val = form.value;
     const start = this.startdate + ' ' + this.starttime;
     const close = this.enddate + ' ' + this.closetime;
+
+    console.log('sad',  start);
+    console.log('sads',  close);
+
     if (this.filelink) {
       const formData: any = new FormData();
       formData.append('feature_image', this.filelink);
       formData.append('name', this.eventname);
       formData.append('start_date', start);
       formData.append('end_date', close);
-      formData.append('location_id', 3);
+      formData.append('location_id', this.location_id);
+
+      console.log('data is bnbn', formData);
       const headers = new Headers();
       this.beerService.addaEvent(formData, this.location_id).subscribe(res => {
         if (res.error === false) {
@@ -101,13 +107,13 @@ export class NeweventComponent implements OnInit {
 
   updateMyDate(newDate) {
     this.myDate = newDate;
-    this.startdate =   this.datePipe.transform(this.myDate, 'yyyy:MM:dd');
+    this.startdate =   this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
 
   }
 
   UpdateClose(s) {
     this.closeDate = s;
-    this.enddate =   this.datePipe.transform(this.closeDate, 'yyyy:MM:dd');
+    this.enddate =   this.datePipe.transform(this.closeDate, 'yyyy-MM-dd');
   }
 
   imageUpload(e) {
