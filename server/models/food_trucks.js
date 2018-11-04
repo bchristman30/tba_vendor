@@ -13,7 +13,7 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.TEXT('long')
         },
         featured_image_id: {
-            type: DataTypes.STRING,
+            type:DataTypes.TEXT('long'),
             allowNull: true
         },
         description: {
@@ -38,7 +38,6 @@ module.exports = function (sequelize, DataTypes) {
             underscored: true,
             classMethods: {
                 associate: function (models) {
-
                     food_trucks.hasMany(models.food_trucks_menu);
                     food_trucks.hasMany(models.food_trucks_reviews);
                 }
