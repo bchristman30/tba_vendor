@@ -5,13 +5,20 @@ const moment = require('moment');
 const getdate = moment().tz('America/New_York');
 var sequelize = require('sequelize');
 var multer = require('multer');
-var upload = multer({ dest: '../tmp/event/' }).single('logo');
+var cloudinaryStorage = require('multer-storage-cloudinary');
 var cloudinary = require('cloudinary');
 cloudinary.config({
   cloud_name: 'thatbeerapp',
   api_key: '416442547859432',
   api_secret: 'UF9i1FPy69toaWA5AWvZcVccnUw'
 });
+
+var storage = cloudinaryStorage({
+  cloudinary: cloudinary,
+  folder: 'events/foodtrucks',
+  allowedFormats: ['jpg', 'png']
+});
+var upload = multer({ storage: storage }).single('logo');
 
 /****************************************************
  * List of Food Truck *
@@ -57,18 +64,13 @@ router.post('/location', function (req, res) {
     if (err) {
       console.log(err);
       return res.json({ error: true, result: '', text: 'Unable to upload image file.' });
-    };
-    console.log(req.body);
-     cloudinary.v2.uploader.upload(req.file.path, {
-      folder: "events/foodtrucks"
-    },
-      function (error, result) {
-        console.log(result, error);
-        if (!error) {
+    }
+    else
+    {
           let data = {
             name: req.body.name,
-            featured_image: result.secure_url,
-            featured_image_id: result.public_id,
+            featured_image: req.file.secure_url,
+            featured_image_id: req.file.public_id,
             description: req.body.description,
             address: req.body.address,
             city: req.body.city,
@@ -77,34 +79,31 @@ router.post('/location', function (req, res) {
             phone: req.body.phone
           };
           console.log(data);
-          db.food_trucks.create(data).then(ft => {
-            if (ft.id != '') {
-              var up = {
-                start_date: req.body.start_date,
-                end_date: req.body.end_date,
-                type: 'food_trucks',
-                referring_id: ft.id,
-                location_id: req.body.location_id
-              };
-              console.log(up);  
-              db.location_calendar.create(up).then(location_calendar => {
-                if (location_calendar.id != '') {
-                  res.json({ error: false, result: '', text: 'food truck created and schedule successfully' });
+        db.food_trucks.create(data).then(ft => {
+          if (ft.id != '') {
+            var up = {
+              start_date: req.body.start_date,
+              end_date: req.body.end_date,
+              type: 'food_trucks',
+              referring_id: ft.id,
+              location_id: req.body.location_id
+            };
+            console.log(up);  
+            db.location_calendar.create(up).then(location_calendar => {
+              if (location_calendar.id != '') {
+                res.json({ error: false, result: '', text: 'food truck created and schedule successfully' });
 
-                }
-              }).catch((err) => {
-                res.json({ error: true, result: err, text: 'unable to schedule foodtruck in brewery with brewery' });
-              });
-            }
-          }).catch((nerr) => {
-            res.json({ error: true, result: nerr, text: 'unable to create food truck' });
-          });
-        }
-        else {
-          res.json({ error: true, result: error, text: 'Error found during uplodation' });
-        }
-      }); 
+              }
+            }).catch((err) => {
+              res.json({ error: true, result: err, text: 'unable to schedule foodtruck in brewery with brewery' });
+            });
+          }
+        }).catch((nerr) => {
+          res.json({ error: true, result: nerr, text: 'unable to create food truck' });
+        });
+      }
   }); 
+
 });
 
 /****************************************************

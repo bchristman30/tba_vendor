@@ -11,14 +11,26 @@ var _ = require('lodash');
 var today = getdate.format('dddd');
 var sequelize = require('sequelize');
 var multer = require('multer');
-var upload = multer({ dest: '../tmp/location/' }).single('logo');
-var upload_event = multer({ dest: '../public/event/' }).single('feature_image');
+var cloudinaryStorage = require('multer-storage-cloudinary');
 var cloudinary = require('cloudinary');
 cloudinary.config({
   cloud_name: 'thatbeerapp',
   api_key: '416442547859432',
   api_secret: 'UF9i1FPy69toaWA5AWvZcVccnUw'
 });
+
+var storage1 = cloudinaryStorage({
+  cloudinary: cloudinary,
+  folder: 'brewery',
+  allowedFormats: ['jpg', 'png']
+});
+var storage2 = cloudinaryStorage({
+  cloudinary: cloudinary,
+  folder: 'events/general',
+  allowedFormats: ['jpg', 'png']
+});
+var upload = multer({ storage: storage1 }).single('logo');
+var upload_event = multer({ storage: storage2 }).single('feature_image');
 /****************************************************
  * FETCH ALL LOCATION WITH HOUR ,REVIEWS DETAILS *
  * URL:/api/location
@@ -424,7 +436,7 @@ router.post('/update_workinghours/:id(\\d+)', function (req, res) {
     let weekday = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     for (let i = 0; i < 7; i++) {
       day = weekday[i];
-      hours.push({ day: day, opening_hour: data[i][day]['opening_hour'], closing_hour: data[i][day]['closing_hour'],isclose:data[i][day]['isclose'], location_id: req.params.id });
+      hours.push({ day: day, opening_hour: data[i][day]['opening_hour'], closing_hour: data[i][day]['closing_hour'], isclose: data[i][day]['isclose'], location_id: req.params.id });
     }
     //console.log(hours);
     if (hours.length == 7) {
@@ -531,45 +543,33 @@ router.route('/update_logo/:id(\\d+)').post(function (req, res) {
       upload(req, res, function (err) {
         if (err) {
           console.log(err);
-          return res.json({error:true,result:'',text:'Unable to upload image file.'});
-        };
-        //console.log("file uploaded");
-        //console.log(req.file);
-        var logo_string_id = req.body.logo_string_id; //publicid
-        console.log('ss',logo_string_id);
-        cloudinary.v2.uploader.upload(req.file.path, {
-          folder: "brewery"
-        },
-          function (error, result) {
-           // console.log(result, error);
-            if (!error) {
-              let data = {
-                logo_string: result.secure_url,
-                logo_string_id: result.public_id
-              };
-              remove_image(logo_string_id).then(
-                result => {
-                  //console.log('remove_image response' + JSON.stringify(result));
-                  location.update(data).then((response) => {
+          return res.json({ error: true, result: '', text: 'Unable to upload image file.' });
+        }
+        else {
+          //console.log("file uploaded");
+          //console.log(req.file);
+          var logo_string_id = req.body.logo_string_id; //publicid
+          console.log('ss', logo_string_id);
+          let data = {
+            logo_string: req.file.secure_url,
+            logo_string_id: req.file.public_id
+          };
+          remove_image(logo_string_id).then(
+            result => {
+              //console.log('remove_image response' + JSON.stringify(result));
+              location.update(data).then((response) => {
 
-                    res.json({ error: false, result:data, text: 'Brewery logo changed successfully!!' });
+                res.json({ error: false, result: data, text: 'Brewery logo changed successfully!!' });
 
-                  }).catch((err) => {
-
-                    res.json({ error: true, result: err, text: 'Error found during updation' });
-
-                  });
-                },
-                error => {
-                 // console.log('remove_image err response' + error);
-                  res.json({ error: true, result: '', text: 'Unable to remove previous image' });
-                }
-              );
-            }
-            else {
-              res.json({ error: true, result: error, text: 'Error found during uplodation' });
-            }
-          });
+              }).catch((err) => {
+                res.json({ error: true, result: err, text: 'Error found during updation' });
+              });
+            },
+            error => {
+              // console.log('remove_image err response' + error);
+              res.json({ error: true, result: '', text: 'Unable to remove previous image' });
+            });
+        }
       });
     }
   }).catch((err) => {
@@ -582,50 +582,41 @@ router.post('/event', function (req, res) {
   upload_event(req, res, function (err) {
     if (err) {
       console.log(err);
-      return res.json({error:true,result:'',text:'Unable to upload image file.'});
-    };
-    console.log(req.body);
-    console.log("file uploaded");
-    console.log(req.file);
-    cloudinary.v2.uploader.upload(req.file.path, {
-      folder: "events/general"
-    },
-      function (error, result) {
-        // console.log(result, error);
-        if (!error) {
-          let data = {
-            name:req.body.name,
-            feature_image: result.secure_url,
-            featured_image_id: result.public_id
+      return res.json({ error: true, result: '', text: 'Unable to upload image file.' });
+    }
+    else {
+      console.log(req.body);
+      console.log("file uploaded");
+      console.log(req.file);
+      let data = {
+        name: req.body.name,
+        feature_image: req.file.secure_url,
+        featured_image_id: req.file.public_id
+      };
+      // console.log(data);
+      db.events.create(data).then(event => {
+        if (event.id != '') {
+          var up = {
+            start_date: new Date(req.body.start_date).toLocaleString(),
+            end_date: new Date(req.body.end_date).toLocaleString(),
+            type: 'events',
+            referring_id: event.id,
+            location_id: req.body.location_id
           };
-          // console.log(data);
-          db.events.create(data).then(event => {
-            if (event.id != '') {
-                var up={
-                  start_date: new Date(req.body.start_date).toLocaleString(),
-                  end_date: new Date(req.body.end_date).toLocaleString(),
-                  type:'events',
-                  referring_id:event.id,
-                  location_id:req.body.location_id
-                };
-                // console.log(up);
-              db.location_calendar.create(up).then(location_calendar => {
-                if (location_calendar.id != '') {
-                    res.json({error:false,result:'',text:'events created and schedule successfully'});
-                  
-                }
-              }).catch((err) => {
-                res.json({ error: true, result: err,text:'unable to schedule event with brewery' });
-              });
+          // console.log(up);
+          db.location_calendar.create(up).then(location_calendar => {
+            if (location_calendar.id != '') {
+              res.json({ error: false, result: '', text: 'events created and schedule successfully' });
+
             }
           }).catch((err) => {
-            res.json({ error: true, result: err,text:'unable to create event' });
+            res.json({ error: true, result: err, text: 'unable to schedule event with brewery' });
           });
         }
-        else {
-          res.json({ error: true, result: error, text: 'Error found during uplodation' });
-        }
+      }).catch((err) => {
+        res.json({ error: true, result: err, text: 'unable to create event' });
       });
+    }
   });
 });
 

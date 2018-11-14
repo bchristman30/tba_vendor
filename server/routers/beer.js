@@ -6,13 +6,20 @@ var async = require("async");
 var sequelize = require('sequelize');
 var _ = require('lodash');
 var multer = require('multer');
-var upload = multer({ dest: '../tmp/beer/' }).single('beer_logo');
+var cloudinaryStorage = require('multer-storage-cloudinary');
 var cloudinary = require('cloudinary');
 cloudinary.config({
     cloud_name: 'thatbeerapp',
     api_key: '416442547859432',
     api_secret: 'UF9i1FPy69toaWA5AWvZcVccnUw'
 });
+
+var storage = cloudinaryStorage({
+    cloudinary: cloudinary,
+    folder: 'beer',
+    allowedFormats: ['jpg', 'png']
+});
+var upload = multer({ storage: storage }).single('beer_logo');
 
 var get_avg_rating = (location_id) => {
     return new Promise(function (resolve, reject) {
@@ -76,7 +83,7 @@ router.route('/:id(\\d+)').get(function (req, res) {
  *******************************************************************/
 //changed
 router.route('/:id(\\d+)/:location_id(\\d+)').get(function (req, res) {
-    console.log('sa',req.params.id);
+    console.log('sa', req.params.id);
     db.location_beer.findAll({
         where: { beer_id: req.params.id, location_id: req.params.location_id },
         attributes: ['id', 'location_id', 'beer_id', 'active'],
@@ -285,69 +292,61 @@ router.route('/update_beer_logo/:id(\\d+)').post(function (req, res) {
 
 router.route('/location').post(function (req, res) {
 
-    upload(req, res, function (err) {
-        if (err) { return res.json({}) };
-        console.log("file uploaded");
-        console.log(req.file);
-        console.log(req.body);
-        var cat = req.body.category;
-        var obj = {
-            name: req.body.name,
-            Alchohol_content: req.body.Alchohol_content,
-            beer_description: req.body.beer_description,
-            price: req.body.price
-        };
-        db.beer.findAll({
-            where: {
-                name: req.body.name
-            }
-        }).then(function (existbeer) {
-            console.log(existbeer);
-            if (existbeer.length == 0) {
-                cloudinary.v2.uploader.upload(req.file.path, {
-                    folder: "beer"
-                },
-                function (error, result) {
-                    console.log(result, error)
-                    if (!error) {
-                        obj.beer_logo = result.secure_url;
-                        obj.beer_logo_id = result.public_id;
-                        //console.log(obj);
-                        db.beer.create(obj).then(beer => {
-                            if (beer.id != '') {
-                                db.location_beer.create({ beer_id: beer.id, location_id: req.body.location_id }).then((loc_beer) => {
-                                    let comp = [];
-                                    for (let i = 0; i < cat.length; i++) {
-                                        comp.push({ beer_id: beer.id, beer_style_id: cat[i] });
-                                    }
-                                    db.beer_category.bulkCreate(comp).then(() => {
-                                        res.json({ error: false, result: beer, text: 'beer added successfully!' });
-                                    }).catch((err) => {
-                                        res.json({ error: true, result: err, text: 'Unable to add beer' });
-                                    });
+    console.log(req.body);
+    var cat = req.body.category;
+    var obj = {
+        name: req.body.name,
+        Alchohol_content: req.body.Alchohol_content,
+        beer_description: req.body.beer_description,
+        price: req.body.price
+    };
+    db.beer.findAll({
+        where: {
+            name: req.body.name
+        }
+    }).then(function (existbeer) {
+        console.log(existbeer);
+        if (existbeer.length == 0) {
+            upload(req, res, function (err) {
+                if (!err) {
+                    obj.beer_logo = req.file.secure_url;
+                    obj.beer_logo_id = req.file.public_id;
+                    //console.log(obj);
+                    db.beer.create(obj).then(beer => {
+                        if (beer.id != '') {
+                            db.location_beer.create({ beer_id: beer.id, location_id: req.body.location_id }).then((loc_beer) => {
+                                let comp = [];
+                                for (let i = 0; i < cat.length; i++) {
+                                    comp.push({ beer_id: beer.id, beer_style_id: cat[i] });
+                                }
+                                db.beer_category.bulkCreate(comp).then(() => {
+                                    res.json({ error: false, result: beer, text: 'beer added successfully!' });
                                 }).catch((err) => {
-                                    res.json({ error: true, result: err, text: err.errors[0].message });
+                                    res.json({ error: true, result: err, text: 'Unable to add beer' });
                                 });
-                            }
-                            else {
-                                res.json({ error: true, result: '', text: 'Something is wrong' });
-                            }
-                        }).catch((err) => {
-                            res.json({ error: true, result: err });
-                        });
-                    }
-                    else {
-                        res.json({ error: true, result: '', text: 'Unable to upload image in cloudinary.' });
-                    }
-                });
-            }
-            else {
-                res.json({ error: true, result: '', text: 'Beer Name already exist' });
-            }
-        }).catch(function (error) {
-            res.json({ error: true, result: [], text: 'Internal Server Error' });
-        });
+                            }).catch((err) => {
+                                res.json({ error: true, result: err, text: err.errors[0].message });
+                            });
+                        }
+                        else {
+                            res.json({ error: true, result: '', text: 'Something is wrong' });
+                        }
+                    }).catch((err) => {
+                        res.json({ error: true, result: err });
+                    });
+                }
+                else {
+                    res.json({ error: true, result: err, text: 'Unable to upload image in cloudinary.' });
+                }
+            });
+        }
+        else {
+            res.json({ error: true, result: '', text: 'Beer Name already exist' });
+        }
+    }).catch(function (error) {
+        res.json({ error: true, result: [], text: 'Internal Server Error' });
     });
+
 });
 
 router.route('/').post(function (req, res) {
@@ -379,10 +378,9 @@ router.route('/remove_beer/:id(\\d+)').post(function (req, res) {
     var beer_id = req.params.id;
     var location_id = req.body.location_id;
     cloudinary.v2.uploader.destroy(req.body.beer_logo_id,
-        function(error, result) {
+        function (error, result) {
             console.log(result, error)
-            if(!error)
-            {
+            if (!error) {
                 db.location_beer.destroy({
                     where: {
                         location_id: location_id,
@@ -391,18 +389,17 @@ router.route('/remove_beer/:id(\\d+)').post(function (req, res) {
                 }).then(function (rowDeleted) { // rowDeleted will return number of rows deleted
                     console.log(rowDeleted + 'Deleted successfully');
                     res.json({ error: false, result: [], text: 'beer successfully removed' });
-            
+
                 }, function (err) {
                     console.log(err);
                     res.json({ error: true, result: err, text: 'Something is wrong' });
                 });
             }
-            else
-            {
+            else {
                 res.json({ error: true, result: error, text: 'Unable to delete beer and its image.' });
             }
         });
-   
+
 });
 
 
