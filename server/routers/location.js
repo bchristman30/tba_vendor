@@ -11,7 +11,7 @@ var _ = require('lodash');
 var today = getdate.format('dddd');
 var sequelize = require('sequelize');
 var multer = require('multer');
-var upload = multer({ dest: '../public/location/' }).single('logo');
+var upload = multer({ dest: '../tmp/location/' }).single('logo');
 var upload_event = multer({ dest: '../public/event/' }).single('feature_image');
 var cloudinary = require('cloudinary');
 cloudinary.config({

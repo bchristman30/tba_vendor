@@ -11,7 +11,7 @@ var _ = require('lodash');
 var today = getdate.format('dddd');
 const verifytoken = require('../middleware/verifytoken.js');
 var multer  = require('multer');
-var upload = multer({ dest: '../public/location/' }).single('foo');
+var upload = multer({ dest: '../tmp/location/' }).single('foo');
 var cloudinary=require('cloudinary');
 cloudinary.config({ 
     cloud_name: 'thatbeerapp', 

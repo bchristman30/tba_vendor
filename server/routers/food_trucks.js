@@ -5,7 +5,7 @@ const moment = require('moment');
 const getdate = moment().tz('America/New_York');
 var sequelize = require('sequelize');
 var multer = require('multer');
-var upload = multer({ dest: '../public/event/' }).single('logo');
+var upload = multer({ dest: '../tmp/event/' }).single('logo');
 var cloudinary = require('cloudinary');
 cloudinary.config({
   cloud_name: 'thatbeerapp',

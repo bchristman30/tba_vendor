@@ -6,7 +6,7 @@ var async = require("async");
 var sequelize = require('sequelize');
 var _ = require('lodash');
 var multer = require('multer');
-var upload = multer({ dest: '../public/beer/' }).single('beer_logo');
+var upload = multer({ dest: '../tmp/beer/' }).single('beer_logo');
 var cloudinary = require('cloudinary');
 cloudinary.config({
     cloud_name: 'thatbeerapp',
