@@ -2,7 +2,8 @@
   "name": "brewerapp",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "mocha *.test.js --timeout 10000"
   },
   "dependencies": {
     "base64-to-image": "^1.0.2",
@@ -48,6 +49,9 @@
   "author": "esferasoft",
   "license": "ISC",
   "devDependencies": {
-    "@angular/cli": "^6.2.3"
+    "@angular/cli": "^6.2.3",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "supertest": "^3.3.0"
   }
 }
