@@ -17,7 +17,7 @@ cloudinary.config({
 var storage = cloudinaryStorage({
     cloudinary: cloudinary,
     folder: 'beer',
-    allowedFormats: ['jpg', 'png']
+    allowedFormats: ['jpg', 'jpeg', 'png']
 });
 var upload = multer({ storage: storage }).single('beer_logo');
 
@@ -292,26 +292,27 @@ router.route('/update_beer_logo/:id(\\d+)').post(function (req, res) {
 
 router.route('/location').post(function (req, res) {
 
-    console.log(req.body);
-    var cat = req.body.category;
-    var obj = {
-        name: req.body.name,
-        Alchohol_content: req.body.Alchohol_content,
-        beer_description: req.body.beer_description,
-        price: req.body.price
-    };
-    db.beer.findAll({
-        where: {
-            name: req.body.name
-        }
-    }).then(function (existbeer) {
-        console.log(existbeer);
-        if (existbeer.length == 0) {
-            upload(req, res, function (err) {
-                if (!err) {
-                    obj.beer_logo = req.file.secure_url;
-                    obj.beer_logo_id = req.file.public_id;
-                    //console.log(obj);
+
+    upload(req, res, function (err) {
+        if (!err) {
+            console.log(req.body);
+            var cat = req.body.category;
+            var obj = {
+                name: req.body.name,
+                Alchohol_content: req.body.Alchohol_content,
+                beer_description: req.body.beer_description,
+                price: req.body.price,
+                beer_logo:req.file.secure_url,
+                beer_logo_id: req.file.public_id
+            };
+            //console.log(obj);
+            db.beer.findAll({
+                where: {
+                    name: req.body.name
+                }
+            }).then(function (existbeer) {
+                console.log(existbeer);
+                if (existbeer.length == 0) {
                     db.beer.create(obj).then(beer => {
                         if (beer.id != '') {
                             db.location_beer.create({ beer_id: beer.id, location_id: req.body.location_id }).then((loc_beer) => {
@@ -332,19 +333,27 @@ router.route('/location').post(function (req, res) {
                             res.json({ error: true, result: '', text: 'Something is wrong' });
                         }
                     }).catch((err) => {
-                        res.json({ error: true, result: err });
+                        res.json({ error: true, result: err, text: '' });
                     });
                 }
                 else {
-                    res.json({ error: true, result: err, text: 'Unable to upload image in cloudinary.' });
+                    remove_image(req.file.public_id).then(result => {
+                        res.json({ error: true, result: '', text: 'Beer Name already exist' });
+                      },
+                      error => {
+                         console.log('remove_image err response' + error);
+                        res.json({ error: true, result: '', text: 'Beer Name already exist*' });
+                      });
+                   
                 }
+            }).catch(function (error) {
+                res.json({ error: true, result: [], text: 'Internal Server Error' });
             });
+
         }
         else {
-            res.json({ error: true, result: '', text: 'Beer Name already exist' });
+            res.json({ error: true, result: err, text: 'Unable to upload image in cloudinary.' });
         }
-    }).catch(function (error) {
-        res.json({ error: true, result: [], text: 'Internal Server Error' });
     });
 
 });
@@ -459,6 +468,19 @@ router.route('/move_to_archive/:id(\\d+)').post(function (req, res) {
     });
 });
 
-
+function remove_image(logo_string_id) {
+  return new Promise(function (resolve, reject) {
+    cloudinary.v2.uploader.destroy(logo_string_id,
+      function (error, result) {
+        console.log(result, error)
+        if (!error) {
+          resolve(result);
+        }
+        else {
+          reject(error);
+        }
+      });
+  });
+}
 
 module.exports = router;
